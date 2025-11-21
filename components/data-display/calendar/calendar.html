@@ -1,0 +1,278 @@
+<style>
+    /* Calendar Container */
+    .calendar-container {
+        max-width: 400px;
+        background: var(--glass-bg);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--glass-border);
+        padding: var(--spacing-lg);
+        box-shadow: var(--glass-shadow);
+    }
+
+    /* Header */
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .calendar-month {
+        font-size: var(--text-lg);
+        font-weight: var(--font-weight-bold);
+        color: var(--text-color);
+    }
+
+    .calendar-nav {
+        display: flex;
+        gap: var(--spacing-xs);
+    }
+
+    .nav-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--text-color);
+    }
+
+    /* Grid */
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+        text-align: center;
+    }
+
+    /* Weekdays */
+    .weekday {
+        font-size: var(--text-xs);
+        font-weight: var(--font-weight-bold);
+        color: var(--text-secondary);
+        padding: var(--spacing-xs);
+        text-transform: uppercase;
+    }
+
+    /* Days */
+    .day {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--text-sm);
+        color: var(--text-color);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+    }
+
+    .day:hover:not(.empty) {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    .day.selected {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .day.today {
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .day.today.selected {
+        color: white;
+    }
+
+    .day.empty {
+        cursor: default;
+    }
+
+    .day.other-month {
+        color: var(--text-secondary);
+        opacity: 0.5;
+    }
+
+    /* Event Indicators */
+    .has-event::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--secondary-color);
+    }
+
+    .day.selected.has-event::after {
+        background: white;
+    }
+
+    /* Event List (Below Calendar) */
+    .event-list {
+        margin-top: var(--spacing-lg);
+        border-top: 1px solid var(--glass-border);
+        padding-top: var(--spacing-md);
+    }
+
+    .event-item {
+        display: flex;
+        gap: var(--spacing-md);
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .event-item:hover {
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    .event-time {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+        width: 40px;
+        padding-top: 2px;
+    }
+
+    .event-info {
+        flex: 1;
+    }
+
+    .event-title {
+        font-size: var(--text-sm);
+        font-weight: var(--font-weight-medium);
+        color: var(--text-color);
+        margin-bottom: 2px;
+    }
+
+    .event-desc {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+    }
+
+    .event-marker {
+        width: 3px;
+        background: var(--primary-color);
+        border-radius: 2px;
+    }
+</style>
+
+<div style="display: flex; gap: var(--spacing-2xl); flex-wrap: wrap;">
+    <!-- Calendar Widget -->
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <div class="calendar-month">November 2025</div>
+            <div class="calendar-nav">
+                <button class="nav-btn">
+                    <span class="material-icons-round">chevron_left</span>
+                </button>
+                <button class="nav-btn">
+                    <span class="material-icons-round">chevron_right</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="calendar-grid">
+            <!-- Weekdays -->
+            <div class="weekday">Sun</div>
+            <div class="weekday">Mon</div>
+            <div class="weekday">Tue</div>
+            <div class="weekday">Wed</div>
+            <div class="weekday">Thu</div>
+            <div class="weekday">Fri</div>
+            <div class="weekday">Sat</div>
+
+            <!-- Days -->
+            <div class="day other-month">26</div>
+            <div class="day other-month">27</div>
+            <div class="day other-month">28</div>
+            <div class="day other-month">29</div>
+            <div class="day other-month">30</div>
+            <div class="day other-month">31</div>
+            <div class="day">1</div>
+
+            <div class="day">2</div>
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day has-event">5</div>
+            <div class="day">6</div>
+            <div class="day">7</div>
+            <div class="day">8</div>
+
+            <div class="day">9</div>
+            <div class="day">10</div>
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day">13</div>
+            <div class="day">14</div>
+            <div class="day">15</div>
+
+            <div class="day">16</div>
+            <div class="day">17</div>
+            <div class="day">18</div>
+            <div class="day">19</div>
+            <div class="day">20</div>
+            <div class="day today selected has-event">21</div>
+            <div class="day">22</div>
+
+            <div class="day">23</div>
+            <div class="day">24</div>
+            <div class="day">25</div>
+            <div class="day">26</div>
+            <div class="day">27</div>
+            <div class="day">28</div>
+            <div class="day">29</div>
+
+            <div class="day">30</div>
+            <div class="day other-month">1</div>
+            <div class="day other-month">2</div>
+            <div class="day other-month">3</div>
+            <div class="day other-month">4</div>
+            <div class="day other-month">5</div>
+            <div class="day other-month">6</div>
+        </div>
+
+        <!-- Selected Day Events -->
+        <div class="event-list">
+            <div class="event-item">
+                <div class="event-marker" style="background: var(--primary-color);"></div>
+                <div class="event-time">09:00</div>
+                <div class="event-info">
+                    <div class="event-title">Team Standup</div>
+                    <div class="event-desc">Daily sync with design team</div>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-marker" style="background: var(--secondary-color);"></div>
+                <div class="event-time">14:30</div>
+                <div class="event-info">
+                    <div class="event-title">Project Review</div>
+                    <div class="event-desc">Q4 Roadmap discussion</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Interactive Day Selection
+    document.querySelectorAll('.day:not(.other-month)').forEach(day => {
+        day.addEventListener('click', () => {
+            document.querySelectorAll('.day').forEach(d => d.classList.remove('selected'));
+            day.classList.add('selected');
+        });
+    });
+</script>

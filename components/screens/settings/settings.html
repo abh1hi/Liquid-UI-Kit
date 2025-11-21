@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="components/screens/settings/settings.css">
+
+<div class="settings-container">
+    <div class="settings-sidebar">
+        <div class="settings-nav-item active">
+            <span class="material-icons-round">person</span>
+            Account
+        </div>
+        <div class="settings-nav-item">
+            <span class="material-icons-round">notifications</span>
+            Notifications
+        </div>
+        <div class="settings-nav-item">
+            <span class="material-icons-round">lock</span>
+            Privacy
+        </div>
+        <div class="settings-nav-item">
+            <span class="material-icons-round">palette</span>
+            Appearance
+        </div>
+        <div class="settings-nav-item">
+            <span class="material-icons-round">language</span>
+            Language
+        </div>
+    </div>
+
+    <div class="settings-content">
+        <div class="settings-section">
+            <h3 class="settings-section-title">Account Settings</h3>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <h4>Profile Visibility</h4>
+                    <p>Control who can see your profile details</p>
+                </div>
+                <div class="input-wrapper" style="width: 150px;">
+                    <select class="input">
+                        <option>Public</option>
+                        <option>Friends Only</option>
+                        <option>Private</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <h4>Email Notifications</h4>
+                    <p>Receive emails about new activity</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3 class="settings-section-title">Security</h3>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <h4>Two-Factor Authentication</h4>
+                    <p>Add an extra layer of security to your account</p>
+                </div>
+                <button class="btn btn-outline sm">Enable</button>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <h4>Active Sessions</h4>
+                    <p>Manage devices where you're logged in</p>
+                </div>
+                <button class="btn btn-ghost sm text-primary">View All</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3 class="settings-section-title">Danger Zone</h3>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <h4 class="text-danger">Delete Account</h4>
+                    <p>Permanently delete your account and all data</p>
+                </div>
+                <button class="btn btn-outline sm"
+                    style="color: var(--danger-color); border-color: var(--danger-color);">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

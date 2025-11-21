@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="components/forms-advanced/dropdowns/dropdowns.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Dropdowns</h2>
+        <p class="text-body">Custom styled select menus.</p>
+    </div>
+
+    <section class="glass-panel p-md" style="min-height: 300px;">
+        <h3 class="text-h4 mb-md">Basic Select</h3>
+
+        <div class="dropdown" id="demo-dropdown">
+            <button class="dropdown-trigger">
+                <span class="selected-value">Select an option</span>
+                <span class="material-icons-round dropdown-arrow">expand_more</span>
+            </button>
+            <div class="dropdown-menu">
+                <div class="dropdown-item" data-value="1">Option 1</div>
+                <div class="dropdown-item" data-value="2">Option 2</div>
+                <div class="dropdown-item selected" data-value="3">Option 3 (Selected)</div>
+                <div class="dropdown-item" data-value="4">Option 4</div>
+                <div class="dropdown-item" data-value="5">Option 5</div>
+            </div>
+        </div>
+
+        <h3 class="text-h4 mt-xl mb-md">With Icons</h3>
+
+        <div class="dropdown" id="icon-dropdown">
+            <button class="dropdown-trigger">
+                <span class="selected-value">
+                    <span class="flex items-center gap-sm">
+                        <span class="material-icons-round text-sm">palette</span> Theme
+                    </span>
+                </span>
+                <span class="material-icons-round dropdown-arrow">expand_more</span>
+            </button>
+            <div class="dropdown-menu">
+                <div class="dropdown-item" data-value="light">
+                    <span class="material-icons-round text-sm">light_mode</span> Light
+                </div>
+                <div class="dropdown-item" data-value="dark">
+                    <span class="material-icons-round text-sm">dark_mode</span> Dark
+                </div>
+                <div class="dropdown-item" data-value="system">
+                    <span class="material-icons-round text-sm">settings_system_daydream</span> System
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const trigger = dropdown.querySelector('.dropdown-trigger');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            const items = dropdown.querySelectorAll('.dropdown-item');
+            const valueDisplay = dropdown.querySelector('.selected-value');
+
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Close others
+                dropdowns.forEach(d => {
+                    if (d !== dropdown) d.classList.remove('open');
+                });
+                dropdown.classList.toggle('open');
+            });
+
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    items.forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+
+                    // Update trigger text if simple text, or custom logic
+                    // For this demo, we'll just copy HTML to support icons
+                    if (valueDisplay) {
+                        valueDisplay.innerHTML = item.innerHTML;
+                    }
+
+                    dropdown.classList.remove('open');
+                    console.log('Selected:', item.dataset.value);
+                });
+            });
+        });
+
+        // Close on click outside
+        document.addEventListener('click', () => {
+            dropdowns.forEach(d => d.classList.remove('open'));
+        });
+    })();
+</script>

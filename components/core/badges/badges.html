@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="components/core/badges/badges.css">
+
+<div class="flex flex-col gap-md">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Badges & Chips</h2>
+        <p class="text-body">Compact elements for status and selection.</p>
+    </div>
+
+    <!-- Chips -->
+    <section class="glass-panel p-md">
+        <h3 class="text-h4 mb-md">Chips</h3>
+        <div class="flex gap-sm flex-wrap">
+            <div class="chip">Default</div>
+            <div class="chip active">Active</div>
+            <div class="chip">
+                <span class="material-icons-round" style="font-size: 18px;">face</span>
+                With Icon
+            </div>
+            <div class="chip">
+                Removable
+                <span class="material-icons-round close-icon">close</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Badges -->
+    <section class="glass-panel p-md mt-md">
+        <h3 class="text-h4 mb-md">Badges</h3>
+        <div class="flex gap-md items-center">
+            <span class="badge badge-primary">New</span>
+            <span class="badge badge-secondary">Completed</span>
+            <span class="badge badge-danger">Failed</span>
+        </div>
+
+        <div class="flex gap-md items-center mt-md">
+            <div class="badge-wrapper">
+                <button class="btn btn-icon btn-glass">
+                    <span class="material-icons-round">notifications</span>
+                </button>
+                <span class="badge badge-danger badge-float">3</span>
+            </div>
+
+            <div class="badge-wrapper">
+                <button class="btn btn-icon btn-glass">
+                    <span class="material-icons-round">mail</span>
+                </button>
+                <span class="badge badge-primary badge-float badge-dot"></span>
+            </div>
+        </div>
+    </section>
+</div>

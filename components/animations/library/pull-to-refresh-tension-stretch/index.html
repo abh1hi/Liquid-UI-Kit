@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pull-to-refresh tension stretch - Animation Preview</title>
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+    <div class="animation-preview-page">
+        <header class="preview-header">
+            <a href="../index.html" class="back-link">
+                <span class="material-icons-round">arrow_back</span>
+                Back to Library
+            </a>
+            <div class="animation-info">
+                <span class="category-badge">Gestural</span>
+                <h1 class="animation-title">Pull-to-refresh tension stretch</h1>
+            </div>
+        </header>
+
+        <div class="preview-container">
+            <div class="demo-area">
+                <div class="refresh-container">
+                    <div class="refresh-indicator">
+                        <svg class="spinner" viewBox="0 0 50 50">
+                            <circle class="spinner-path" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+                        </svg>
+                    </div>
+                    <div class="content-list">
+                        <div class="list-header">
+                            <h3>Pull down to refresh</h3>
+                        </div>
+                        <div class="content-item">
+                            <div class="item-icon"
+                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <span class="material-icons-round">inbox</span>
+                            </div>
+                            <div class="item-text">
+                                <h4>New Message</h4>
+                                <p>You have new updates</p>
+                            </div>
+                        </div>
+                        <div class="content-item">
+                            <div class="item-icon"
+                                style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <span class="material-icons-round">notifications</span>
+                            </div>
+                            <div class="item-text">
+                                <h4>Notification</h4>
+                                <p>Latest activity</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="play-btn" id="playBtn">
+                    <span class="material-icons-round">play_arrow</span>
+                    Play Animation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const playBtn = document.getElementById('playBtn');
+        const refreshContainer = document.querySelector('.refresh-container');
+        const refreshIndicator = document.querySelector('.refresh-indicator');
+        const contentList = document.querySelector('.content-list');
+
+        playBtn.addEventListener('click', () => {
+            // Reset
+            refreshContainer.classList.remove('pulling', 'refreshing', 'snapping-back');
+            refreshIndicator.classList.remove('active');
+
+            setTimeout(() => {
+                // Start pull animation
+                refreshContainer.classList.add('pulling');
+                refreshIndicator.classList.add('active');
+
+                // After stretch, trigger refresh
+                setTimeout(() => {
+                    refreshContainer.classList.remove('pulling');
+                    refreshContainer.classList.add('refreshing');
+
+                    // Complete refresh and snap back
+                    setTimeout(() => {
+                        refreshContainer.classList.remove('refreshing');
+                        refreshContainer.classList.add('snapping-back');
+                        refreshIndicator.classList.remove('active');
+
+                        setTimeout(() => {
+                            refreshContainer.classList.remove('snapping-back');
+                        }, 400);
+                    }, 1500);
+                }, 800);
+            }, 100);
+        });
+
+        // Auto-play on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                playBtn.click();
+            }, 300);
+        });
+    </script>
+</body>
+
+</html>

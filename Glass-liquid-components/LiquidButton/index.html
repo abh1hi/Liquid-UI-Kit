@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Button Component</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Required SVG Filters -->
+    <svg class="filters" aria-hidden="true">
+        <defs>
+            <filter id="glass-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+            </filter>
+            <filter id="filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.005" numOctaves="5" seed="2" />
+                <feDisplacementMap in="SourceGraphic" scale="20" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="container">
+        <h1 style="color: var(--text-color); margin-bottom: var(--spacing-xl);">Liquid Button Variants</h1>
+
+        <!-- Standard Buttons -->
+        <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap;">
+            <button class="liquid-button">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Default</span>
+            </button>
+
+            <button class="liquid-button primary">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Primary</span>
+            </button>
+
+            <button class="liquid-button secondary">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Secondary</span>
+            </button>
+
+            <button class="liquid-button accent">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Accent</span>
+            </button>
+        </div>
+
+        <!-- Size Variants -->
+        <div style="display: flex; gap: var(--spacing-lg); align-items: center; flex-wrap: wrap;">
+            <button class="liquid-button small">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Small</span>
+            </button>
+
+            <button class="liquid-button">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Medium</span>
+            </button>
+
+            <button class="liquid-button large">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Large</span>
+            </button>
+        </div>
+
+        <!-- Shape Variants -->
+        <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap;">
+            <button class="liquid-button square">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Square</span>
+            </button>
+
+            <button class="liquid-button">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Default</span>
+            </button>
+
+            <button class="liquid-button rounded">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Rounded</span>
+            </button>
+        </div>
+
+        <!-- State Variants -->
+        <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap;">
+            <button class="liquid-button loading">
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Loading</span>
+            </button>
+
+            <button class="liquid-button" disabled>
+                <div class="liquid-layers">
+                    <div class="liquid-effect"></div>
+                    <div class="liquid-tint"></div>
+                    <div class="liquid-shine"></div>
+                </div>
+                <span class="liquid-text">Disabled</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="components\core\icon-button\icon-button.css">
+<div class="demo-row">
+    <div class="demo-label">Sizes</div>
+    <button class="icon-btn sm filled">
+        <span class="material-icons-round">settings</span>
+    </button>
+    <button class="icon-btn md filled">
+        <span class="material-icons-round">settings</span>
+    </button>
+    <button class="icon-btn lg filled">
+        <span class="material-icons-round">settings</span>
+    </button>
+</div>
+
+<!-- Variants -->
+<div class="demo-row">
+    <div class="demo-label">Variants</div>
+    <button class="icon-btn md filled" title="Filled">
+        <span class="material-icons-round">edit</span>
+    </button>
+    <button class="icon-btn md outlined" title="Outlined">
+        <span class="material-icons-round">share</span>
+    </button>
+    <button class="icon-btn md ghost" title="Ghost">
+        <span class="material-icons-round">more_vert</span>
+    </button>
+</div>
+
+<!-- Colors -->
+<div class="demo-row">
+    <div class="demo-label">Colors</div>
+    <button class="icon-btn md filled primary">
+        <span class="material-icons-round">add</span>
+    </button>
+    <button class="icon-btn md filled secondary">
+        <span class="material-icons-round">favorite</span>
+    </button>
+    <button class="icon-btn md ghost danger">
+        <span class="material-icons-round">delete</span>
+    </button>
+</div>
+
+<!-- States -->
+<div class="demo-row">
+    <div class="demo-label">States</div>
+    <button class="icon-btn md filled primary">
+        <span class="material-icons-round">mic</span>
+    </button>
+    <button class="icon-btn md filled" disabled style="opacity: 0.5; cursor: not-allowed;">
+        <span class="material-icons-round">mic_off</span>
+    </button>
+</div>
+</div>
+
+<script>
+    // Ripple Effect
+    document.querySelectorAll('.icon-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+
+            this.appendChild(ripple);
+
+            ripple.addEventListener('animationend', () => {
+                ripple.remove();
+            });
+        });
+    });
+</script>

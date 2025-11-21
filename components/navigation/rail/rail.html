@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="components/navigation/rail/rail.css">
+<div class="nav-rail" id="demo-rail">
+    <div class="rail-fab">
+        <span class="material-icons-round">edit</span>
+    </div>
+
+    <div class="rail-item active">
+        <span class="material-icons-round rail-icon">inbox</span>
+        <span class="rail-label">Inbox</span>
+    </div>
+    <div class="rail-item">
+        <span class="material-icons-round rail-icon">star</span>
+        <span class="rail-label">Starred</span>
+    </div>
+    <div class="rail-item">
+        <span class="material-icons-round rail-icon">send</span>
+        <span class="rail-label">Sent</span>
+    </div>
+    <div class="rail-item">
+        <span class="material-icons-round rail-icon">drafts</span>
+        <span class="rail-label">Drafts</span>
+    </div>
+
+    <div style="flex: 1;"></div>
+
+    <div class="rail-item" onclick="toggleRail()">
+        <span class="material-icons-round rail-icon">menu_open</span>
+        <span class="rail-label">Collapse</span>
+    </div>
+</div>
+
+<div class="rail-content">
+    <h1>Inbox</h1>
+    <p class="text-secondary">Select an item from the rail to view details.</p>
+    <div class="mt-xl">
+        <button class="btn btn-outline" onclick="toggleRail()">Toggle Expand/Collapse</button>
+    </div>
+</div>
+</div>
+</div>
+
+<script>
+    function toggleRail() {
+        const rail = document.getElementById('demo-rail');
+        rail.classList.toggle('expanded');
+    }
+
+    // Selection Logic
+    document.querySelectorAll('.rail-item').forEach(item => {
+        item.addEventListener('click', function () {
+            if (this.querySelector('.rail-icon').textContent === 'menu_open') return;
+
+            document.querySelectorAll('.rail-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+</script>

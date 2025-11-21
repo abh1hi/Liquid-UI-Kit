@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="components/data-display/cards/cards.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Cards</h2>
+        <p class="text-body">Versatile containers for content.</p>
+    </div>
+
+    <!-- Basic Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+
+        <!-- Basic Glass Card -->
+        <div class="card">
+            <h3 class="card-title">Glass Card</h3>
+            <h4 class="card-subtitle">Translucent & Modern</h4>
+            <p class="card-text">This card uses the glassmorphism effect with backdrop blur and a subtle border.</p>
+            <div class="card-actions">
+                <button class="btn btn-primary btn-sm">Action</button>
+                <button class="btn btn-ghost btn-sm">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Elevated Card -->
+        <div class="card card-elevated">
+            <h3 class="card-title">Elevated Card</h3>
+            <h4 class="card-subtitle">Solid & Shadowed</h4>
+            <p class="card-text">A more traditional card style with a solid background and soft shadow for depth.</p>
+            <div class="card-actions">
+                <button class="btn btn-outline btn-sm">Details</button>
+            </div>
+        </div>
+
+        <!-- Outlined Card -->
+        <div class="card card-outlined">
+            <h3 class="card-title">Outlined Card</h3>
+            <h4 class="card-subtitle">Minimalist</h4>
+            <p class="card-text">Useful for secondary content or when you want to reduce visual weight.</p>
+        </div>
+    </div>
+
+    <!-- Image / Product Cards -->
+    <h3 class="text-h3 mt-xl mb-md">Rich Content Cards</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+
+        <!-- Image Card -->
+        <div class="card card-image">
+            <div style="overflow: hidden; border-radius: var(--radius-lg) var(--radius-lg) 0 0;">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                    alt="Landscape" class="card-img-top">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Beautiful Landscapes</h3>
+                <p class="card-text">Explore the world's most breathtaking views and hidden gems.</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary w-full">Explore</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Card -->
+        <div class="card card-image product-card">
+            <span class="product-badge">New Arrival</span>
+            <div style="overflow: hidden; border-radius: var(--radius-lg) var(--radius-lg) 0 0;">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                    alt="Product" class="card-img-top">
+            </div>
+            <div class="card-body">
+                <div class="flex justify-between items-center mb-sm">
+                    <h3 class="card-title mb-0">Minimalist Watch</h3>
+                    <span class="product-price">$129</span>
+                </div>
+                <p class="card-text">Elegant design meets modern functionality.</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary w-full">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

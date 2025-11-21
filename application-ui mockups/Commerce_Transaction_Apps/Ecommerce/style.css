@@ -1,0 +1,161 @@
+/* Responsive Visibility */
+.desktop-view {
+    display: block;
+}
+
+.mobile-view {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-view {
+        display: none;
+    }
+
+    .mobile-view {
+        display: block;
+    }
+}
+
+/* Desktop Specific Styles */
+.app-bar-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-color);
+    padding-bottom: var(--spacing-md);
+}
+
+.desktop-nav-links .nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    transition: all 0.3s ease;
+}
+
+.desktop-nav-links .nav-link:hover,
+.desktop-nav-links .nav-link.active {
+    color: var(--text-color);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.hero-section {
+    position: relative;
+}
+
+.hero-panel {
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.hero-content {
+    flex: 1;
+    padding-right: var(--spacing-xl);
+    z-index: 2;
+}
+
+.hero-image {
+    flex: 1;
+    height: 400px;
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--glass-shadow);
+}
+
+.display-text {
+    font-size: 48px;
+    line-height: 1.2;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--text-color) 0%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glass-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.glass-input-wrapper .material-icons-round {
+    position: absolute;
+    left: 12px;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.glass-input-wrapper .glass-input {
+    padding-left: 40px;
+}
+
+.glass-input-wrapper .glass-input.sm {
+    padding: 8px 12px 8px 36px;
+    font-size: 14px;
+}
+
+/* Mobile Specific Styles */
+.mobile-view {
+    padding-bottom: 80px;
+    /* Space for bottom nav */
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.product-card.compact {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.product-card.compact .product-image-container {
+    position: relative;
+    padding-top: 100%;
+    /* 1:1 Aspect Ratio */
+}
+
+.product-card.compact .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-card.compact .product-badge.xs {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    top: 8px;
+    left: 8px;
+}
+
+.icon-btn.xs {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn.xs .material-icons-round {
+    font-size: 14px;
+}

@@ -1,0 +1,346 @@
+<style>
+    /* Audio Player Container */
+    .audio-player {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-lg);
+        width: 100%;
+        max-width: 400px;
+        box-shadow: var(--glass-shadow);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    /* Track Info */
+    .track-info {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+
+    .track-art {
+        width: 64px;
+        height: 64px;
+        border-radius: var(--radius-md);
+        background: linear-gradient(135deg, #e0f7fa, #80deea);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 24px;
+    }
+
+    .track-details {
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .track-title {
+        font-size: var(--text-base);
+        font-weight: var(--font-weight-bold);
+        color: var(--text-color);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .track-artist {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+    }
+
+    /* Controls */
+    .player-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-lg);
+    }
+
+    .control-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-color);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        border-radius: 50%;
+    }
+
+    .control-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+        transform: scale(1.1);
+    }
+
+    .control-btn.main {
+        width: 48px;
+        height: 48px;
+        background: var(--primary-color);
+        color: white;
+        box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+    }
+
+    .control-btn.main:hover {
+        background: var(--primary-hover);
+        transform: scale(1.05);
+    }
+
+    .control-btn.secondary {
+        width: 32px;
+        height: 32px;
+        color: var(--text-secondary);
+    }
+
+    /* Progress Bar */
+    .progress-container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+    }
+
+    .progress-bar {
+        flex: 1;
+        height: 4px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .progress-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 30%;
+        background: var(--primary-color);
+        border-radius: 2px;
+    }
+
+    .progress-handle {
+        position: absolute;
+        left: 30%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        background: white;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .progress-bar:hover .progress-handle {
+        opacity: 1;
+    }
+
+    /* Volume Control */
+    .volume-control {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        color: var(--text-secondary);
+    }
+
+    .volume-slider {
+        width: 80px;
+        height: 4px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .volume-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 70%;
+        background: var(--text-secondary);
+        border-radius: 2px;
+    }
+
+    /* Playlist */
+    .playlist {
+        border-top: 1px solid var(--glass-border);
+        padding-top: var(--spacing-md);
+        margin-top: var(--spacing-sm);
+    }
+
+    .playlist-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .playlist-item:hover {
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    .playlist-item.active {
+        background: rgba(var(--primary-rgb), 0.1);
+    }
+
+    .playlist-item.active .playlist-title {
+        color: var(--primary-color);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .playlist-title {
+        font-size: var(--text-sm);
+        color: var(--text-color);
+    }
+
+    .playlist-duration {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+    }
+
+    /* Waveform Animation */
+    .playing-indicator {
+        display: flex;
+        gap: 2px;
+        height: 12px;
+        align-items: flex-end;
+    }
+
+    .bar {
+        width: 3px;
+        background: var(--primary-color);
+        animation: equalizer 1s ease-in-out infinite;
+    }
+
+    .bar:nth-child(1) {
+        animation-duration: 0.8s;
+    }
+
+    .bar:nth-child(2) {
+        animation-duration: 1.1s;
+    }
+
+    .bar:nth-child(3) {
+        animation-duration: 0.9s;
+    }
+
+    @keyframes equalizer {
+
+        0%,
+        100% {
+            height: 20%;
+        }
+
+        50% {
+            height: 100%;
+        }
+    }
+</style>
+
+<div class="audio-player">
+    <!-- Track Info -->
+    <div class="track-info">
+        <div class="track-art">
+            <span class="material-icons-round">music_note</span>
+        </div>
+        <div class="track-details">
+            <div class="track-title">Midnight City</div>
+            <div class="track-artist">M83</div>
+        </div>
+        <div class="playing-indicator">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-container">
+        <span>1:24</span>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+            <div class="progress-handle"></div>
+        </div>
+        <span>4:03</span>
+    </div>
+
+    <!-- Controls -->
+    <div class="player-controls">
+        <button class="control-btn secondary">
+            <span class="material-icons-round">shuffle</span>
+        </button>
+        <button class="control-btn secondary">
+            <span class="material-icons-round">skip_previous</span>
+        </button>
+        <button class="control-btn main" id="play-pause-btn">
+            <span class="material-icons-round">pause</span>
+        </button>
+        <button class="control-btn secondary">
+            <span class="material-icons-round">skip_next</span>
+        </button>
+        <button class="control-btn secondary">
+            <span class="material-icons-round">repeat</span>
+        </button>
+    </div>
+
+    <!-- Volume -->
+    <div class="volume-control">
+        <span class="material-icons-round" style="font-size: 18px;">volume_up</span>
+        <div class="volume-slider">
+            <div class="volume-fill"></div>
+        </div>
+    </div>
+
+    <!-- Playlist -->
+    <div class="playlist">
+        <div class="playlist-item active">
+            <span class="playlist-title">1. Midnight City</span>
+            <span class="playlist-duration">4:03</span>
+        </div>
+        <div class="playlist-item">
+            <span class="playlist-title">2. Reunion</span>
+            <span class="playlist-duration">3:55</span>
+        </div>
+        <div class="playlist-item">
+            <span class="playlist-title">3. Wait</span>
+            <span class="playlist-duration">5:43</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const playBtn = document.getElementById('play-pause-btn');
+    const indicator = document.querySelector('.playing-indicator');
+    let isPlaying = true;
+
+    playBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        const icon = playBtn.querySelector('span');
+
+        if (isPlaying) {
+            icon.textContent = 'pause';
+            indicator.style.opacity = '1';
+        } else {
+            icon.textContent = 'play_arrow';
+            indicator.style.opacity = '0';
+        }
+    });
+
+    // Playlist selection
+    document.querySelectorAll('.playlist-item').forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelectorAll('.playlist-item').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+        });
+    });
+</script>

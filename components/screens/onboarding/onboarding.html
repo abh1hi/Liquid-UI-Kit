@@ -1,0 +1,92 @@
+<link rel="stylesheet" href="components\screens\onboarding\onboarding.css">
+
+<div class="p-xl">
+    <div class="onboarding-container">
+        <div class="slides-wrapper">
+            <div class="slides-track" id="track">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <span class="material-icons-round">rocket_launch</span>
+                    </div>
+                    <h2 class="slide-title">Welcome Aboard</h2>
+                    <p class="slide-desc">Discover a new way to manage your tasks and boost productivity with our
+                        intuitive tools.</p>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <span class="material-icons-round">sync</span>
+                    </div>
+                    <h2 class="slide-title">Sync Everywhere</h2>
+                    <p class="slide-desc">Keep your data in sync across all your devices. Access your work anytime,
+                        anywhere.</p>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <span class="material-icons-round">security</span>
+                    </div>
+                    <h2 class="slide-title">Secure & Safe</h2>
+                    <p class="slide-desc">Your data is protected with enterprise-grade encryption. Privacy is our top
+                        priority.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-area">
+            <button class="nav-btn" onclick="skipOnboarding()">Skip</button>
+            <div class="dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <button class="nav-btn btn-next" onclick="nextSlide()">Next</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const totalSlides = 3;
+    const track = document.getElementById('track');
+    const dots = document.querySelectorAll('.dot');
+    const nextBtn = document.querySelector('.btn-next');
+
+    function updateSlide() {
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update dots
+        dots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+
+        // Update button text
+        if (currentSlide === totalSlides - 1) {
+            nextBtn.textContent = 'Get Started';
+        } else {
+            nextBtn.textContent = 'Next';
+        }
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlide();
+        } else {
+            // End of onboarding
+            alert('Onboarding Complete!');
+            currentSlide = 0;
+            updateSlide();
+        }
+    }
+
+    function skipOnboarding() {
+        currentSlide = totalSlides - 1;
+        updateSlide();
+    }
+</script>

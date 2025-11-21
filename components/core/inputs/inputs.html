@@ -1,0 +1,109 @@
+<link rel="stylesheet" href="components/core/inputs/inputs.css">
+
+<div class="flex flex-col gap-md">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Inputs</h2>
+        <p class="text-body">Fields for user text input.</p>
+    </div>
+
+    <div class="flex flex-col gap-md" style="max-width: 400px; margin: 0 auto; width: 100%;">
+
+        <!-- Basic Text -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">Basic Inputs</h3>
+
+            <div class="input-group">
+                <label class="input-label">Username</label>
+                <div class="input-wrapper">
+                    <input type="text" class="input-field" placeholder="Enter your username">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Email</label>
+                <div class="input-wrapper">
+                    <input type="email" class="input-field" placeholder="john@example.com">
+                </div>
+                <span class="input-helper">We'll never share your email.</span>
+            </div>
+        </section>
+
+        <!-- With Icons -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">With Icons</h3>
+
+            <div class="input-group">
+                <label class="input-label">Website</label>
+                <div class="input-wrapper">
+                    <span class="material-icons-round input-icon input-icon-start">language</span>
+                    <input type="url" class="input-field has-start-icon" placeholder="https://example.com">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Search</label>
+                <div class="input-wrapper">
+                    <span class="material-icons-round input-icon input-icon-start">search</span>
+                    <input type="search" class="input-field has-start-icon input-search" placeholder="Search...">
+                </div>
+            </div>
+        </section>
+
+        <!-- Password -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">Password</h3>
+
+            <div class="input-group">
+                <label class="input-label">Password</label>
+                <div class="input-wrapper">
+                    <span class="material-icons-round input-icon input-icon-start">lock</span>
+                    <input type="password" class="input-field has-start-icon has-end-icon" id="password-input"
+                        placeholder="••••••••">
+                    <button class="password-toggle" id="password-toggle" type="button">
+                        <span class="material-icons-round">visibility</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- States -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">States</h3>
+
+            <div class="input-group error">
+                <label class="input-label">Error State</label>
+                <div class="input-wrapper">
+                    <input type="text" class="input-field" value="Invalid Value">
+                    <span class="material-icons-round input-icon input-icon-end">error</span>
+                </div>
+                <span class="input-helper">This field is required.</span>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Disabled</label>
+                <div class="input-wrapper">
+                    <input type="text" class="input-field" disabled value="Cannot edit this">
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script>
+    // Password Toggle Logic
+    (function () {
+        const toggleBtn = document.getElementById('password-toggle');
+        const input = document.getElementById('password-input');
+
+        if (toggleBtn && input) {
+            toggleBtn.addEventListener('click', () => {
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+
+                const icon = toggleBtn.querySelector('.material-icons-round');
+                icon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+            });
+        }
+    })();
+</script>

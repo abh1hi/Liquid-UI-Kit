@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="components/navigation/tabs/tabs.css">
+
+<div class="flex flex-col gap-md">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Tabs</h2>
+        <p class="text-body">Organize content into separate views.</p>
+    </div>
+
+    <!-- Line Tabs -->
+    <section class="glass-panel p-md">
+        <h3 class="text-h4 mb-md">Line Tabs</h3>
+
+        <div class="tabs-container" id="line-tabs">
+            <div class="tabs-header">
+                <div class="tab-item active" data-tab="tab1">Overview</div>
+                <div class="tab-item" data-tab="tab2">Details</div>
+                <div class="tab-item" data-tab="tab3">Settings</div>
+                <div class="tab-indicator" style="width: 86px; transform: translateX(0px);"></div>
+            </div>
+
+            <div class="tab-content active" id="tab1">
+                <p class="text-body">Overview content goes here.</p>
+            </div>
+            <div class="tab-content" id="tab2">
+                <p class="text-body">Detailed specifications and data.</p>
+            </div>
+            <div class="tab-content" id="tab3">
+                <p class="text-body">Configuration options.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pill Tabs -->
+    <section class="glass-panel p-md mt-md">
+        <h3 class="text-h4 mb-md">Pill Tabs</h3>
+
+        <div class="flex justify-center">
+            <div class="tabs-pills" id="pill-tabs">
+                <div class="pill-indicator" style="width: 75px; transform: translateX(4px);"></div>
+                <div class="tab-pill active" data-tab="pill1">Daily</div>
+                <div class="tab-pill" data-tab="pill2">Weekly</div>
+                <div class="tab-pill" data-tab="pill3">Monthly</div>
+            </div>
+        </div>
+
+        <div class="text-center mt-md">
+            <div class="tab-content active" id="pill1">
+                <h4 class="text-h3">Today</h4>
+            </div>
+            <div class="tab-content" id="pill2">
+                <h4 class="text-h3">This Week</h4>
+            </div>
+            <div class="tab-content" id="pill3">
+                <h4 class="text-h3">This Month</h4>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Tab Logic
+    (function () {
+        // Line Tabs
+        const lineTabs = document.getElementById('line-tabs');
+        if (lineTabs) {
+            const headers = lineTabs.querySelectorAll('.tab-item');
+            const indicator = lineTabs.querySelector('.tab-indicator');
+
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    // Update Active State
+                    headers.forEach(h => h.classList.remove('active'));
+                    header.classList.add('active');
+
+                    // Move Indicator
+                    indicator.style.width = `${header.offsetWidth}px`;
+                    indicator.style.transform = `translateX(${header.offsetLeft}px)`;
+
+                    // Show Content
+                    const target = header.dataset.tab;
+                    lineTabs.querySelectorAll('.tab-content').forEach(c => {
+                        c.classList.toggle('active', c.id === target);
+                    });
+                });
+            });
+        }
+
+        // Pill Tabs
+        const pillTabs = document.getElementById('pill-tabs');
+        if (pillTabs) {
+            const pills = pillTabs.querySelectorAll('.tab-pill');
+            const indicator = pillTabs.querySelector('.pill-indicator');
+
+            pills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    pills.forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+
+                    indicator.style.width = `${pill.offsetWidth}px`;
+                    indicator.style.transform = `translateX(${pill.offsetLeft}px)`;
+
+                    // Show Content (Parent container logic needed if content is outside)
+                    const target = pill.dataset.tab;
+                    // Assuming content is sibling in this demo structure
+                    const container = pillTabs.parentElement.nextElementSibling;
+                    container.querySelectorAll('.tab-content').forEach(c => {
+                        c.classList.toggle('active', c.id === target);
+                    });
+                });
+            });
+        }
+    })();
+</script>

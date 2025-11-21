@@ -1,0 +1,241 @@
+<style>
+    /* Gallery Grid for Demo */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .gallery-item {
+        aspect-ratio: 1;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.2s;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.02);
+    }
+
+    .gallery-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #eee;
+    }
+
+    /* Lightbox Overlay */
+    .lightbox-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .lightbox-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Lightbox Content */
+    .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lightbox-image {
+        max-width: 100%;
+        max-height: 80vh;
+        border-radius: var(--radius-sm);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-caption {
+        color: white;
+        margin-top: var(--spacing-md);
+        font-size: var(--text-base);
+        text-align: center;
+    }
+
+    /* Controls */
+    .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        z-index: 2001;
+    }
+
+    .lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+
+    .lightbox-nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-prev {
+        left: 20px;
+    }
+
+    .nav-next {
+        right: 20px;
+    }
+
+    /* Toolbar */
+    .lightbox-toolbar {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: var(--spacing-md);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 8px 16px;
+        border-radius: 24px;
+        backdrop-filter: blur(4px);
+    }
+
+    .toolbar-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+
+    .toolbar-btn:hover {
+        opacity: 1;
+    }
+</style>
+
+<!-- Gallery Grid -->
+<div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(0)">
+        <div class="gallery-img" style="background: #ffccbc;"></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(1)">
+        <div class="gallery-img" style="background: #b2dfdb;"></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(2)">
+        <div class="gallery-img" style="background: #c5cae9;"></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(3)">
+        <div class="gallery-img" style="background: #f0f4c3;"></div>
+    </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">
+        <span class="material-icons-round">close</span>
+    </button>
+
+    <button class="lightbox-nav nav-prev" onclick="navigateLightbox(-1)">
+        <span class="material-icons-round">chevron_left</span>
+    </button>
+
+    <div class="lightbox-content">
+        <div class="lightbox-image" style="width: 800px; height: 500px; background: #ffccbc;"></div>
+        <div class="lightbox-caption">Image 1 of 4</div>
+    </div>
+
+    <button class="lightbox-nav nav-next" onclick="navigateLightbox(1)">
+        <span class="material-icons-round">chevron_right</span>
+    </button>
+
+    <div class="lightbox-toolbar">
+        <button class="toolbar-btn">
+            <span class="material-icons-round">zoom_in</span>
+        </button>
+        <button class="toolbar-btn">
+            <span class="material-icons-round">zoom_out</span>
+        </button>
+        <button class="toolbar-btn">
+            <span class="material-icons-round">file_download</span>
+        </button>
+        <button class="toolbar-btn">
+            <span class="material-icons-round">share</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    const colors = ['#ffccbc', '#b2dfdb', '#c5cae9', '#f0f4c3'];
+    let currentIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+    const img = lightbox.querySelector('.lightbox-image');
+    const caption = lightbox.querySelector('.lightbox-caption');
+
+    function openLightbox(index) {
+        currentIndex = index;
+        updateImage();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function navigateLightbox(direction) {
+        currentIndex = (currentIndex + direction + colors.length) % colors.length;
+        updateImage();
+    }
+
+    function updateImage() {
+        img.style.background = colors[currentIndex];
+        caption.textContent = `Image ${currentIndex + 1} of ${colors.length}`;
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+</script>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce Mockup</title>
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="../../../../style.css">
+
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="../../../../components/navigation/app-bar/app-bar.css">
+    <link rel="stylesheet" href="../../../../components/navigation/bottom-nav.css">
+    <link rel="stylesheet" href="../../../../components/ecommerce/product-card/product-card.css">
+
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    body {
+        --bg-color: #0a0a0a;
+        --text-color: #e5e5e5;
+        --text-secondary: #a0a0a0;
+        --text-tertiary: #666;
+        --text-disabled: #444;
+
+        --primary-pastel: #4a7fff;
+        --secondary-pastel: #3dd68c;
+        --tertiary-pastel: #ff6b9d;
+        --accent-pastel: #b794f6;
+
+        --primary-text: #e3f2ff;
+        --secondary-text: #d4f4e2;
+        --tertiary-text: #ffe4ec;
+        --accent-text: #f0e7ff;
+
+        --primary-hover: #6b96ff;
+        --primary-active: #8cb0ff;
+
+        --gradient-mesh:
+            radial-gradient(at 0% 0%, rgba(74, 127, 255, 0.15) 0, transparent 50%),
+            radial-gradient(at 100% 0%, rgba(61, 214, 140, 0.15) 0, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(255, 107, 157, 0.15) 0, transparent 50%),
+            radial-gradient(at 0% 100%, rgba(183, 148, 246, 0.15) 0, transparent 50%);
+
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --glass-blur: 24px;
+        --glass-saturate: 200%;
+        --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        --glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+    }
+</style>
+
+<body>
+
+    <!-- Desktop View -->
+    <div class="desktop-view">
+        <!-- App Bar -->
+        <div class="app-bar-container">
+            <div class="app-bar">
+                <div class="app-bar-start">
+                    <h1 class="app-bar-title text-primary">ShopFlow</h1>
+                    <div class="desktop-nav-links ml-md flex gap-md">
+                        <a href="#" class="nav-link active">Home</a>
+                        <a href="#" class="nav-link">Men</a>
+                        <a href="#" class="nav-link">Women</a>
+                        <a href="#" class="nav-link">Kids</a>
+                    </div>
+                </div>
+                <div class="app-bar-end">
+                    <div class="search-bar-wrapper glass-input-wrapper">
+                        <span class="material-icons-round">search</span>
+                        <input type="text" class="glass-input sm" placeholder="Search products...">
+                    </div>
+                    <button class="btn btn-icon btn-ghost">
+                        <span class="material-icons-round">favorite_border</span>
+                    </button>
+                    <button class="btn btn-icon btn-ghost">
+                        <span class="material-icons-round">shopping_cart</span>
+                    </button>
+                    <div class="avatar avatar-sm">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero-section mt-lg mb-xl">
+            <div class="glass-panel hero-panel flex items-center justify-between p-xl">
+                <div class="hero-content">
+                    <span class="badge-pill bg-accent-pastel text-accent-text mb-sm">New Collection</span>
+                    <h1 class="display-text mb-md">Summer Essentials</h1>
+                    <p class="text-body mb-lg">Discover the latest trends for the season. Comfort meets style.</p>
+                    <button class="glass-button primary">Shop Now</button>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80"
+                        alt="Fashion" class="rounded-lg">
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid -->
+        <div class="app-container max-w-1200">
+            <h2 class="text-h2 mb-lg">Featured Products</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-lg">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <span class="product-badge">New</span>
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"
+                            alt="Sneakers" class="product-image">
+                        <div class="product-actions-overlay">
+                            <button class="icon-btn bg-white text-dark shadow-md"><span
+                                    class="material-icons-round">favorite_border</span></button>
+                            <button class="icon-btn bg-white text-dark shadow-md"><span
+                                    class="material-icons-round">shopping_cart</span></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Footwear</div>
+                        <h3 class="product-title">Nike Air Max 270</h3>
+                        <div class="product-rating">
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star_half</span>
+                            <span class="text-secondary ml-1">(4.5)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$129.99</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <span class="product-badge bg-danger text-white">-20%</span>
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80"
+                            alt="Watch" class="product-image">
+                        <div class="product-actions-overlay">
+                            <button class="icon-btn bg-white text-dark shadow-md"><span
+                                    class="material-icons-round">favorite_border</span></button>
+                            <button class="icon-btn bg-white text-dark shadow-md"><span
+                                    class="material-icons-round">shopping_cart</span></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Accessories</div>
+                        <h3 class="product-title">Minimalist Watch</h3>
+                        <div class="product-rating">
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-secondary">star_border</span>
+                            <span class="text-secondary ml-1">(4.0)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$89.00</span>
+                            <span class="product-old-price">$110.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"
+                            alt="Headphones" class="product-image">
+                        <div class="product-actions-overlay">
+                            <button class="icon-btn bg-white text-dark shadow-md"><span
+                                    class="material-icons-round">favorite_border</span></button>
+                            <button class="icon-btn bg-white text-dark shadow-md"><span
+                                    class="material-icons-round">shopping_cart</span></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electronics</div>
+                        <h3 class="product-title">Wireless Headphones</h3>
+                        <div class="product-rating">
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="text-secondary ml-1">(5.0)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$249.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=500&q=80"
+                            alt="Sunglasses" class="product-image">
+                        <div class="product-actions-overlay">
+                            <button class="icon-btn bg-white text-dark shadow-md"><span
+                                    class="material-icons-round">favorite_border</span></button>
+                            <button class="icon-btn bg-white text-dark shadow-md"><span
+                                    class="material-icons-round">shopping_cart</span></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Accessories</div>
+                        <h3 class="product-title">Classic Sunglasses</h3>
+                        <div class="product-rating">
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-warning">star</span>
+                            <span class="material-icons-round text-sm text-secondary">star_border</span>
+                            <span class="text-secondary ml-1">(4.2)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$150.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile View -->
+    <div class="mobile-view">
+        <!-- Mobile Header -->
+        <div class="header glass-panel flex items-center justify-between sticky top-0 z-50">
+            <button class="btn btn-icon btn-ghost">
+                <span class="material-icons-round">menu</span>
+            </button>
+            <h1 class="text-h3 m-0">ShopFlow</h1>
+            <div class="avatar avatar-xs">
+                <img src="https://i.pravatar.cc/150?img=12" alt="User">
+            </div>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="px-md mb-md">
+            <div class="glass-input-wrapper w-full">
+                <span class="material-icons-round">search</span>
+                <input type="text" class="glass-input" placeholder="Search...">
+            </div>
+        </div>
+
+        <!-- Mobile Hero -->
+        <div class="px-md mb-lg">
+            <div class="glass-panel p-md relative overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80"
+                        alt="Fashion" class="w-full h-full object-cover opacity-50">
+                </div>
+                <div class="relative z-10">
+                    <span class="badge-pill bg-white text-dark mb-sm text-xs">New</span>
+                    <h2 class="text-h3 mb-sm">Summer Vibes</h2>
+                    <button class="glass-button sm bg-white text-dark border-none">Shop</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Categories -->
+        <div class="px-md mb-lg">
+            <h3 class="text-h4 mb-sm">Categories</h3>
+            <div class="flex gap-sm overflow-x-auto pb-sm hide-scrollbar">
+                <button class="glass-button sm active">All</button>
+                <button class="glass-button sm">Clothing</button>
+                <button class="glass-button sm">Shoes</button>
+                <button class="glass-button sm">Accessories</button>
+            </div>
+        </div>
+
+        <!-- Mobile Product Grid -->
+        <div class="px-md pb-100">
+            <div class="grid grid-cols-2 gap-md">
+                <!-- Product 1 -->
+                <div class="product-card compact">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"
+                            alt="Sneakers" class="product-image">
+                        <button class="icon-btn xs absolute top-2 right-2 bg-white text-dark shadow-sm"><span
+                                class="material-icons-round text-sm">favorite_border</span></button>
+                    </div>
+                    <div class="product-info p-sm">
+                        <h3 class="product-title text-sm truncate">Nike Air Max 270</h3>
+                        <div class="product-footer mt-xs">
+                            <span class="product-price text-sm">$129.99</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card compact">
+                    <div class="product-image-container">
+                        <span class="product-badge xs bg-danger text-white">-20%</span>
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80"
+                            alt="Watch" class="product-image">
+                        <button class="icon-btn xs absolute top-2 right-2 bg-white text-dark shadow-sm"><span
+                                class="material-icons-round text-sm">favorite_border</span></button>
+                    </div>
+                    <div class="product-info p-sm">
+                        <h3 class="product-title text-sm truncate">Minimalist Watch</h3>
+                        <div class="product-footer mt-xs">
+                            <span class="product-price text-sm">$89.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card compact">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"
+                            alt="Headphones" class="product-image">
+                        <button class="icon-btn xs absolute top-2 right-2 bg-white text-dark shadow-sm"><span
+                                class="material-icons-round text-sm">favorite_border</span></button>
+                    </div>
+                    <div class="product-info p-sm">
+                        <h3 class="product-title text-sm truncate">Wireless Headphones</h3>
+                        <div class="product-footer mt-xs">
+                            <span class="product-price text-sm">$249.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card compact">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=500&q=80"
+                            alt="Sunglasses" class="product-image">
+                        <button class="icon-btn xs absolute top-2 right-2 bg-white text-dark shadow-sm"><span
+                                class="material-icons-round text-sm">favorite_border</span></button>
+                    </div>
+                    <div class="product-info p-sm">
+                        <h3 class="product-title text-sm truncate">Classic Sunglasses</h3>
+                        <div class="product-footer mt-xs">
+                            <span class="product-price text-sm">$150.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a class="nav-item active" onclick="setActive(this)">
+                <div class="nav-icon-container">
+                    <span class="material-icons-round">home</span>
+                </div>
+                <span>Home</span>
+            </a>
+            <a class="nav-item" onclick="setActive(this)">
+                <div class="nav-icon-container">
+                    <span class="material-icons-round">search</span>
+                </div>
+                <span>Search</span>
+            </a>
+            <a class="nav-item" onclick="setActive(this)">
+                <div class="nav-icon-container">
+                    <span class="material-icons-round">shopping_cart</span>
+                </div>
+                <span>Cart</span>
+            </a>
+            <a class="nav-item" onclick="setActive(this)">
+                <div class="nav-icon-container">
+                    <span class="material-icons-round">person</span>
+                </div>
+                <span>Profile</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="components\screens\splash\splash.css">
+<div id="splash-demo" class="splash-container">
+    <div class="splash-logo">
+        <span class="material-icons-round">bolt</span>
+    </div>
+    <div class="splash-title">App Name</div>
+    <div class="splash-subtitle">Building the future</div>
+    <div class="splash-progress">
+        <div class="splash-progress-bar"></div>
+    </div>
+</div>
+</div>
+
+<script>
+    function resetSplash(theme) {
+        const container = document.getElementById('splash-demo');
+
+        // Reset animations by cloning
+        const newContainer = container.cloneNode(true);
+        container.parentNode.replaceChild(newContainer, container);
+
+        // Set theme
+        if (theme === 'dark') {
+            newContainer.classList.add('dark');
+        } else {
+            newContainer.classList.remove('dark');
+        }
+    }
+</script>

@@ -1,0 +1,415 @@
+<style>
+    /* Kanban Container */
+    .kanban-board {
+        display: flex;
+        gap: var(--spacing-lg);
+        padding: var(--spacing-lg);
+        overflow-x: auto;
+        height: calc(100vh - 200px);
+        min-height: 500px;
+        align-items: flex-start;
+    }
+
+    /* Column */
+    .kanban-column {
+        flex: 0 0 300px;
+        background: var(--glass-bg);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--glass-border);
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+    }
+
+    /* Column Header */
+    .kanban-header {
+        padding: var(--spacing-md);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .kanban-title {
+        font-weight: var(--font-weight-bold);
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .kanban-count {
+        background: rgba(0, 0, 0, 0.05);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+    }
+
+    .kanban-actions {
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+    }
+
+    .kanban-actions:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--text-color);
+    }
+
+    /* Card List */
+    .kanban-list {
+        padding: var(--spacing-md);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+        flex: 1;
+    }
+
+    /* Card */
+    .kanban-card {
+        background: white;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        cursor: grab;
+        transition: all 0.2s var(--ease-out);
+        border: 1px solid transparent;
+    }
+
+    .kanban-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .kanban-card.dragging {
+        opacity: 0.5;
+        cursor: grabbing;
+    }
+
+    /* Card Content */
+    .card-tags {
+        display: flex;
+        gap: 4px;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .card-tag {
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+    }
+
+    .tag-design {
+        background: #e3f2fd;
+        color: #1565c0;
+    }
+
+    .tag-dev {
+        background: #f3e5f5;
+        color: #7b1fa2;
+    }
+
+    .tag-bug {
+        background: #ffebee;
+        color: #c62828;
+    }
+
+    .card-title {
+        font-size: var(--text-sm);
+        font-weight: var(--font-weight-medium);
+        color: var(--text-color);
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.4;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: var(--spacing-sm);
+    }
+
+    .card-members {
+        display: flex;
+        margin-left: 8px;
+    }
+
+    .member-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid white;
+        margin-left: -8px;
+        background: #ddd;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+    }
+
+    .card-meta {
+        display: flex;
+        gap: var(--spacing-sm);
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+    }
+
+    /* Add Button */
+    .kanban-add {
+        padding: var(--spacing-md);
+        border-top: 1px solid var(--glass-border);
+    }
+
+    .btn-add-card {
+        width: 100%;
+        padding: var(--spacing-sm);
+        background: transparent;
+        border: 1px dashed var(--glass-border);
+        border-radius: var(--radius-md);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+        transition: all 0.2s;
+    }
+
+    .btn-add-card:hover {
+        background: rgba(0, 0, 0, 0.02);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+        .kanban-card {
+            background: #2d2d2d;
+            box-shadow: none;
+        }
+
+        .member-avatar {
+            border-color: #2d2d2d;
+        }
+    }
+</style>
+
+<div class="kanban-board">
+    <!-- Todo Column -->
+    <div class="kanban-column">
+        <div class="kanban-header">
+            <div class="kanban-title">
+                To Do
+                <span class="kanban-count">3</span>
+            </div>
+            <span class="material-icons-round kanban-actions">more_horiz</span>
+        </div>
+        <div class="kanban-list" id="todo-list">
+            <div class="kanban-card" draggable="true">
+                <div class="card-tags">
+                    <span class="card-tag tag-design">Design</span>
+                </div>
+                <div class="card-title">Create wireframes for mobile app</div>
+                <div class="card-footer">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="material-icons-round" style="font-size: 14px;">attach_file</span>
+                            2
+                        </div>
+                        <div class="meta-item">
+                            <span class="material-icons-round" style="font-size: 14px;">chat_bubble_outline</span>
+                            4
+                        </div>
+                    </div>
+                    <div class="card-members">
+                        <div class="member-avatar" style="background: #ffccbc;">JD</div>
+                        <div class="member-avatar" style="background: #b2dfdb;">AL</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kanban-card" draggable="true">
+                <div class="card-tags">
+                    <span class="card-tag tag-dev">Frontend</span>
+                </div>
+                <div class="card-title">Implement authentication flow</div>
+                <div class="card-footer">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="material-icons-round" style="font-size: 14px;">schedule</span>
+                            2d
+                        </div>
+                    </div>
+                    <div class="card-members">
+                        <div class="member-avatar" style="background: #c5cae9;">RK</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kanban-card" draggable="true">
+                <div class="card-tags">
+                    <span class="card-tag tag-design">Research</span>
+                </div>
+                <div class="card-title">Competitor analysis</div>
+                <div class="card-footer">
+                    <div class="card-meta"></div>
+                    <div class="card-members">
+                        <div class="member-avatar" style="background: #ffccbc;">JD</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kanban-add">
+            <button class="btn-add-card">
+                <span class="material-icons-round">add</span>
+                Add Card
+            </button>
+        </div>
+    </div>
+
+    <!-- In Progress Column -->
+    <div class="kanban-column">
+        <div class="kanban-header">
+            <div class="kanban-title">
+                In Progress
+                <span class="kanban-count">2</span>
+            </div>
+            <span class="material-icons-round kanban-actions">more_horiz</span>
+        </div>
+        <div class="kanban-list" id="progress-list">
+            <div class="kanban-card" draggable="true">
+                <div class="card-tags">
+                    <span class="card-tag tag-bug">Bug</span>
+                </div>
+                <div class="card-title">Fix navigation menu on mobile devices</div>
+                <div class="card-footer">
+                    <div class="card-meta">
+                        <div class="meta-item" style="color: #ef5350;">
+                            <span class="material-icons-round" style="font-size: 14px;">flag</span>
+                            High
+                        </div>
+                    </div>
+                    <div class="card-members">
+                        <div class="member-avatar" style="background: #b2dfdb;">AL</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kanban-card" draggable="true">
+                <div class="card-tags">
+                    <span class="card-tag tag-dev">Backend</span>
+                </div>
+                <div class="card-title">API integration for user profile</div>
+                <div class="card-footer">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="material-icons-round" style="font-size: 14px;">link</span>
+                            1
+                        </div>
+                    </div>
+                    <div class="card-members">
+                        <div class="member-avatar" style="background: #c5cae9;">RK</div>
+                        <div class="member-avatar" style="background: #ffccbc;">JD</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kanban-add">
+            <button class="btn-add-card">
+                <span class="material-icons-round">add</span>
+                Add Card
+            </button>
+        </div>
+    </div>
+
+    <!-- Done Column -->
+    <div class="kanban-column">
+        <div class="kanban-header">
+            <div class="kanban-title">
+                Done
+                <span class="kanban-count">1</span>
+            </div>
+            <span class="material-icons-round kanban-actions">more_horiz</span>
+        </div>
+        <div class="kanban-list" id="done-list">
+            <div class="kanban-card" draggable="true" style="opacity: 0.8;">
+                <div class="card-tags">
+                    <span class="card-tag tag-design">Design</span>
+                </div>
+                <div class="card-title">Logo design iterations</div>
+                <div class="card-footer">
+                    <div class="card-meta">
+                        <div class="meta-item" style="color: #66bb6a;">
+                            <span class="material-icons-round" style="font-size: 14px;">check_circle</span>
+                            Approved
+                        </div>
+                    </div>
+                    <div class="card-members">
+                        <div class="member-avatar" style="background: #ffccbc;">JD</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kanban-add">
+            <button class="btn-add-card">
+                <span class="material-icons-round">add</span>
+                Add Card
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Simple Drag and Drop Implementation
+    const cards = document.querySelectorAll('.kanban-card');
+    const columns = document.querySelectorAll('.kanban-list');
+
+    cards.forEach(card => {
+        card.addEventListener('dragstart', () => {
+            card.classList.add('dragging');
+        });
+
+        card.addEventListener('dragend', () => {
+            card.classList.remove('dragging');
+        });
+    });
+
+    columns.forEach(column => {
+        column.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(column, e.clientY);
+            const draggable = document.querySelector('.dragging');
+            if (afterElement == null) {
+                column.appendChild(draggable);
+            } else {
+                column.insertBefore(draggable, afterElement);
+            }
+        });
+    });
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.kanban-card:not(.dragging)')];
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+</script>

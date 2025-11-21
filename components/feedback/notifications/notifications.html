@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="components/feedback/notifications/notifications.css">
+<div class="notif-header">
+    <span class="notif-title">Notifications</span>
+    <button class="mark-read-btn">Mark all as read</button>
+</div>
+
+<div class="notif-tabs">
+    <div class="notif-tab active">All</div>
+    <div class="notif-tab">Mentions</div>
+    <div class="notif-tab">System</div>
+</div>
+
+<div class="notif-list">
+    <!-- Unread Item -->
+    <div class="notif-item unread">
+        <div class="notif-avatar avatar-theme">JD</div>
+        <div class="notif-content">
+            <div class="notif-text"><b>John Doe</b> commented on your post "Design System Update"</div>
+            <div class="notif-time">2 minutes ago</div>
+        </div>
+    </div>
+
+    <!-- Unread System Item -->
+    <div class="notif-item unread">
+        <div class="notif-icon icon-info">
+            <span class="material-icons-round" style="font-size: 20px;">update</span>
+        </div>
+        <div class="notif-content">
+            <div class="notif-text">System update <b>v2.4.0</b> is available for download.</div>
+            <div class="notif-time">1 hour ago</div>
+        </div>
+    </div>
+
+    <!-- Read Item -->
+    <div class="notif-item">
+        <div class="notif-avatar"
+            style="background-image: url('https://i.pravatar.cc/150?img=5'); background-size: cover;"></div>
+        <div class="notif-content">
+            <div class="notif-text"><b>Sarah Smith</b> liked your comment.</div>
+            <div class="notif-time">Yesterday</div>
+        </div>
+    </div>
+
+    <!-- Read Item -->
+    <div class="notif-item">
+        <div class="notif-icon icon-success">
+            <span class="material-icons-round" style="font-size: 20px;">check_circle</span>
+        </div>
+        <div class="notif-content">
+            <div class="notif-text">Your backup was completed successfully.</div>
+            <div class="notif-time">2 days ago</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Mark as read logic
+    document.querySelectorAll('.notif-item').forEach(item => {
+        item.addEventListener('click', function () {
+            this.classList.remove('unread');
+        });
+    });
+
+    document.querySelector('.mark-read-btn').addEventListener('click', () => {
+        document.querySelectorAll('.notif-item').forEach(item => {
+            item.classList.remove('unread');
+        });
+    });
+
+    // Tab switching (Visual only for demo)
+    document.querySelectorAll('.notif-tab').forEach(tab => {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.notif-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+</script>

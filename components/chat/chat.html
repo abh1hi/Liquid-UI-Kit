@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="components/chat/chat.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Chat Interface</h2>
+        <p class="text-body">Modern messaging UI with glassmorphism.</p>
+    </div>
+
+    <section class="glass-panel p-0 overflow-hidden flex justify-center">
+        <div class="chat-container w-full max-w-2xl">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
+                        alt="Avatar" class="chat-avatar">
+                    <div>
+                        <h4 class="text-body font-bold">Sarah Wilson</h4>
+                        <div class="flex items-center">
+                            <span class="chat-status"></span>
+                            <span class="text-caption">Online</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-sm">
+                    <button class="icon-btn text-sm">
+                        <span class="material-icons-round">phone</span>
+                    </button>
+                    <button class="icon-btn text-sm">
+                        <span class="material-icons-round">videocam</span>
+                    </button>
+                    <button class="icon-btn text-sm">
+                        <span class="material-icons-round">more_vert</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages -->
+            <div class="chat-messages" id="chat-messages">
+                <div class="text-center text-caption mb-md">Today</div>
+
+                <div class="message received">
+                    <div class="message-bubble">
+                        Hi there! How is the new project coming along?
+                    </div>
+                    <span class="message-time">10:30 AM</span>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-bubble">
+                        Hey Sarah! It's going great. We just finished the new dashboard design.
+                    </div>
+                    <span class="message-time">10:32 AM</span>
+                </div>
+
+                <div class="message received">
+                    <div class="message-bubble">
+                        That's awesome! Can I see a preview?
+                    </div>
+                    <span class="message-time">10:33 AM</span>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-bubble">
+                        Sure, let me send you the link.
+                    </div>
+                    <span class="message-time">10:33 AM</span>
+                </div>
+
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+
+            <!-- Input -->
+            <div class="chat-input-area">
+                <button class="icon-btn text-sm">
+                    <span class="material-icons-round">add</span>
+                </button>
+                <input type="text" class="chat-input" placeholder="Type a message..." id="chat-input">
+                <button class="icon-btn text-sm text-primary">
+                    <span class="material-icons-round">send</span>
+                </button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        const chatInput = document.getElementById('chat-input');
+        const messagesContainer = document.getElementById('chat-messages');
+
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && chatInput.value.trim()) {
+                    // Demo: Add sent message
+                    const text = chatInput.value;
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'message sent';
+                    msgDiv.innerHTML = `
+                        <div class="message-bubble">${text}</div>
+                        <span class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    `;
+
+                    // Insert before typing indicator
+                    const indicator = messagesContainer.querySelector('.typing-indicator');
+                    messagesContainer.insertBefore(msgDiv, indicator);
+
+                    chatInput.value = '';
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+            });
+        }
+    })();
+</script>

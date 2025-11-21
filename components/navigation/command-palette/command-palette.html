@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="components/navigation/command-palette/command-palette.css">
+<button class="btn btn-primary" onclick="openPalette()">Open Command Palette</button>
+
+<!-- Palette Modal -->
+<div class="palette-overlay" id="palette-overlay">
+    <div class="command-palette">
+        <div class="palette-search">
+            <span class="material-icons-round text-secondary">search</span>
+            <input type="text" class="palette-input" placeholder="Type a command or search..." id="palette-input">
+            <span class="shortcut">ESC</span>
+        </div>
+
+        <div class="palette-results">
+            <div class="result-group">
+                <div class="group-title">Navigation</div>
+                <div class="result-item selected">
+                    <span class="material-icons-round result-icon">home</span>
+                    <div class="result-info">Go to Home</div>
+                    <span class="shortcut">G H</span>
+                </div>
+                <div class="result-item">
+                    <span class="material-icons-round result-icon">person</span>
+                    <div class="result-info">Go to Profile</div>
+                    <span class="shortcut">G P</span>
+                </div>
+            </div>
+
+            <div class="result-group">
+                <div class="group-title">Actions</div>
+                <div class="result-item">
+                    <span class="material-icons-round result-icon">add_circle</span>
+                    <div class="result-info">Create New Project</div>
+                </div>
+                <div class="result-item">
+                    <span class="material-icons-round result-icon">settings</span>
+                    <div class="result-info">Open Settings</div>
+                    <span class="shortcut">Ctrl ,</span>
+                </div>
+                <div class="result-item">
+                    <span class="material-icons-round result-icon">dark_mode</span>
+                    <div class="result-info">Toggle Dark Mode</div>
+                    <span class="shortcut">Ctrl D</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="palette-footer">
+            <span style="margin-right: 16px;">Use arrows to navigate</span>
+            <span>Enter to select</span>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    const overlay = document.getElementById('palette-overlay');
+    const input = document.getElementById('palette-input');
+
+    function openPalette() {
+        overlay.classList.add('active');
+        input.focus();
+    }
+
+    function closePalette() {
+        overlay.classList.remove('active');
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Ctrl + K to open
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            openPalette();
+        }
+
+        // Esc to close
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+            closePalette();
+        }
+    });
+
+    // Close on click outside
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            closePalette();
+        }
+    });
+
+    // Navigation Logic (Simple Demo)
+    const items = document.querySelectorAll('.result-item');
+    let selectedIndex = 0;
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex + 1) % items.length;
+            updateSelection();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+            updateSelection();
+        } else if (e.key === 'Enter') {
+            alert(`Selected: ${items[selectedIndex].querySelector('.result-info').textContent}`);
+            closePalette();
+        }
+    });
+
+    function updateSelection() {
+        items.forEach((item, index) => {
+            if (index === selectedIndex) {
+                item.classList.add('selected');
+                item.scrollIntoView({ block: 'nearest' });
+            } else {
+                item.classList.remove('selected');
+            }
+        });
+    }
+
+    // Hover effect
+    items.forEach((item, index) => {
+        item.addEventListener('mouseenter', () => {
+            selectedIndex = index;
+            updateSelection();
+        });
+        item.addEventListener('click', () => {
+            alert(`Selected: ${item.querySelector('.result-info').textContent}`);
+            closePalette();
+        });
+    });
+</script>

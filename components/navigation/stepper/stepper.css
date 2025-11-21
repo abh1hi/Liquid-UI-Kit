@@ -1,0 +1,108 @@
+/* Stepper */
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+}
+
+.stepper::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--glass-border);
+    z-index: 0;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+.step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--text-secondary);
+    transition: all 0.3s;
+}
+
+.step.active .step-circle {
+    border-color: var(--primary-pastel);
+    color: var(--primary-text);
+    background: var(--bg-color);
+    box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
+}
+
+.step.completed .step-circle {
+    background: var(--primary-pastel);
+    border-color: var(--primary-pastel);
+    color: #fff;
+}
+
+.step-label {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    font-weight: var(--font-weight-medium);
+}
+
+.step.active .step-label {
+    color: var(--primary-text);
+}
+
+.step.completed .step-label {
+    color: var(--primary-text);
+}
+
+/* Vertical Stepper */
+.stepper-vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+}
+
+.stepper-vertical::before {
+    display: none;
+}
+
+.stepper-vertical .step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 24px;
+    width: 100%;
+}
+
+.stepper-vertical .step::after {
+    content: "";
+    position: absolute;
+    top: 32px;
+    left: 15px;
+    width: 2px;
+    height: calc(100% - 32px);
+    background: var(--glass-border);
+}
+
+.stepper-vertical .step:last-child::after {
+    display: none;
+}
+
+.step-content {
+    flex: 1;
+    padding-top: 4px;
+}

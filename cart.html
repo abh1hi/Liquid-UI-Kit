@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Liquid Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="liquid_sample.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Override liquid_sample.css global resets to fit our layout */
+        body {
+            display: block !important;
+            height: auto !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: var(--bg-color) !important;
+            animation: none !important;
+            color: var(--text-color) !important;
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .switcher {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cart-container {
+            padding-bottom: 80px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-pastel);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            position: relative;
+            z-index: 5;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            color: var(--primary-text);
+            font-weight: 500;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: none;
+            background: var(--accent-pastel);
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .quantity-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-pastel);
+        }
+
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .remove-btn {
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: rgba(255, 59, 48, 0.2);
+            color: #ff3b30;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+            z-index: 5;
+        }
+
+        .remove-btn:hover {
+            background: rgba(255, 59, 48, 0.3);
+        }
+
+        .cart-summary {
+            margin-top: 24px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .summary-row.total {
+            font-weight: 600;
+            font-size: 18px;
+            padding-top: 12px;
+            border-top: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: var(--primary-pastel);
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 5;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .empty-cart-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SVG Filters -->
+    <svg class="filters" style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <defs>
+            <filter id="glass-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+            </filter>
+            <filter id="switcher">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header flex justify-between items-center">
+            <div class="flex items-center gap-sm">
+                <a href="test_liquid_ecommerce.html"
+                    style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar" style="width: 32px; height: 32px;">←</div>
+                    <h3>My Cart</h3>
+                </a>
+            </div>
+        </header>
+
+        <!-- Theme Switcher -->
+        <div class="switcher" c-previous="1" style="position: relative; top: 0; margin-bottom: 20px;">
+            <div class="switcher__legend">Theme</div>
+            <label class="switcher__option">
+                <input class="switcher__input" type="radio" name="theme" value="light" c-option="1" checked>
+                <span class="switcher__icon">Light</span>
+            </label>
+            <label class="switcher__option">
+                <input class="switcher__input" type="radio" name="theme" value="dark" c-option="2">
+                <span class="switcher__icon">Dark</span>
+            </label>
+            <label class="switcher__option">
+                <input class="switcher__input" type="radio" name="theme" value="dim" c-option="3">
+                <span class="switcher__icon">Dim</span>
+            </label>
+        </div>
+
+        <!-- Cart Container -->
+        <div class="cart-container p-md">
+            <!-- Cart Items -->
+            <div id="cart-items">
+                <!-- Cart Item 1 with Liquid Glass -->
+                <div class="liquidGlass-wrapper"
+                    style="border-radius: var(--radius-lg); padding: var(--spacing-md); margin-bottom: 16px;">
+                    <div class="liquidGlass-effect"></div>
+                    <div class="liquidGlass-tint"></div>
+                    <div class="liquidGlass-shine"></div>
+
+                    <div class="cart-item">
+                        <div class="cart-item-image">🎒</div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">Liquid Backpack</div>
+                            <div class="cart-item-price">$85.00</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(1, -1)">-</button>
+                                <span class="quantity-display" id="qty-1">1</span>
+                                <button class="quantity-btn" onclick="updateQuantity(1, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(1)">Remove</button>
+                    </div>
+                </div>
+
+                <!-- Cart Item 2 with Liquid Glass -->
+                <div class="liquidGlass-wrapper"
+                    style="border-radius: var(--radius-lg); padding: var(--spacing-md); margin-bottom: 16px;">
+                    <div class="liquidGlass-effect"></div>
+                    <div class="liquidGlass-tint"></div>
+                    <div class="liquidGlass-shine"></div>
+
+                    <div class="cart-item">
+                        <div class="cart-item-image">🕶️</div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">Cool Sunglasses</div>
+                            <div class="cart-item-price">$45.00</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(2, -1)">-</button>
+                                <span class="quantity-display" id="qty-2">2</span>
+                                <button class="quantity-btn" onclick="updateQuantity(2, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(2)">Remove</button>
+                    </div>
+                </div>
+
+                <!-- Cart Item 3 Standard Glass -->
+                <div class="glass-panel" style="padding: var(--spacing-md); margin-bottom: 16px;">
+                    <div class="cart-item">
+                        <div class="cart-item-image">👟</div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">Running Shoes</div>
+                            <div class="cart-item-price">$120.00</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(3, -1)">-</button>
+                                <span class="quantity-display" id="qty-3">1</span>
+                                <button class="quantity-btn" onclick="updateQuantity(3, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(3)">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Summary with Liquid Glass -->
+            <div class="liquidGlass-wrapper cart-summary"
+                style="border-radius: var(--radius-lg); padding: var(--spacing-md);">
+                <div class="liquidGlass-effect"></div>
+                <div class="liquidGlass-tint"></div>
+                <div class="liquidGlass-shine"></div>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$295.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>$10.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax</span>
+                    <span>$15.25</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">$320.25</span>
+                </div>
+
+                <button class="checkout-btn" onclick="location.href='checkout.html'">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="liquid-layers">
+                <div class="liquid-effect"></div>
+                <div class="liquid-shine"></div>
+            </div>
+
+            <div class="dock-items">
+                <div class="dock-item" data-tooltip="Home" onclick="location.href='test_liquid_ecommerce.html'">🏠</div>
+                <div class="dock-item" data-tooltip="Favourites" onclick="location.href='favourites.html'">❤️</div>
+                <div class="dock-item active" data-tooltip="Cart" onclick="location.href='cart.html'">🛒</div>
+                <div class="dock-item" data-tooltip="Orders" onclick="location.href='test_liquid_ecommerce.html'">📦
+                </div>
+                <div class="dock-item" data-tooltip="Profile" onclick="location.href='test_liquid_ecommerce.html'">👤
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="Glass-liquid-components\LiquidDock\LiquidDock.js"></script>
+    <script>
+        // Switcher logic
+        const switcher = document.querySelector('.switcher');
+        const inputs = document.querySelectorAll('.switcher__input');
+        inputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const current = e.target.getAttribute('c-option');
+                setTimeout(() => {
+                    switcher.setAttribute('c-previous', current);
+                }, 400);
+
+                if (e.target.value === 'dark' || e.target.value === 'dim') {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+            });
+        });
+
+        // Cart functionality
+        const prices = {
+            1: 85.00,
+            2: 45.00,
+            3: 120.00
+        };
+
+        function updateQuantity(itemId, change) {
+            const qtyElement = document.getElementById(`qty-${itemId}`);
+            let currentQty = parseInt(qtyElement.textContent);
+            currentQty = Math.max(1, currentQty + change);
+            qtyElement.textContent = currentQty;
+            updateTotal();
+        }
+
+        function removeItem(itemId) {
+            const items = document.querySelectorAll('.cart-item');
+            if (items.length === 1) {
+                document.getElementById('cart-items').innerHTML = `
+                    <div class="glass-panel empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some items to get started!</p>
+                        <button class="glass-button mt-md" onclick="location.href='test_liquid_ecommerce.html'">Continue Shopping</button>
+                    </div>
+                `;
+                document.querySelector('.cart-summary').style.display = 'none';
+            } else {
+                const itemElement = document.getElementById(`qty-${itemId}`).closest('.liquidGlass-wrapper, .glass-panel');
+                itemElement.remove();
+                delete prices[itemId];
+                updateTotal();
+            }
+        }
+
+        function updateTotal() {
+            let subtotal = 0;
+            Object.keys(prices).forEach(itemId => {
+                const qtyElement = document.getElementById(`qty-${itemId}`);
+                if (qtyElement) {
+                    const qty = parseInt(qtyElement.textContent);
+                    subtotal += prices[itemId] * qty;
+                }
+            });
+
+            const shipping = 10.00;
+            const tax = subtotal * 0.05;
+            const total = subtotal + shipping + tax;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        }
+    </script>
+</body>
+
+</html>
+<style>
+    /* Import main theme variables */
+    @import url('liquid_variables.css');
+    @import url('/Glass-liquid-components/LiquidDock/LiquidDock.css');
+
+    /* Base Reset */
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 40px;
+        min-height: 100vh;
+        background: var(--bg-color);
+        font-family: 'Inter', sans-serif;
+        box-sizing: border-box;
+        color: var(--text-color);
+        transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .filters {
+        position: absolute;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+    }
+
+    /* Liquid Dock Styles */
+    .liquid-dock {
+        position: relative;
+        padding: 12px 24px;
+        border-radius: 24px;
+        transition: all 0.3s ease;
+    }
+
+    .liquid-layers {
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: var(--glass-shadow);
+        z-index: 0;
+    }
+
+    .liquid-effect {
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(8px);
+        filter: url(#glass-distortion);
+        background: var(--glass-bg);
+    }
+
+    .liquid-tint {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg,
+                color-mix(in srgb, var(--primary-pastel) 40%, transparent) 0%,
+                color-mix(in srgb, var(--secondary-pastel) 20%, transparent) 100%);
+        opacity: 0.7;
+    }
+
+    .liquid-shine {
+        position: absolute;
+        inset: 0;
+        box-shadow:
+            inset 1px 1px 0 0 rgba(255, 255, 255, 0.8),
+            inset -1px -1px 0 0 rgba(255, 255, 255, 0.4);
+        border-radius: 24px;
+    }
+
+    .dock-items {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        gap: 12px;
+        align-items: flex-end;
+        height: 48px;
+    }
+
+    .dock-item {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        background: color-mix(in srgb, var(--accent-pastel) 30%, transparent);
+        position: relative;
+        transform-origin: bottom center;
+    }
+
+    .dock-item:hover,
+    .dock-item.active {
+        background: var(--accent-pastel);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dock-item::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        background: var(--text-color);
+        color: var(--bg-color);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        opacity: 0;
+        transition: all 0.2s ease;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .dock-item:hover::after {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+</style>

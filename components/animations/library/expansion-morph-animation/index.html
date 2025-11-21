@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expansion morph animation - Animation Preview</title>
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+<body>
+    <div class="animation-preview-page">
+        <header class="preview-header">
+            <a href="../index.html" class="back-link">
+                <span class="material-icons-round">arrow_back</span>
+                Back to Library
+            </a>
+            <div class="animation-info">
+                <span class="category-badge">Dynamic Island</span>
+                <h1 class="animation-title">Expansion morph animation</h1>
+            </div>
+        </header>
+
+        <div class="preview-container">
+            <div class="demo-area">
+                <div class="demo-box">
+            <span class="material-icons-round">animation</span>
+            <span class="demo-text">Expansion morph animation</span>
+        </div>
+            </div>
+            
+            <div class="controls">
+                <button class="play-btn" id="playBtn">
+                    <span class="material-icons-round">play_arrow</span>
+                    Play Animation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const playBtn = document.getElementById('playBtn');
+        const demoElements = document.querySelectorAll('.demo-area > *');
+        
+        playBtn.addEventListener('click', () => {
+            demoElements.forEach(elem => {
+                elem.classList.remove('animate');
+                // Recursively remove animate class from children
+                elem.querySelectorAll('.animate').forEach(child => child.classList.remove('animate'));
+                void elem.offsetWidth; // Force reflow
+                elem.classList.add('animate');
+                // Recursively add animate class to children that need it
+                elem.querySelectorAll('[class*="switch-"], [class*="checkbox-"]').forEach(child => {
+                    child.classList.add('animate');
+                });
+            });
+        });
+
+        // Auto-play on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                demoElements.forEach(elem => {
+                    elem.classList.add('animate');
+                    elem.querySelectorAll('[class*="switch-"], [class*="checkbox-"]').forEach(child => {
+                        child.classList.add('animate');
+                    });
+                });
+            }, 300);
+        });
+        
+    </script>
+</body>
+</html>

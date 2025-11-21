@@ -1,0 +1,99 @@
+/* Signature Container */
+.signature-pad {
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background: white;
+    /* Canvas needs white bg usually */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: var(--glass-shadow);
+}
+
+/* Canvas Area */
+.signature-canvas {
+    width: 100%;
+    height: 300px;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+/* Toolbar */
+.signature-toolbar {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-top: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pen-options {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.color-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+/* Signature Container */
+.signature-pad {
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background: white;
+    /* Canvas needs white bg usually */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: var(--glass-shadow);
+}
+
+/* Canvas Area */
+.signature-canvas {
+    width: 100%;
+    height: 300px;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+/* Toolbar */
+.signature-toolbar {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-top: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pen-options {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.color-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.color-btn.active {
+    transform: scale(1.2);
+    border-color: var(--glass-border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

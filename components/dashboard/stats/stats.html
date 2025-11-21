@@ -1,0 +1,103 @@
+<link rel="stylesheet" href="components/dashboard/stats/stats.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Dashboard Analytics</h2>
+        <p class="text-body">Key performance indicators and visual data.</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Total Revenue</span>
+                <div class="stat-icon text-success">
+                    <span class="material-icons-round">attach_money</span>
+                </div>
+            </div>
+            <div class="stat-value">$45,231</div>
+            <div class="stat-trend up">
+                <span class="material-icons-round text-sm">trending_up</span>
+                <span>+20.1% from last month</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Active Users</span>
+                <div class="stat-icon text-primary">
+                    <span class="material-icons-round">people</span>
+                </div>
+            </div>
+            <div class="stat-value">2,345</div>
+            <div class="stat-trend up">
+                <span class="material-icons-round text-sm">trending_up</span>
+                <span>+5.4% from last week</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Bounce Rate</span>
+                <div class="stat-icon text-warning">
+                    <span class="material-icons-round">analytics</span>
+                </div>
+            </div>
+            <div class="stat-value">42.3%</div>
+            <div class="stat-trend down">
+                <span class="material-icons-round text-sm">trending_down</span>
+                <span>-2.1% from yesterday</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">New Orders</span>
+                <div class="stat-icon text-danger">
+                    <span class="material-icons-round">shopping_bag</span>
+                </div>
+            </div>
+            <div class="stat-value">156</div>
+            <div class="stat-trend up">
+                <span class="material-icons-round text-sm">trending_up</span>
+                <span>+12% from last month</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3 class="text-h3">Weekly Traffic</h3>
+                <p class="text-caption">User visits over the last 7 days</p>
+            </div>
+            <div class="bar-chart">
+                <div class="chart-bar" style="height: 40%" data-label="Mon"></div>
+                <div class="chart-bar" style="height: 65%" data-label="Tue"></div>
+                <div class="chart-bar" style="height: 50%" data-label="Wed"></div>
+                <div class="chart-bar" style="height: 85%" data-label="Thu"></div>
+                <div class="chart-bar" style="height: 60%" data-label="Fri"></div>
+                <div class="chart-bar" style="height: 30%" data-label="Sat"></div>
+                <div class="chart-bar" style="height: 45%" data-label="Sun"></div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3 class="text-h3">Sales Overview</h3>
+                <p class="text-caption">Monthly revenue performance</p>
+            </div>
+            <div class="bar-chart">
+                <div class="chart-bar bg-success" style="height: 55%" data-label="Jan"></div>
+                <div class="chart-bar bg-success" style="height: 70%" data-label="Feb"></div>
+                <div class="chart-bar bg-success" style="height: 45%" data-label="Mar"></div>
+                <div class="chart-bar bg-success" style="height: 80%" data-label="Apr"></div>
+                <div class="chart-bar bg-success" style="height: 65%" data-label="May"></div>
+                <div class="chart-bar bg-success" style="height: 90%" data-label="Jun"></div>
+            </div>
+        </div>
+    </div>
+</div>

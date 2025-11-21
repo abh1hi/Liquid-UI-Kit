@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Card Component</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Required SVG Filters -->
+    <svg class="filters" aria-hidden="true">
+        <defs>
+            <filter id="glass-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="container">
+        <!-- Liquid Card -->
+        <div class="liquid-card">
+            <div class="liquid-layers">
+                <div class="liquid-effect"></div>
+                <div class="liquid-tint"></div>
+                <div class="liquid-shine"></div>
+            </div>
+
+            <div class="card-content">
+                <div class="card-image">🌊</div>
+                <h2 class="card-title">Liquid Glass</h2>
+                <p class="card-description">A multi-layered CSS effect that mimics the properties of fluid glass.</p>
+                <button class="card-action">Learn More</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

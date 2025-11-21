@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Switcher Component</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Required SVG Filters -->
+    <svg class="filters" aria-hidden="true">
+        <defs>
+            <filter id="switcher-noise">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="container">
+        <!-- Liquid Switcher -->
+        <div class="liquid-switcher" c-previous="1">
+            <div class="switcher-legend">Theme</div>
+
+            <label class="switcher-option">
+                <input class="switcher-input" type="radio" name="theme" value="light" c-option="1" checked>
+                <span class="switcher-label">Light</span>
+            </label>
+
+            <label class="switcher-option">
+                <input class="switcher-input" type="radio" name="theme" value="dark" c-option="2">
+                <span class="switcher-label">Dark</span>
+            </label>
+
+            <label class="switcher-option">
+                <input class="switcher-input" type="radio" name="theme" value="auto" c-option="3">
+                <span class="switcher-label">Auto</span>
+            </label>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

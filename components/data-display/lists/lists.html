@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="components/data-display/lists/lists.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Lists</h2>
+        <p class="text-body">Display collections of items.</p>
+    </div>
+
+    <!-- Standard List -->
+    <section class="glass-panel p-md">
+        <h3 class="text-h4 mb-md">Standard List</h3>
+
+        <div class="list">
+            <div class="list-item">
+                <div class="list-item-start">
+                    <span class="material-icons-round">inbox</span>
+                </div>
+                <div class="list-item-content">
+                    <div class="list-item-title">Inbox</div>
+                    <div class="list-item-subtitle">You have 3 new messages</div>
+                </div>
+                <div class="list-item-end">
+                    <span class="badge badge-primary badge-dot"></span>
+                </div>
+            </div>
+            <div class="list-item">
+                <div class="list-item-start">
+                    <span class="material-icons-round">star</span>
+                </div>
+                <div class="list-item-content">
+                    <div class="list-item-title">Starred</div>
+                    <div class="list-item-subtitle">Your favorite items</div>
+                </div>
+            </div>
+            <div class="list-item">
+                <div class="list-item-start">
+                    <span class="material-icons-round">send</span>
+                </div>
+                <div class="list-item-content">
+                    <div class="list-item-title">Sent</div>
+                    <div class="list-item-subtitle">Messages sent successfully</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expandable List -->
+    <section class="glass-panel p-md">
+        <h3 class="text-h4 mb-md">Expandable List</h3>
+
+        <div class="list list-expandable" id="expandable-list">
+            <!-- Item 1 -->
+            <div class="list-item">
+                <div class="list-item-content">
+                    <div class="list-item-title">Project Alpha</div>
+                    <div class="list-item-subtitle">Status: In Progress</div>
+                </div>
+                <div class="list-item-end">
+                    <span class="material-icons-round dropdown-arrow">expand_more</span>
+                </div>
+            </div>
+            <div class="list-item-body">
+                <p>Detailed information about Project Alpha. It is currently 60% complete and on track for delivery.</p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="list-item">
+                <div class="list-item-content">
+                    <div class="list-item-title">Project Beta</div>
+                    <div class="list-item-subtitle">Status: Planning</div>
+                </div>
+                <div class="list-item-end">
+                    <span class="material-icons-round dropdown-arrow">expand_more</span>
+                </div>
+            </div>
+            <div class="list-item-body">
+                <p>Project Beta is in the initial planning phase. Requirements gathering is scheduled for next week.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        const list = document.getElementById('expandable-list');
+        if (list) {
+            const items = list.querySelectorAll('.list-item');
+
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const wasExpanded = item.classList.contains('expanded');
+
+                    // Close all
+                    items.forEach(i => {
+                        i.classList.remove('expanded');
+                        const arrow = i.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    });
+
+                    // Toggle current
+                    if (!wasExpanded) {
+                        item.classList.add('expanded');
+                        const arrow = item.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        }
+    })();
+</script>

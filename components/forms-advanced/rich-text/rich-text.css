@@ -1,0 +1,104 @@
+/* Editor Container */
+.rich-editor {
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    box-shadow: var(--glass-shadow);
+}
+
+/* Toolbar */
+.editor-toolbar {
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.02);
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.toolbar-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.toolbar-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-color);
+}
+
+.toolbar-btn.active {
+    background: var(--primary-pastel);
+    color: var(--primary-text);
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 20px;
+    background: var(--glass-border);
+    margin: 6px 4px;
+}
+
+/* Content Area */
+.editor-content {
+    flex: 1;
+    padding: var(--spacing-md);
+    overflow-y: auto;
+    outline: none;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.editor-content:focus {
+    outline: none;
+    background: rgba(var(--primary-rgb), 0.02);
+}
+
+.editor-content p {
+    margin-bottom: 1em;
+}
+
+.editor-content ul,
+.editor-content ol {
+    margin-bottom: 1em;
+    padding-left: 2em;
+}
+
+.editor-content blockquote {
+    border-left: 4px solid var(--primary-pastel);
+    margin: 0 0 1em 0;
+    padding-left: 1em;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Placeholder */
+.editor-content:empty::before {
+    content: attr(data-placeholder);
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .editor-toolbar {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .toolbar-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}

@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="components/core/toggles/toggles.css">
+
+<div class="flex flex-col gap-md">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Selection Controls</h2>
+        <p class="text-body">Switches, Checkboxes, and Radio buttons.</p>
+    </div>
+
+    <div class="flex flex-col gap-md" style="max-width: 600px; margin: 0 auto; width: 100%;">
+
+        <!-- Switches -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">Switches</h3>
+
+            <div class="flex flex-col gap-md">
+                <label class="selection-control">
+                    <input type="checkbox">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                    <span class="label-text">Airplane Mode</span>
+                </label>
+
+                <label class="selection-control">
+                    <input type="checkbox" checked>
+                    <div class="switch-track">
+                        <div class="switch-thumb">
+                            <span class="material-icons-round icon">check</span>
+                        </div>
+                    </div>
+                    <span class="label-text">Wi-Fi</span>
+                </label>
+
+                <label class="selection-control">
+                    <input type="checkbox" disabled>
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                    <span class="label-text">Disabled</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Checkboxes -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">Checkboxes</h3>
+
+            <div class="flex flex-col gap-md">
+                <label class="selection-control">
+                    <input type="checkbox">
+                    <div class="checkbox-box">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <span class="label-text">Remember me</span>
+                </label>
+
+                <label class="selection-control">
+                    <input type="checkbox" checked>
+                    <div class="checkbox-box">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <span class="label-text">Subscribe to newsletter</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Radios -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">Radio Buttons</h3>
+
+            <div class="flex flex-col gap-md">
+                <label class="selection-control">
+                    <input type="radio" name="plan" value="free">
+                    <div class="radio-circle">
+                        <div class="radio-dot"></div>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="label-text">Free Plan</span>
+                        <span class="text-caption">Basic features</span>
+                    </div>
+                </label>
+
+                <label class="selection-control">
+                    <input type="radio" name="plan" value="pro" checked>
+                    <div class="radio-circle">
+                        <div class="radio-dot"></div>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="label-text">Pro Plan</span>
+                        <span class="text-caption">$10/month</span>
+                    </div>
+                </label>
+            </div>
+        </section>
+
+    </div>
+</div>

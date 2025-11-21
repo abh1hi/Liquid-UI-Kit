@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="components/screens/login/login.css">
+
+<div class="login-container">
+    <!-- Left Side: Visuals -->
+    <div class="login-sidebar">
+        <div style="position: relative; z-index: 1;">
+            <h2 class="text-3xl font-bold mb-md text-primary-text">Welcome Back!</h2>
+            <p class="text-lg text-primary-text opacity-80">
+                Sign in to access your dashboard, settings, and projects.
+            </p>
+        </div>
+    </div>
+
+    <!-- Right Side: Form -->
+    <div class="login-content">
+        <div class="login-header">
+            <div class="login-brand">Liquid UI</div>
+            <p class="text-secondary">Please enter your details</p>
+        </div>
+
+        <div class="social-login">
+            <button class="btn btn-outline full-width">
+                <span class="material-icons-round">g_mobiledata</span>
+                Google
+            </button>
+            <button class="btn btn-outline full-width">
+                <span class="material-icons-round">apple</span>
+                Apple
+            </button>
+        </div>
+
+        <div class="divider">
+            <span>or sign in with email</span>
+        </div>
+
+        <form onsubmit="event.preventDefault();">
+            <div class="form-group">
+                <label class="label">Email</label>
+                <div class="input-wrapper">
+                    <span class="material-icons-round input-icon">mail</span>
+                    <input type="email" class="input" placeholder="Enter your email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Password</label>
+                <div class="input-wrapper">
+                    <span class="material-icons-round input-icon">lock</span>
+                    <input type="password" class="input" placeholder="••••••••">
+                    <button type="button" class="icon-btn sm input-action">
+                        <span class="material-icons-round">visibility</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-label">Remember me</span>
+                </label>
+                <a href="#" class="link text-primary">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary full-width">Sign In</button>
+        </form>
+
+        <p class="text-center mt-lg text-sm text-secondary">
+            Don't have an account? <a href="#" class="link text-primary font-medium">Sign up</a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,420 @@
+/**
+ * Liquid Glass Custom Themes
+ * 
+ * Custom glass-specific themes optimized for liquid glass components
+ * Each theme provides unique visual aesthetics while maintaining consistency
+ */
+
+/* ============================================
+   CRYSTAL THEME 🔮 - Ultra-Clear Glass
+   ============================================
+   Use case: Professional, clean interfaces
+   Characteristics: Maximum clarity, diamond-like reflections
+*/
+[data-theme="crystal"],
+body:has(input[value="crystal"]:checked) {
+    /* Ultra-clear glass with minimal tint */
+    --liquid-glass-base: rgba(255, 255, 255, 0.12);
+    --liquid-glass-tint: rgba(220, 240, 255, 0.08);
+    --liquid-glass-border: rgba(220, 240, 255, 0.25);
+
+    /* Minimal blur for clarity */
+    --liquid-blur: 4px;
+    --liquid-saturate: 120%;
+
+    /* Diamond-like reflections - strong light, weak dark */
+    --glass-reflex-light: 2;
+    --glass-reflex-dark: 0.5;
+
+    /* Light reflections */
+    --liquid-glass-shine-1: rgba(255, 255, 255, 0.4);
+    --liquid-glass-shine-2: rgba(255, 255, 255, 0.3);
+
+    /* Theme colors - cool blue-white */
+    --liquid-action: #00a8ff;
+    --liquid-content: #1a1a2e;
+    --liquid-bg-overlay: #f0f8ff;
+
+    /* Component-specific */
+    --liquid-btn-bg: rgba(255, 255, 255, 0.15);
+    --liquid-card-bg: rgba(255, 255, 255, 0.12);
+    --liquid-switcher-bg: rgba(255, 255, 255, 0.18);
+    --liquid-switcher-indicator: rgba(255, 255, 255, 0.35);
+
+    /* Shadows - subtle and clean */
+    --liquid-shadow-sm: 0 2px 6px rgba(0, 168, 255, 0.08);
+    --liquid-shadow-md: 0 4px 12px rgba(0, 168, 255, 0.12);
+    --liquid-shadow-lg: 0 8px 24px rgba(0, 168, 255, 0.15);
+    --liquid-card-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 4px 16px rgba(0, 168, 255, 0.08);
+}
+
+/* ============================================
+   FROST THEME ❄️ - Frosted Glass
+   ============================================
+   Use case: Winter apps, weather apps
+   Characteristics: Heavy frost, icy blue-white
+*/
+[data-theme="frost"],
+body:has(input[value="frost"]:checked) {
+    /* Heavy frosted glass */
+    --liquid-glass-base: rgba(240, 248, 255, 0.35);
+    --liquid-glass-tint: rgba(200, 230, 255, 0.25);
+    --liquid-glass-border: rgba(180, 220, 255, 0.4);
+
+    /* High blur for frosted effect */
+    --liquid-blur: 12px;
+    --liquid-saturate: 130%;
+
+    /* Balanced reflections */
+    --glass-reflex-light: 1.5;
+    --glass-reflex-dark: 1;
+
+    /* Icy reflections */
+    --liquid-glass-shine-1: rgba(240, 250, 255, 0.5);
+    --liquid-glass-shine-2: rgba(220, 240, 255, 0.4);
+
+    /* Theme colors - icy blue */
+    --liquid-action: #4fc3f7;
+    --liquid-content: #1e3a5f;
+    --liquid-bg-overlay: #e3f2fd;
+
+    /* Component-specific */
+    --liquid-btn-bg: rgba(240, 248, 255, 0.4);
+    --liquid-card-bg: rgba(240, 248, 255, 0.35);
+    --liquid-switcher-bg: rgba(240, 248, 255, 0.45);
+    --liquid-switcher-indicator: rgba(255, 255, 255, 0.6);
+
+    /* Shadows - soft and diffused */
+    --liquid-shadow-sm: 0 2px 8px rgba(79, 195, 247, 0.12);
+    --liquid-shadow-md: 0 4px 16px rgba(79, 195, 247, 0.15);
+    --liquid-shadow-lg: 0 8px 28px rgba(79, 195, 247, 0.2);
+    --liquid-card-shadow:
+        0 4px 12px rgba(200, 230, 255, 0.15),
+        0 8px 24px rgba(79, 195, 247, 0.1);
+}
+
+/* ============================================
+   AURORA THEME 🌌 - Iridescent Glass
+   ============================================
+   Use case: Creative apps, portfolios
+   Characteristics: Color-shifting, gradient tints
+*/
+[data-theme="aurora"],
+body:has(input[value="aurora"]:checked) {
+    /* Iridescent glass with gradient */
+    --liquid-glass-base: rgba(138, 43, 226, 0.15);
+    --liquid-glass-tint: linear-gradient(135deg,
+            rgba(138, 43, 226, 0.15) 0%,
+            rgba(0, 191, 165, 0.15) 50%,
+            rgba(138, 43, 226, 0.15) 100%);
+    --liquid-glass-border: rgba(138, 43, 226, 0.3);
+
+    /* Medium blur with high saturation */
+    --liquid-blur: 8px;
+    --liquid-saturate: 180%;
+
+    /* Dynamic reflections */
+    --glass-reflex-light: 1.8;
+    --glass-reflex-dark: 1.2;
+
+    /* Color-shifting reflections */
+    --liquid-glass-shine-1: rgba(200, 150, 255, 0.4);
+    --liquid-glass-shine-2: rgba(100, 255, 218, 0.3);
+
+    /* Theme colors - purple-turquoise */
+    --liquid-action: #00bfa5;
+    --liquid-content: #1a1a2e;
+    --liquid-bg-overlay: linear-gradient(135deg, #f5e6ff 0%, #e6fff9 100%);
+
+    /* Component-specific - gradient backgrounds */
+    --liquid-btn-bg: linear-gradient(135deg,
+            rgba(138, 43, 226, 0.2) 0%,
+            rgba(0, 191, 165, 0.2) 100%);
+    --liquid-card-bg: rgba(138, 43, 226, 0.12);
+    --liquid-switcher-bg: rgba(138, 43, 226, 0.18);
+    --liquid-switcher-indicator: linear-gradient(135deg,
+            rgba(138, 43, 226, 0.4) 0%,
+            rgba(0, 191, 165, 0.4) 100%);
+
+    /* Shadows - colorful and vibrant */
+    --liquid-shadow-sm: 0 2px 8px rgba(138, 43, 226, 0.15);
+    --liquid-shadow-md: 0 4px 16px rgba(138, 43, 226, 0.2);
+    --liquid-shadow-lg: 0 8px 28px rgba(138, 43, 226, 0.25);
+    --liquid-card-shadow:
+        0 4px 12px rgba(138, 43, 226, 0.12),
+        0 8px 24px rgba(0, 191, 165, 0.12);
+}
+
+/* ============================================
+   OBSIDIAN THEME 🖤 - Dark Volcanic Glass
+   ============================================
+   Use case: Gaming, entertainment, dark mode
+   Characteristics: Deep blacks, subtle sheens
+*/
+[data-theme="obsidian"],
+body:has(input[value="obsidian"]:checked) {
+    /* Dark volcanic glass */
+    --liquid-glass-base: rgba(30, 30, 40, 0.6);
+    --liquid-glass-tint: rgba(40, 40, 55, 0.4);
+    --liquid-glass-border: rgba(80, 80, 100, 0.3);
+
+    /* Low blur for crisp edges */
+    --liquid-blur: 6px;
+    --liquid-saturate: 110%;
+
+    /* Minimal light reflections */
+    --glass-reflex-light: 0.8;
+    --glass-reflex-dark: 2;
+
+    /* Subtle dark reflections */
+    --liquid-glass-shine-1: rgba(100, 100, 120, 0.2);
+    --liquid-glass-shine-2: rgba(80, 80, 100, 0.15);
+
+    /* Theme colors - dark with purple accent */
+    --liquid-action: #bb86fc;
+    --liquid-content: #e1e1e6;
+    --liquid-bg-overlay: #0a0a0f;
+
+    /* Component-specific */
+    --liquid-btn-bg: rgba(40, 40, 55, 0.5);
+    --liquid-card-bg: rgba(30, 30, 40, 0.6);
+    --liquid-switcher-bg: rgba(40, 40, 55, 0.6);
+    --liquid-switcher-indicator: rgba(80, 80, 100, 0.6);
+
+    /* Shadows - deep and dramatic */
+    --liquid-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --liquid-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --liquid-shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.6);
+    --liquid-card-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        0 2px 4px rgba(187, 134, 252, 0.1);
+}
+
+/* ============================================
+   PRISM THEME 🌈 - Rainbow Glass
+   ============================================
+   Use case: Colorful brands, fun apps
+   Characteristics: Multi-color, high saturation
+*/
+[data-theme="prism"],
+body:has(input[value="prism"]:checked) {
+    /* Rainbow refractive glass */
+    --liquid-glass-base: rgba(255, 255, 255, 0.2);
+    --liquid-glass-tint: linear-gradient(90deg,
+            rgba(255, 0, 128, 0.1) 0%,
+            rgba(255, 128, 0, 0.1) 25%,
+            rgba(128, 255, 0, 0.1) 50%,
+            rgba(0, 128, 255, 0.1) 75%,
+            rgba(255, 0, 128, 0.1) 100%);
+    --liquid-glass-border: rgba(255, 100, 200, 0.35);
+
+    /* Medium blur with maximum saturation */
+    --liquid-blur: 8px;
+    --liquid-saturate: 200%;
+
+    /* Vibrant reflections */
+    --glass-reflex-light: 2;
+    --glass-reflex-dark: 0.8;
+
+    /* Rainbow reflections */
+    --liquid-glass-shine-1: rgba(255, 200, 255, 0.4);
+    --liquid-glass-shine-2: rgba(200, 255, 255, 0.3);
+
+    /* Theme colors - vibrant multi-color */
+    --liquid-action: #ff1744;
+    --liquid-content: #1a1a1a;
+    --liquid-bg-overlay: linear-gradient(135deg,
+            #fff5f7 0%,
+            #fff8f5 25%,
+            #f5fff8 50%,
+            #f5f8ff 75%,
+            #fff5f7 100%);
+
+    /* Component-specific - rainbow gradients */
+    --liquid-btn-bg: linear-gradient(90deg,
+            rgba(255, 0, 128, 0.15) 0%,
+            rgba(128, 255, 0, 0.15) 50%,
+            rgba(0, 128, 255, 0.15) 100%);
+    --liquid-card-bg: rgba(255, 255, 255, 0.25);
+    --liquid-switcher-bg: rgba(255, 255, 255, 0.3);
+    --liquid-switcher-indicator: linear-gradient(90deg,
+            rgba(255, 0, 128, 0.35) 0%,
+            rgba(0, 128, 255, 0.35) 100%);
+
+    /* Shadows - colorful and playful */
+    --liquid-shadow-sm: 0 2px 8px rgba(255, 23, 68, 0.15);
+    --liquid-shadow-md: 0 4px 16px rgba(255, 23, 68, 0.2);
+    --liquid-shadow-lg: 0 8px 28px rgba(255, 23, 68, 0.25);
+    --liquid-card-shadow:
+        0 4px 12px rgba(255, 100, 150, 0.15),
+        0 8px 24px rgba(100, 150, 255, 0.15);
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================
+*/
+
+/* Optimized glass wrapper */
+.liquidGlass-wrapper,
+.liquid-button {
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .liquidGlass-wrapper,
+    .liquid-button,
+    .liquid-switcher {
+        transition: none;
+        animation: none;
+    }
+
+    .liquidGlass-effect,
+    .liquid-effect {
+        filter: none !important;
+    }
+}
+
+/* GPU acceleration hints */
+.liquidGlass-effect,
+.liquid-effect,
+.liquidGlass-tint,
+.liquid-tint {
+    will-change: opacity;
+    transform: translateZ(0);
+}
+
+/* ============================================
+   THEME-SPECIFIC ANIMATIONS
+   ============================================
+*/
+
+/* Crystal theme - sparkle effect */
+[data-theme="crystal"] .liquidGlass-shine,
+[data-theme="crystal"] .liquid-shine {
+    animation: crystalSparkle 3s ease-in-out infinite;
+}
+
+@keyframes crystalSparkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Frost theme - shimmer effect */
+[data-theme="frost"] .liquidGlass-shine,
+[data-theme="frost"] .liquid-shine {
+    animation: frostShimmer 4s ease-in-out infinite;
+}
+
+@keyframes frostShimmer {
+
+    0%,
+    100% {
+        box-shadow: inset 2px 2px 1px 0 rgba(240, 250, 255, 0.5),
+            inset -1px -1px 1px 1px rgba(220, 240, 255, 0.4);
+    }
+
+    50% {
+        box-shadow: inset 2px 2px 1px 0 rgba(220, 240, 255, 0.4),
+            inset -1px -1px 1px 1px rgba(240, 250, 255, 0.5);
+    }
+}
+
+/* Aurora theme - color shift */
+[data-theme="aurora"] .liquidGlass-tint,
+[data-theme="aurora"] .liquid-tint {
+    animation: auroraShift 8s ease-in-out infinite;
+}
+
+@keyframes auroraShift {
+    0% {
+        opacity: 0.15;
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        opacity: 0.25;
+        filter: hue-rotate(30deg);
+    }
+
+    100% {
+        opacity: 0.15;
+        filter: hue-rotate(0deg);
+    }
+}
+
+/* Obsidian theme - pulse */
+[data-theme="obsidian"] .liquidGlass-wrapper:hover .liquidGlass-effect,
+[data-theme="obsidian"] .liquid-button:hover .liquid-effect {
+    animation: obsidianPulse 2s ease-in-out infinite;
+}
+
+@keyframes obsidianPulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Prism theme - rainbow shift */
+[data-theme="prism"] .liquidGlass-tint,
+[data-theme="prism"] .liquid-tint {
+    animation: prismRainbow 10s linear infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes prismRainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================
+*/
+
+/* High performance mode - disable effects */
+.liquid-performance-mode .liquidGlass-effect,
+.liquid-performance-mode .liquid-effect {
+    backdrop-filter: none;
+    filter: none;
+    background: var(--liquid-glass-base);
+}
+
+/* Disable animations for specific components */
+.liquid-static {
+    animation: none !important;
+}
+
+/* Force GPU acceleration */
+.liquid-gpu-accelerated {
+    transform: translate3d(0, 0, 0);
+    will-change: transform, opacity;
+}

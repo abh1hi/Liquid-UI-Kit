@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="components/core/sliders/sliders.css">
+
+<div class="flex flex-col gap-md">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Sliders</h2>
+        <p class="text-body">Selection controls for range values.</p>
+    </div>
+
+    <div class="flex flex-col gap-md" style="max-width: 500px; margin: 0 auto; width: 100%;">
+
+        <!-- Basic Slider -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">Continuous Slider</h3>
+
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Volume</span>
+                    <span class="slider-value" id="vol-val">50%</span>
+                </div>
+                <input type="range" min="0" max="100" value="50"
+                    oninput="document.getElementById('vol-val').textContent = this.value + '%'">
+            </div>
+        </section>
+
+        <!-- Steps -->
+        <section class="glass-panel p-md">
+            <h3 class="text-h4 mb-md">Discrete Steps</h3>
+
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Rating</span>
+                    <span class="slider-value" id="rate-val">3</span>
+                </div>
+                <input type="range" min="1" max="5" step="1" value="3"
+                    oninput="document.getElementById('rate-val').textContent = this.value">
+                <div class="flex justify-between mt-md text-caption">
+                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>

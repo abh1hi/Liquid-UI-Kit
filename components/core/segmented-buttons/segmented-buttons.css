@@ -1,0 +1,71 @@
+/* Segmented Control Container */
+.segmented-control {
+    display: inline-flex;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Segment Button */
+.segment-btn {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 6px 16px;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    z-index: 1;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.segment-btn:hover {
+    color: var(--text-color);
+}
+
+.segment-btn.active {
+    background: var(--primary-pastel);
+    color: var(--primary-text);
+    box-shadow: var(--glass-shadow);
+}
+
+.segmented-control.lg .segment-btn {
+    padding: 10px 24px;
+    font-size: var(--text-base);
+}
+
+/* Full Width */
+.segmented-control.full-width {
+    display: flex;
+    width: 100%;
+}
+
+.segmented-control.full-width .segment-btn {
+    flex: 1;
+    justify-content: center;
+}
+
+/* Vertical */
+.segmented-control.vertical {
+    flex-direction: column;
+    width: auto;
+    display: inline-flex;
+}
+
+/* Demo Layout */
+.demo-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.demo-title {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}

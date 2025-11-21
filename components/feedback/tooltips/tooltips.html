@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="components/feedback/tooltips/tooltips.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Tooltips</h2>
+        <p class="text-body">Contextual information on hover.</p>
+    </div>
+
+    <section class="glass-panel p-xl flex justify-center items-center gap-xl flex-wrap" style="min-height: 200px;">
+
+        <!-- Top -->
+        <div class="tooltip-wrapper">
+            <button class="btn btn-secondary">Hover Top</button>
+            <div class="tooltip">Tooltip on Top</div>
+        </div>
+
+        <!-- Right -->
+        <div class="tooltip-wrapper">
+            <button class="btn btn-secondary">Hover Right</button>
+            <div class="tooltip tooltip-right">Tooltip on Right</div>
+        </div>
+
+        <!-- Bottom -->
+        <div class="tooltip-wrapper">
+            <button class="btn btn-secondary">Hover Bottom</button>
+            <div class="tooltip tooltip-bottom">Tooltip on Bottom</div>
+        </div>
+
+        <!-- Left -->
+        <div class="tooltip-wrapper">
+            <button class="btn btn-secondary">Hover Left</button>
+            <div class="tooltip tooltip-left">Tooltip on Left</div>
+        </div>
+
+    </section>
+
+    <section class="glass-panel p-xl text-center">
+        <h3 class="text-h4 mb-lg">Glass Tooltip</h3>
+        <div class="tooltip-wrapper">
+            <button class="btn btn-primary">Glass Effect</button>
+            <div class="tooltip tooltip-glass">
+                <strong>Glass Tooltip</strong><br>
+                With blur effect
+            </div>
+        </div>
+    </section>
+</div>

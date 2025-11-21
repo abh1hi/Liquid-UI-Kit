@@ -1,0 +1,126 @@
+/* Import main theme variables */
+@import url('../../../css/variables.css');
+
+/* Base Reset */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 40px;
+    min-height: 100vh;
+    background: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    color: var(--text-color);
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+.filters {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Liquid Dock Styles */
+.liquid-dock {
+    position: relative;
+    padding: 12px 24px;
+    border-radius: 24px;
+    transition: all 0.3s ease;
+}
+
+/* Layers Wrapper */
+.liquid-layers {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--glass-shadow);
+    z-index: 0;
+}
+
+/* Layer 1: Distortion */
+.liquid-effect {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(8px);
+    filter: url(#glass-distortion);
+    background: var(--glass-bg);
+}
+
+/* Layer 2: Tint */
+.liquid-tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            color-mix(in srgb, var(--primary-pastel) 40%, transparent) 0%,
+            color-mix(in srgb, var(--secondary-pastel) 20%, transparent) 100%);
+    opacity: 0.7;
+}
+
+/* Layer 3: Shine */
+.liquid-shine {
+    position: absolute;
+    inset: 0;
+    box-shadow:
+        inset 1px 1px 0 0 rgba(255, 255, 255, 0.8),
+        inset -1px -1px 0 0 rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+}
+
+/* Dock Items */
+.dock-items {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    height: 48px;
+    /* Base height */
+}
+
+.dock-item {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: color-mix(in srgb, var(--accent-pastel) 30%, transparent);
+    position: relative;
+    transform-origin: bottom center;
+}
+
+.dock-item:hover {
+    background: var(--accent-pastel);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tooltip */
+.dock-item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    background: var(--text-color);
+    color: var(--bg-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.dock-item:hover::after {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}

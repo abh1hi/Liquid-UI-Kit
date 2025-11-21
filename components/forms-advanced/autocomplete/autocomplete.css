@@ -1,0 +1,208 @@
+/* Autocomplete Container */
+.autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Input Group */
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    color: var(--text-secondary);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Input */
+.autocomplete-input {
+    width: 100%;
+    padding: 12px 40px 12px 44px;
+    /* Left padding for search icon, right for actions */
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    border-radius: var(--radius-md);
+    color: var(--text-color);
+    font-size: var(--text-base);
+    transition: all 0.2s;
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.autocomplete-input:focus {
+    outline: none;
+    border-color: var(--primary-pastel);
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 4px rgba(var(--primary-pastel), 0.2);
+}
+
+/* Input Actions (Spinner & Clear) */
+.input-actions {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Loading Spinner */
+.input-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--primary-pastel);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: none;
+}
+
+.input-spinner.active {
+    display: block;
+}
+
+/* Clear Button */
+.clear-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+.clear-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-color);
+}
+
+.clear-btn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.clear-btn .material-icons-round {
+    font-size: 18px;
+}
+
+/* Suggestions List */
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glass-shadow);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    backdrop-filter: blur(var(--glass-blur));
+    animation: slideDown 0.2s ease-out;
+}
+
+.suggestions-list.active {
+    display: block;
+}
+
+/* Scrollbar Styling */
+.suggestions-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.suggestions-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.suggestions-list::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 10px;
+}
+
+.suggestions-list::-webkit-scrollbar-thumb:hover {
+    background: var(--text-disabled);
+}
+
+/* List Items */
+.suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-color);
+    transition: background 0.1s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+    background: var(--primary-pastel);
+    color: var(--primary-text);
+}
+
+.suggestion-item:hover .suggestion-icon,
+.suggestion-item.selected .suggestion-icon {
+    color: var(--primary-text);
+}
+
+.suggestion-item .highlight {
+    font-weight: bold;
+    color: var(--primary-text);
+    /* Better contrast on hover */
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+.suggestion-icon {
+    color: var(--text-secondary);
+    font-size: 20px;
+    opacity: 0.7;
+}
+
+/* No Results */
+.no-results {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Animations */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

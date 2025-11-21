@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="components/forms-advanced/otp/otp.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">OTP Verification</h2>
+        <p class="text-body">Secure one-time password entry.</p>
+    </div>
+
+    <section class="glass-panel p-xl text-center">
+        <h3 class="text-h4 mb-lg">Enter 4-digit Code</h3>
+        <p class="text-body mb-lg">We sent a code to your email.</p>
+
+        <div class="otp-container" id="otp-4">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+        </div>
+
+        <button class="btn btn-primary mt-xl">Verify</button>
+    </section>
+
+    <section class="glass-panel p-xl text-center mt-lg">
+        <h3 class="text-h4 mb-lg">Enter 6-digit Code</h3>
+
+        <div class="otp-container" id="otp-6">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            <div class="otp-separator">-</div>
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        const containers = document.querySelectorAll('.otp-container');
+
+        containers.forEach(container => {
+            const inputs = container.querySelectorAll('.otp-input');
+
+            inputs.forEach((input, index) => {
+                // Handle Input
+                input.addEventListener('input', (e) => {
+                    const val = e.target.value;
+
+                    if (val.length === 1) {
+                        // Move to next
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
+                    } else if (val.length === 0) {
+                        // Handle backspace (sometimes handled in keydown)
+                    }
+                });
+
+                // Handle Backspace & Arrows
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && input.value === '') {
+                        if (index > 0) {
+                            inputs[index - 1].focus();
+                        }
+                    } else if (e.key === 'ArrowLeft') {
+                        if (index > 0) inputs[index - 1].focus();
+                    } else if (e.key === 'ArrowRight') {
+                        if (index < inputs.length - 1) inputs[index + 1].focus();
+                    }
+                });
+
+                // Handle Paste
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pasteData = e.clipboardData.getData('text').slice(0, inputs.length);
+
+                    if (/^\d+$/.test(pasteData)) {
+                        pasteData.split('').forEach((char, i) => {
+                            if (inputs[i]) inputs[i].value = char;
+                        });
+                        // Focus last filled
+                        const lastIndex = Math.min(pasteData.length, inputs.length) - 1;
+                        if (lastIndex >= 0) inputs[lastIndex].focus();
+                    }
+                });
+            });
+        });
+    })();
+</script>

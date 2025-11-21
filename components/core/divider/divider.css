@@ -1,0 +1,87 @@
+/* Divider Base */
+.divider {
+    border: none;
+    margin: 0;
+    background: var(--glass-border);
+}
+
+/* Horizontal */
+.divider.horizontal {
+    height: 1px;
+    width: 100%;
+    margin: var(--spacing-md) 0;
+}
+
+/* Vertical */
+.divider.vertical {
+    width: 1px;
+    height: 100%;
+    min-height: 20px;
+    margin: 0 var(--spacing-md);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Styles */
+.divider.dashed {
+    background: transparent;
+    border-top: 1px dashed var(--glass-border);
+}
+
+.divider.dotted {
+    background: transparent;
+    border-top: 2px dotted var(--glass-border);
+}
+
+/* With Text */
+.divider-text {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    margin: var(--spacing-md) 0;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--glass-border);
+}
+
+.divider-text::before {
+    margin-right: var(--spacing-md);
+}
+
+.divider-text::after {
+    margin-left: var(--spacing-md);
+}
+
+/* Text Alignment */
+.divider-text.left::before {
+    flex: 0;
+    margin-right: 0;
+}
+
+.divider-text.left::after {
+    margin-left: var(--spacing-md);
+}
+
+.divider-text.right::before {
+    margin-right: var(--spacing-md);
+}
+
+.divider-text.right::after {
+    flex: 0;
+    margin-left: 0;
+}
+
+/* Demo Layout */
+.demo-box {
+    padding: var(--spacing-lg);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}

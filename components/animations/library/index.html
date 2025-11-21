@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Library - iOS Modern UI Animations</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+    <div class="library-page">
+        <header class="library-header">
+            <h1 class="library-title">Animation Library</h1>
+            <p class="library-subtitle">iOS Modern UI Animations - 73 Premium Animations</p>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalAnimations">73</span>
+                    <span class="stat-label">Animations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalCategories">11</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="library-container" id="libraryContainer">
+            <!-- Categories and animations will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <script>
+        async function loadAnimations() {
+            try {
+                const response = await fetch('../../ui_animations.json');
+                const data = await response.json();
+                const animations = data.iOS_Modern_UI_Animations;
+                const container = document.getElementById('libraryContainer');
+
+                // Helper function to convert animation name to URL-friendly folder name
+                function toFolderName(animationName) {
+                    return animationName
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '');
+                }
+
+                // Helper function to get icon for category
+                function getCategoryIcon(category) {
+                    const icons = {
+                        'System_Navigation': 'navigation',
+                        'Material_and_Depth': 'layers',
+                        'Micro_Interactions': 'touch_app',
+                        'Gestural': 'swipe',
+                        'Overlays_and_Modals': 'web_asset',
+                        'SF_Symbol_Animations': 'stars',
+                        'Home_Screen': 'home',
+                        'Lock_Screen': 'lock',
+                        'Dynamic_Island': 'radio_button_checked',
+                        'SwiftUI_Motion_APIs': 'code'
+                    };
+                    return icons[category] || 'animation';
+                }
+
+                // Create sections for each category
+                Object.keys(animations).forEach((categoryKey, index) => {
+                    const categoryData = animations[categoryKey];
+                    const categoryName = categoryKey.replace(/_/g, ' ');
+                    const categoryIcon = getCategoryIcon(categoryKey);
+
+                    // Create category section
+                    const section = document.createElement('div');
+                    section.className = 'category-section';
+                    section.innerHTML = `
+                        <div class="category-header">
+                            <div class="category-header-content">
+                                <span class="material-icons-round category-icon">${categoryIcon}</span>
+                                <h2 class="category-title">${categoryName}</h2>
+                                <span class="animation-count">${categoryData.length} animations</span>
+                            </div>
+                            <button class="category-toggle" data-category="${categoryKey}">
+                                <span class="material-icons-round">expand_more</span>
+                            </button>
+                        </div>
+                        <div class="category-content expanded" id="category-${categoryKey}">
+                            <div class="animations-grid">
+                                ${categoryData.map(animation => {
+                        const folderName = toFolderName(animation.name);
+                        const targets = animation.targets.join(', ');
+                        return `
+                                        <a href="${folderName}/index.html" class="animation-card">
+                                            <div class="card-header">
+                                                <span class="material-icons-round">play_circle</span>
+                                            </div>
+                                            <h3 class="card-title">${animation.name}</h3>
+                                            <div class="card-targets">
+                                                ${animation.targets.slice(0, 3).map(target =>
+                            `<span class="target-badge">${target}</span>`
+                        ).join('')}
+                                                ${animation.targets.length > 3 ?
+                                `<span class="target-badge">+${animation.targets.length - 3}</span>` : ''
+                            }
+                                            </div>
+                                        </a>
+                                    `;
+                    }).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    container.appendChild(section);
+                });
+
+                // Add toggle functionality
+                document.querySelectorAll('.category-toggle').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const categoryKey = btn.dataset.category;
+                        const content = document.getElementById(`category-${categoryKey}`);
+                        const icon = btn.querySelector('.material-icons-round');
+
+                        content.classList.toggle('expanded');
+                        icon.style.transform = content.classList.contains('expanded')
+                            ? 'rotate(0deg)'
+                            : 'rotate(-90deg)';
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error loading animations:', error);
+                container.innerHTML = `
+                    <div class="error-message">
+                        <span class="material-icons-round">error_outline</span>
+                        <p>Failed to load animations. Please check your connection.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Load animations on page load
+        document.addEventListener('DOMContentLoaded', loadAnimations);
+    </script>
+</body>
+
+</html>

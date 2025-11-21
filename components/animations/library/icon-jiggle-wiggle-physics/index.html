@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon jiggle/wiggle physics - Animation Preview</title>
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+    <div class="animation-preview-page">
+        <header class="preview-header">
+            <a href="../index.html" class="back-link">
+                <span class="material-icons-round">arrow_back</span>
+                Back to Library
+            </a>
+            <div class="animation-info">
+                <span class="category-badge">Home Screen</span>
+                <h1 class="animation-title">Icon jiggle/wiggle physics</h1>
+            </div>
+        </header>
+
+        <div class="preview-container">
+            <div class="demo-area">
+                <div class="home-screen-grid">
+                    <div class="app-icon">
+                        <div class="icon-content"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <span class="material-icons-round">photo_camera</span>
+                        </div>
+                        <span class="icon-label">Camera</span>
+                        <button class="delete-badge">×</button>
+                    </div>
+                    <div class="app-icon">
+                        <div class="icon-content"
+                            style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <span class="material-icons-round">music_note</span>
+                        </div>
+                        <span class="icon-label">Music</span>
+                        <button class="delete-badge">×</button>
+                    </div>
+                    <div class="app-icon">
+                        <div class="icon-content"
+                            style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <span class="material-icons-round">email</span>
+                        </div>
+                        <span class="icon-label">Mail</span>
+                        <button class="delete-badge">×</button>
+                    </div>
+                    <div class="app-icon">
+                        <div class="icon-content"
+                            style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                            <span class="material-icons-round">settings</span>
+                        </div>
+                        <span class="icon-label">Settings</span>
+                        <button class="delete-badge">×</button>
+                    </div>
+                    <div class="app-icon">
+                        <div class="icon-content"
+                            style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <span class="material-icons-round">map</span>
+                        </div>
+                        <span class="icon-label">Maps</span>
+                        <button class="delete-badge">×</button>
+                    </div>
+                    <div class="app-icon">
+                        <div class="icon-content"
+                            style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                            <span class="material-icons-round">image</span>
+                        </div>
+                        <span class="icon-label">Photos</span>
+                        <button class="delete-badge">×</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="play-btn" id="playBtn">
+                    <span class="material-icons-round">play_arrow</span>
+                    Play Animation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const playBtn = document.getElementById('playBtn');
+        const appIcons = document.querySelectorAll('.app-icon');
+
+        playBtn.addEventListener('click', () => {
+            appIcons.forEach(icon => {
+                icon.classList.remove('jiggling');
+            });
+
+            setTimeout(() => {
+                appIcons.forEach(icon => {
+                    icon.classList.add('jiggling');
+                });
+            }, 100);
+        });
+
+        // Auto-play on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                appIcons.forEach(icon => {
+                    icon.classList.add('jiggling');
+                });
+            }, 300);
+        });
+    </script>
+</body>
+
+</html>

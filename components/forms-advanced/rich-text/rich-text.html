@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="components/forms-advanced/rich-text/rich-text.css">
+<div class="editor-toolbar">
+    <!-- Text Style -->
+    <button class="toolbar-btn" data-cmd="bold" title="Bold">
+        <span class="material-icons-round">format_bold</span>
+    </button>
+    <button class="toolbar-btn" data-cmd="italic" title="Italic">
+        <span class="material-icons-round">format_italic</span>
+    </button>
+    <button class="toolbar-btn" data-cmd="underline" title="Underline">
+        <span class="material-icons-round">format_underlined</span>
+    </button>
+    <button class="toolbar-btn" data-cmd="strikeThrough" title="Strikethrough">
+        <span class="material-icons-round">strikethrough_s</span>
+    </button>
+
+    <div class="toolbar-separator"></div>
+
+    <!-- Alignment -->
+    <button class="toolbar-btn" data-cmd="justifyLeft" title="Align Left">
+        <span class="material-icons-round">format_align_left</span>
+    </button>
+    <button class="toolbar-btn" data-cmd="justifyCenter" title="Align Center">
+        <span class="material-icons-round">format_align_center</span>
+    </button>
+    <button class="toolbar-btn" data-cmd="justifyRight" title="Align Right">
+        <span class="material-icons-round">format_align_right</span>
+    </button>
+
+    <div class="toolbar-separator"></div>
+
+    <!-- Lists -->
+    <button class="toolbar-btn" data-cmd="insertUnorderedList" title="Bullet List">
+        <span class="material-icons-round">format_list_bulleted</span>
+    </button>
+    <button class="toolbar-btn" data-cmd="insertOrderedList" title="Numbered List">
+        <span class="material-icons-round">format_list_numbered</span>
+    </button>
+
+    <div class="toolbar-separator"></div>
+
+    <!-- Extras -->
+    <button class="toolbar-btn" data-cmd="createLink" title="Insert Link">
+        <span class="material-icons-round">link</span>
+    </button>
+    <button class="toolbar-btn" data-cmd="formatBlock" data-val="blockquote" title="Quote">
+        <span class="material-icons-round">format_quote</span>
+    </button>
+    <button class="toolbar-btn" data-cmd="removeFormat" title="Clear Formatting">
+        <span class="material-icons-round">format_clear</span>
+    </button>
+</div>
+
+<div class="editor-content" contenteditable="true" data-placeholder="Start typing...">
+    <p>Hello <b>World</b>! This is a <i>rich text</i> editor.</p>
+    <ul>
+        <li>Easy to use</li>
+        <li>Lightweight</li>
+        <li>Customizable</li>
+    </ul>
+</div>
+</div>
+</div>
+
+<script>
+    // Editor Logic
+    document.querySelectorAll('.toolbar-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const cmd = btn.dataset.cmd;
+            const val = btn.dataset.val || null;
+
+            if (cmd === 'createLink') {
+                const url = prompt('Enter link URL:', 'https://');
+                if (url) document.execCommand(cmd, false, url);
+            } else {
+                document.execCommand(cmd, false, val);
+            }
+
+            // Update active state
+            updateToolbar();
+        });
+    });
+
+    // Update toolbar state based on selection
+    const editor = document.querySelector('.editor-content');
+    editor.addEventListener('keyup', updateToolbar);
+    editor.addEventListener('mouseup', updateToolbar);
+
+    function updateToolbar() {
+        document.querySelectorAll('.toolbar-btn').forEach(btn => {
+            const cmd = btn.dataset.cmd;
+            if (document.queryCommandState(cmd)) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+</script>

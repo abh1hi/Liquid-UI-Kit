@@ -1,0 +1,175 @@
+/* Checkbox tick drawing animation Animation */
+
+.animation-preview-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+}
+
+.preview-header {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-4px);
+}
+
+.animation-info {
+    margin-top: 1.5rem;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.animation-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.preview-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.demo-area {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-radius: 16px;
+    padding: 3rem;
+    margin-bottom: 2rem;
+}
+
+/* Custom Demo Styles */
+.checkbox-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-box {
+    fill: white;
+    stroke: #667eea;
+    stroke-width: 2;
+}
+
+.checkbox-check {
+    fill: none;
+    stroke: white;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+}
+
+/* Animation Keyframes */
+@keyframes drawCheck {
+    from {
+        stroke-dashoffset: 60;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fillBox {
+    from {
+        fill: white;
+    }
+    to {
+        fill: #667eea;
+    }
+}
+
+/* Animation Class */
+.checkbox-check.animate {
+    animation: drawCheck 0.5s ease-out forwards;
+}
+
+.checkbox-box.animate {
+    animation: fillBox 0.3s ease-out forwards;
+}
+
+/* Controls */
+.controls {
+    text-align: center;
+}
+
+.play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transition: all 0.2s;
+}
+
+.play-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+}
+
+.play-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .animation-preview-page {
+        padding: 1rem;
+    }
+    
+    .animation-title {
+        font-size: 1.75rem;
+    }
+    
+    .preview-container {
+        padding: 1.5rem;
+    }
+    
+    .demo-area {
+        padding: 2rem 1rem;
+        min-height: 250px;
+    }
+}

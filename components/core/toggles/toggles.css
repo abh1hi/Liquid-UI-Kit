@@ -1,0 +1,177 @@
+/* Toggles, Checkboxes, Radios */
+
+/* Container */
+.selection-control {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: var(--spacing-sm);
+    position: relative;
+}
+
+.selection-control input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.label-text {
+    font-size: var(--text-base);
+    color: var(--text-color);
+    transition: color 0.2s;
+}
+
+.selection-control:hover .label-text {
+    color: var(--primary-text);
+}
+
+/* --- Switch --- */
+.switch-track {
+    width: 52px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Default off */
+    border-radius: 16px;
+    /* Pill shape */
+    border: 1px solid var(--glass-border);
+    position: relative;
+    transition: all 0.3s var(--ease-out);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.switch-thumb {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    transition: all 0.3s var(--ease-elastic);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-thumb .icon {
+    font-size: 16px;
+    color: var(--text-tertiary);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+/* Checked State */
+.selection-control input:checked+.switch-track {
+    background-color: var(--primary-pastel);
+    border-color: var(--primary-pastel);
+}
+
+.selection-control input:checked+.switch-track .switch-thumb {
+    transform: translateX(20px);
+    background-color: var(--primary-text);
+}
+
+.selection-control input:checked+.switch-track .switch-thumb .icon {
+    opacity: 1;
+    color: var(--primary-pastel);
+}
+
+/* Hover */
+.selection-control:hover .switch-thumb {
+    transform: scale(1.1);
+}
+
+.selection-control input:checked:hover+.switch-track .switch-thumb {
+    transform: translateX(20px) scale(1.1);
+}
+
+/* --- Checkbox --- */
+.checkbox-box {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--text-tertiary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s var(--ease-out);
+    background: var(--glass-bg);
+}
+
+.checkbox-box svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: white;
+    stroke-width: 3;
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    transition: stroke-dashoffset 0.3s var(--ease-out);
+}
+
+/* Checked State */
+.selection-control input:checked+.checkbox-box {
+    background-color: var(--primary-pastel);
+    border-color: var(--primary-pastel);
+}
+
+.selection-control input:checked+.checkbox-box svg {
+    stroke-dashoffset: 0;
+    stroke: var(--primary-text);
+}
+
+/* Hover */
+.selection-control:hover .checkbox-box {
+    border-color: var(--primary-pastel);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Radio --- */
+.radio-circle {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--text-tertiary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s var(--ease-out);
+    background: var(--glass-bg);
+}
+
+.radio-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-text);
+    transform: scale(0);
+    transition: transform 0.2s var(--ease-elastic);
+}
+
+/* Checked State */
+.selection-control input:checked+.radio-circle {
+    border-color: var(--primary-pastel);
+    background-color: var(--primary-pastel);
+}
+
+.selection-control input:checked+.radio-circle .radio-dot {
+    transform: scale(1);
+}
+
+/* Hover */
+.selection-control:hover .radio-circle {
+    border-color: var(--primary-pastel);
+}
+
+/* --- Disabled --- */
+.selection-control input:disabled~.switch-track,
+.selection-control input:disabled~.checkbox-box,
+.selection-control input:disabled~.radio-circle,
+.selection-control input:disabled~.label-text {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+}

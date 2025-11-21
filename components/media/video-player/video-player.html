@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="components/media/video-player/video-player.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Video Player</h2>
+        <p class="text-body">Custom styled video player interface.</p>
+    </div>
+
+    <section class="glass-panel p-lg flex justify-center">
+        <div class="video-player-container">
+            <video class="video-element"
+                poster="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=80">
+                <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div class="video-controls">
+                <div class="video-progress-container">
+                    <div class="video-progress-bar"></div>
+                </div>
+
+                <div class="video-buttons">
+                    <div class="video-btn-group">
+                        <button class="video-btn">
+                            <span class="material-icons-round">play_arrow</span>
+                        </button>
+                        <button class="video-btn">
+                            <span class="material-icons-round">volume_up</span>
+                        </button>
+                        <div class="volume-slider">
+                            <div class="volume-level"></div>
+                        </div>
+                        <span class="video-time">04:32 / 10:00</span>
+                    </div>
+
+                    <div class="video-btn-group">
+                        <button class="video-btn">
+                            <span class="material-icons-round">settings</span>
+                        </button>
+                        <button class="video-btn">
+                            <span class="material-icons-round">fullscreen</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        // Simple Play/Pause Demo Logic
+        const container = document.querySelector('.video-player-container');
+        if (!container) return;
+
+        const video = container.querySelector('video');
+        const playBtn = container.querySelector('.video-btn span');
+
+        if (playBtn && video) {
+            playBtn.parentElement.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    playBtn.textContent = 'pause';
+                } else {
+                    video.pause();
+                    playBtn.textContent = 'play_arrow';
+                }
+            });
+        }
+    })();
+</script>

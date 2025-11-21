@@ -1,0 +1,123 @@
+/* Onboarding Container */
+.onboarding-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 600px;
+    background: var(--glass-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    box-shadow: var(--glass-shadow);
+}
+
+/* Slides Area */
+.slides-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.slides-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.slide {
+    flex: 0 0 100%;
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Slide Content */
+.slide-image {
+    width: 200px;
+    height: 200px;
+    background: var(--primary-pastel);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-xl);
+    color: var(--primary-text);
+}
+
+.slide-image span {
+    font-size: 80px;
+}
+
+.slide-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.slide-desc {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Navigation Area */
+.nav-area {
+    padding: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.nav-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    color: var(--text-color);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-btn.btn-next {
+    color: var(--primary-text);
+    background: var(--primary-pastel);
+}
+
+.nav-btn.btn-next:hover {
+    background: var(--primary-hover);
+}
+
+/* Dots */
+.dots {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--glass-border);
+    transition: all 0.3s;
+}
+
+.dot.active {
+    width: 24px;
+    background: var(--primary-pastel);
+    border-radius: 4px;
+}

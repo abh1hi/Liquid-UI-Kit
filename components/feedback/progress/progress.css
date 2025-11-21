@@ -1,0 +1,92 @@
+/* Progress Indicators */
+
+/* Linear Progress */
+.progress-linear {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--primary-pastel);
+    border-radius: var(--radius-full);
+    transition: width 0.3s var(--ease-out);
+}
+
+.progress-indeterminate .progress-bar {
+    width: 30%;
+    position: absolute;
+    left: -30%;
+    animation: linear-indeterminate 1.5s infinite var(--ease-elastic);
+}
+
+@keyframes linear-indeterminate {
+    0% {
+        left: -30%;
+        width: 30%;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    100% {
+        left: 100%;
+        width: 30%;
+    }
+}
+
+/* Circular Progress */
+.progress-circular {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    animation: rotate 2s linear infinite;
+}
+
+.progress-circular svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-circular circle {
+    fill: none;
+    stroke: var(--primary-pastel);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s;
+}
+
+.progress-circular-indeterminate circle {
+    animation: circular-dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes circular-dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+    }
+}

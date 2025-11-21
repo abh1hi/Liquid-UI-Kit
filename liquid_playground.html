@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Components Playground</title>
+
+    <!-- Main styles -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Liquid theme variables -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="liquid_variables.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+    <!-- SVG Filters (Required for liquid effects) -->
+    <svg class="filters" style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+        <defs>
+            <filter id="glass-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+            </filter>
+            <filter id="filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.005" numOctaves="5" seed="2" />
+                <feDisplacementMap in="SourceGraphic" scale="20" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="playground-container">
+        <!-- Mobile Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🌊 Liquid Glass</h1>
+            </div>
+            <nav class="sidebar-content" id="sidebar-nav">
+                <!-- Liquid Components -->
+                <div class="nav-group">
+                    <div class="nav-group-title">Components</div>
+                    <a class="nav-link active" data-component="buttons">
+                        <span class="material-icons-round"
+                            style="font-size: 18px; margin-right: 8px;">smart_button</span>
+                        Buttons
+                    </a>
+                    <a class="nav-link" data-component="cards">
+                        <span class="material-icons-round" style="font-size: 18px; margin-right: 8px;">style</span>
+                        Cards
+                    </a>
+                    <a class="nav-link" data-component="dock">
+                        <span class="material-icons-round" style="font-size: 18px; margin-right: 8px;">dock</span>
+                        Dock
+                    </a>
+                    <a class="nav-link" data-component="switcher">
+                        <span class="material-icons-round" style="font-size: 18px; margin-right: 8px;">toggle_on</span>
+                        Switcher
+                    </a>
+                </div>
+
+                <!-- Examples -->
+                <div class="nav-group">
+                    <div class="nav-group-title">Examples</div>
+                    <a class="nav-link" data-component="ecommerce">
+                        <span class="material-icons-round"
+                            style="font-size: 18px; margin-right: 8px;">shopping_cart</span>
+                        E-commerce
+                    </a>
+                    <a class="nav-link" data-component="all">
+                        <span class="material-icons-round" style="font-size: 18px; margin-right: 8px;">dashboard</span>
+                        All Components
+                    </a>
+                </div>
+
+                <!-- Resources -->
+                <div class="nav-group">
+                    <div class="nav-group-title">Resources</div>
+                    <a class="nav-link" data-component="guide">
+                        <span class="material-icons-round" style="font-size: 18px; margin-right: 8px;">menu_book</span>
+                        Guide
+                    </a>
+                    <a class="nav-link" data-component="variables">
+                        <span class="material-icons-round" style="font-size: 18px; margin-right: 8px;">code</span>
+                        Variables
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="flex items-center gap-md">
+                    <button id="mobile-menu-btn" class="icon-btn md:hidden">
+                        <span class="material-icons-round">menu</span>
+                    </button>
+                    <h2 id="current-component-title">Liquid Buttons</h2>
+                </div>
+
+                <div class="theme-controls">
+                    <div class="control-group">
+                        <label class="text-caption">Theme</label>
+                        <select id="theme-select" class="select-input">
+                            <option value="default">Pastel (Default)</option>
+                            <option value="oceanic">Oceanic</option>
+                            <option value="sunset">Sunset</option>
+                            <option value="forest">Forest</option>
+                            <option value="dark">Dark Mode</option>
+                        </select>
+                    </div>
+                    <button id="toggle-mode" class="icon-btn" title="Toggle Dark Mode">
+                        <span class="material-icons-round">dark_mode</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Preview Area -->
+            <div class="preview-area">
+                <div id="component-stage" class="component-stage">
+                    <!-- Components will be rendered here -->
+                    <div id="buttons-section">
+                        <!-- Content will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/theme-manager.js"></script>
+    <script>
+        // Liquid Playground App
+        class LiquidPlayground {
+            constructor() {
+                this.nav = document.getElementById('sidebar-nav');
+                this.stage = document.getElementById('component-stage');
+                this.title = document.getElementById('current-component-title');
+                this.currentComponent = 'buttons';
+
+                this.init();
+            }
+
+            init() {
+                this.handleNavigation();
+                this.handleMobileMenu();
+                this.loadComponent('buttons');
+            }
+
+            handleNavigation() {
+                this.nav.addEventListener('click', (e) => {
+                    const link = e.target.closest('.nav-link');
+                    if (!link) return;
+
+                    // Update active state
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+
+                    // Load component
+                    const component = link.dataset.component;
+                    this.loadComponent(component);
+                });
+            }
+
+            handleMobileMenu() {
+                const mobileBtn = document.getElementById('mobile-menu-btn');
+                const sidebar = document.querySelector('.sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+
+                const toggleSidebar = () => {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                };
+
+                const closeSidebar = () => {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                };
+
+                if (mobileBtn) mobileBtn.addEventListener('click', toggleSidebar);
+                if (overlay) overlay.addEventListener('click', closeSidebar);
+            }
+
+            loadComponent(component) {
+                this.currentComponent = component;
+
+                // Update title
+                const titles = {
+                    'buttons': 'Liquid Buttons',
+                    'cards': 'Liquid Cards',
+                    'dock': 'Liquid Dock',
+                    'switcher': 'Liquid Switcher',
+                    'ecommerce': 'E-commerce Demo',
+                    'all': 'All Components',
+                    'guide': 'Component Guide',
+                    'variables': 'CSS Variables'
+                };
+                this.title.textContent = titles[component] || 'Liquid Glass';
+
+                // Load content
+                this.renderComponent(component);
+            }
+
+            renderComponent(component) {
+                const content = this.getComponentContent(component);
+                this.stage.innerHTML = content;
+
+                // Re-initialize any interactive elements
+                this.initializeInteractiveElements();
+            }
+
+            getComponentContent(component) {
+                switch (component) {
+                    case 'buttons':
+                        return this.renderButtons();
+                    case 'cards':
+                        return this.renderCards();
+                    case 'dock':
+                        return this.renderDock();
+                    case 'switcher':
+                        return this.renderSwitcher();
+                    case 'ecommerce':
+                        return this.renderEcommerce();
+                    case 'all':
+                        return this.renderAll();
+                    case 'guide':
+                        return this.renderGuide();
+                    case 'variables':
+                        return this.renderVariables();
+                    default:
+                        return '<div class="text-center"><p>Component not found</p></div>';
+                }
+            }
+
+            renderButtons() {
+                return `
+                    <div class="p-2xl">
+                        <div class="mb-2xl">
+                            <h3 class="text-h3 mb-md">Standard Buttons</h3>
+                            <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap; align-items: center;">
+                                ${this.createLiquidButton('Default', '')}
+                                ${this.createLiquidButton('Primary', 'primary')}
+                                ${this.createLiquidButton('Secondary', 'secondary')}
+                                ${this.createLiquidButton('Accent', 'accent')}
+                            </div>
+                        </div>
+
+                        <div class="mb-2xl">
+                            <h3 class="text-h3 mb-md">Size Variants</h3>
+                            <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap; align-items: center;">
+                                ${this.createLiquidButton('Small', 'small')}
+                                ${this.createLiquidButton('Medium', '')}
+                                ${this.createLiquidButton('Large', 'large')}
+                            </div>
+                        </div>
+
+                        <div class="mb-2xl">
+                            <h3 class="text-h3 mb-md">Shape Variants</h3>
+                            <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap;">
+                                ${this.createLiquidButton('Square', 'square')}
+                                ${this.createLiquidButton('Default', '')}
+                                ${this.createLiquidButton('Rounded', 'rounded')}
+                            </div>
+                        </div>
+
+                        <div class="mb-2xl">
+                            <h3 class="text-h3 mb-md">Large Action Button</h3>
+                            <button class="lg-liquid-btn">Action Button</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            createLiquidButton(text, variant) {
+                return `
+                    <button class="liquid-button ${variant}">
+                        <div class="liquid-layers">
+                            <div class="liquid-effect"></div>
+                            <div class="liquid-tint"></div>
+                            <div class="liquid-shine"></div>
+                        </div>
+                        <span class="liquid-text">${text}</span>
+                    </button>
+                `;
+            }
+
+            renderCards() {
+                return `
+                    <div class="p-2xl">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl);">
+                            ${this.createLiquidCard('Info Card', 'Beautiful card with liquid glass effect')}
+                            ${this.createLiquidCard('Feature Card', 'Another stunning card component')}
+                            ${this.createProductCard('🎨', 'Product Name', '$99.99')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            createLiquidCard(title, description) {
+                return `
+                    <div class="liquidGlass-wrapper liquid-card">
+                        <div class="liquidGlass-effect"></div>
+                        <div class="liquidGlass-tint"></div>
+                        <div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h4 class="liquid-card-title">${title}</h4>
+                            <p class="liquid-card-description">${description}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            createProductCard(emoji, title, price) {
+                return `
+                    <div class="liquidGlass-wrapper liquid-product-card">
+                        <div class="liquidGlass-effect"></div>
+                        <div class="liquidGlass-tint"></div>
+                        <div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <div class="product-image">${emoji}</div>
+                            <h4 class="product-title">${title}</h4>
+                            <p class="product-price">${price}</p>
+                            <button class="product-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderDock() {
+                return `
+                    <div class="p-2xl">
+                        <div style="display: flex; justify-content: center;">
+                            <div class="liquidGlass-wrapper liquid-dock">
+                                <div class="liquidGlass-effect"></div>
+                                <div class="liquidGlass-tint"></div>
+                                <div class="liquidGlass-shine"></div>
+                                <div class="liquidGlass-content" style="display: flex; gap: var(--spacing-sm);">
+                                    <div class="liquid-dock-item">🏠</div>
+                                    <div class="liquid-dock-item">🔍</div>
+                                    <div class="liquid-dock-item">💬</div>
+                                    <div class="liquid-dock-item">⚙️</div>
+                                    <div class="liquid-dock-item">👤</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderSwitcher() {
+                return `
+                    <div class="p-2xl">
+                        <div style="display: flex; justify-content: center; flex-direction: column; gap: var(--spacing-xl); align-items: center;">
+                            <div>
+                                <h3 class="text-h3 mb-md text-center">3-Option Switcher</h3>
+                                <div class="liquid-switcher" id="switcher-3">
+                                    <button class="liquid-switcher-option active">Option 1</button>
+                                    <button class="liquid-switcher-option">Option 2</button>
+                                    <button class="liquid-switcher-option">Option 3</button>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-h3 mb-md text-center">2-Option Switcher</h3>
+                                <div class="liquid-switcher" id="switcher-2">
+                                    <button class="liquid-switcher-option active">Monthly</button>
+                                    <button class="liquid-switcher-option">Yearly</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderEcommerce() {
+                return `
+                    <div class="p-2xl">
+                        <h3 class="text-h3 mb-xl">Product Grid</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--spacing-xl);">
+                            ${this.createProductCard('👟', 'Sneakers', '$129.99')}
+                            ${this.createProductCard('🎒', 'Backpack', '$79.99')}
+                            ${this.createProductCard('🕶️', 'Sunglasses', '$45.99')}
+                            ${this.createProductCard('⌚', 'Watch', '$199.99')}
+                            ${this.createProductCard('🎧', 'Headphones', '$89.99')}
+                            ${this.createProductCard('📱', 'Phone Case', '$29.99')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderAll() {
+                return `
+                    <div class="p-2xl">
+                        <div class="mb-3xl">
+                            <h3 class="text-h2 mb-lg">🔘 Buttons</h3>
+                            <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap;">
+                                ${this.createLiquidButton('Primary', 'primary')}
+                                ${this.createLiquidButton('Secondary', 'secondary')}
+                                ${this.createLiquidButton('Accent', 'accent')}
+                            </div>
+                        </div>
+
+                        <div class="mb-3xl">
+                            <h3 class="text-h2 mb-lg">🎴 Cards</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl);">
+                                ${this.createLiquidCard('Card 1', 'Description here')}
+                                ${this.createLiquidCard('Card 2', 'Another card')}
+                            </div>
+                        </div>
+
+                        <div class="mb-3xl">
+                            <h3 class="text-h2 mb-lg">🎯 Dock</h3>
+                            <div style="display: flex; justify-content: center;">
+                                <div class="liquidGlass-wrapper liquid-dock">
+                                    <div class="liquidGlass-effect"></div>
+                                    <div class="liquidGlass-tint"></div>
+                                    <div class="liquidGlass-shine"></div>
+                                    <div class="liquidGlass-content" style="display: flex; gap: var(--spacing-sm);">
+                                        <div class="liquid-dock-item">🏠</div>
+                                        <div class="liquid-dock-item">🔍</div>
+                                        <div class="liquid-dock-item">💬</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderGuide() {
+                return `
+                    <div class="p-2xl">
+                        <h2 class="text-h2 mb-lg">📖 Component Guide</h2>
+                        <div class="glass-panel p-lg mb-lg">
+                            <h3 class="text-h3 mb-md">Quick Start</h3>
+                            <ol style="line-height: 1.8;">
+                                <li>Include <code>liquid_variables.css</code> in your HTML</li>
+                                <li>Add SVG filters to your page</li>
+                                <li>Use component markup from the examples</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="glass-panel p-lg mb-lg">
+                            <h3 class="text-h3 mb-md">Documentation</h3>
+                            <p class="mb-md">For complete documentation, see:</p>
+                            <ul style="line-height: 1.8;">
+                                <li><strong>LIQUID_COMPONENTS_GUIDE.md</strong> - Full guide</li>
+                                <li><strong>LIQUID_QUICK_REF.md</strong> - Quick reference</li>
+                                <li><strong>LIQUID_MIGRATION.md</strong> - Migration guide</li>
+                            </ul>
+                        </div>
+
+                        <div class="glass-panel p-lg">
+                            <h3 class="text-h3 mb-md">Component Files</h3>
+                            <p class="mb-md">Individual components are located in:</p>
+                            <code>Glass-liquid-components/[ComponentName]/</code>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderVariables() {
+                return `
+                    <div class="p-2xl">
+                        <h2 class="text-h2 mb-lg">CSS Variables</h2>
+                        
+                        <div class="glass-panel p-lg mb-lg">
+                            <h3 class="text-h3 mb-md">Glass Properties</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);  font-family: monospace; font-size: 14px;">
+                                <div>--liquid-glass-base</div>
+                                <div>--liquid-glass-tint</div>
+                                <div>--liquid-glass-border</div>
+                                <div>--liquid-blur</div>
+                                <div>--liquid-saturate</div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-lg mb-lg">
+                            <h3 class="text-h3 mb-md">Component Variables</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md); font-family: monospace; font-size: 14px;">
+                                <div>--liquid-btn-bg</div>
+                                <div>--liquid-card-bg</div>
+                                <div>--liquid-switcher-bg</div>
+                                <div>--liquid-shadow-lg</div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-lg">
+                            <h3 class="text-h3 mb-md">Transitions</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md); font-family: monospace; font-size: 14px;">
+                                <div>--liquid-transition</div>
+                                <div>--liquid-transition-fast</div>
+                                <div>--liquid-ease-elastic</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            initializeInteractiveElements() {
+                // Initialize switchers
+                const switchers = document.querySelectorAll('.liquid-switcher');
+                switchers.forEach(switcher => {
+                    const options = switcher.querySelectorAll('.liquid-switcher-option');
+                    options.forEach(option => {
+                        option.addEventListener('click', () => {
+                            options.forEach(opt => opt.classList.remove('active'));
+                            option.classList.add('active');
+                        });
+                    });
+                });
+
+                // Initialize product buttons
+                const productBtns = document.querySelectorAll('.product-btn');
+                productBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const originalText = btn.textContent;
+                        btn.textContent = '✓ Added!';
+                        btn.style.background = 'var(--success-color)';
+
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                            btn.style.background = 'var(--liquid-action)';
+                        }, 1500);
+                    });
+                });
+
+                // Add liquid button effects
+                const liquidButtons = document.querySelectorAll('.liquid-button, .lg-liquid-btn');
+                liquidButtons.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        this.style.animation = 'none';
+                        setTimeout(() => {
+                            this.style.animation = '';
+                        }, 10);
+                    });
+                });
+            }
+        }
+
+        // Initialize playground
+        document.addEventListener('DOMContentLoaded', () => {
+            window.liquidPlayground = new LiquidPlayground();
+        });
+    </script>
+
+    <style>
+        /* Additional styles for liquid playground */
+        .liquid-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+            padding: var(--spacing-md) var(--spacing-xl);
+            min-width: 120px;
+            min-height: 48px;
+            border-radius: var(--radius-lg);
+            background: transparent;
+            box-shadow: var(--liquid-card-shadow);
+            transition: var(--liquid-transition);
+            font-family: var(--font-family);
+            font-size: var(--text-base);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .liquid-button:hover {
+            transform: scale(1.05);
+        }
+
+        .liquid-button:active {
+            transform: scale(0.95);
+        }
+
+        .liquid-button.small {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            min-width: 90px;
+            min-height: 36px;
+            font-size: var(--text-sm);
+        }
+
+        .liquid-button.large {
+            padding: var(--spacing-lg) var(--spacing-3xl);
+            min-width: 180px;
+            min-height: 64px;
+            font-size: var(--text-lg);
+            border-radius: 32px;
+        }
+
+        .liquid-button.square {
+            border-radius: var(--radius-sm);
+        }
+
+        .liquid-button.rounded {
+            border-radius: var(--radius-full);
+        }
+
+        .liquid-button.primary {
+            box-shadow: var(--liquid-card-shadow), 0 0 0 2px var(--primary-pastel);
+        }
+
+        .liquid-button.primary .liquid-tint {
+            background: color-mix(in srgb, var(--primary-pastel) 20%, var(--liquid-glass-tint));
+        }
+
+        .liquid-button.secondary {
+            box-shadow: var(--liquid-card-shadow), 0 0 0 2px var(--secondary-pastel);
+        }
+
+        .liquid-button.secondary .liquid-tint {
+            background: color-mix(in srgb, var(--secondary-pastel) 20%, var(--liquid-glass-tint));
+        }
+
+        .liquid-button.accent {
+            box-shadow: var(--liquid-card-shadow), 0 0 0 2px var(--accent-pastel);
+        }
+
+        .liquid-button.accent .liquid-tint {
+            background: color-mix(in srgb, var(--accent-pastel) 20%, var(--liquid-glass-tint));
+        }
+
+        .liquid-layers {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .liquid-effect {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            backdrop-filter: blur(3px);
+            filter: url(#glass-distortion);
+            overflow: hidden;
+            isolation: isolate;
+            background: var(--liquid-glass-base);
+        }
+
+        .liquid-tint {
+            z-index: 1;
+            position: absolute;
+            inset: 0;
+            background: var(--liquid-glass-tint);
+            pointer-events: none;
+        }
+
+        .liquid-shine {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            overflow: hidden;
+            pointer-events: none;
+            box-shadow: inset 2px 2px 1px 0 var(--liquid-glass-shine-1), inset -1px -1px 1px 1px var(--liquid-glass-shine-2);
+        }
+
+        .liquid-text {
+            position: relative;
+            z-index: 3;
+            color: var(--text-color);
+            font-weight: var(--font-weight-bold);
+            pointer-events: none;
+        }
+
+        .liquidGlass-wrapper {
+            position: relative;
+            display: inline-flex;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--liquid-transition);
+        }
+
+        .liquidGlass-effect {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            backdrop-filter: blur(3px);
+            filter: url(#glass-distortion);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .liquidGlass-tint {
+            z-index: 1;
+            position: absolute;
+            inset: 0;
+            background: var(--liquid-glass-tint);
+        }
+
+        .liquidGlass-shine {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            overflow: hidden;
+            box-shadow: inset 2px 2px 1px 0 var(--liquid-glass-shine-1), inset -1px -1px 1px 1px var(--liquid-glass-shine-2);
+        }
+
+        .liquidGlass-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .liquid-card {
+            width: 100%;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            background: var(--liquid-card-bg);
+            box-shadow: var(--liquid-card-shadow);
+        }
+
+        .liquid-card-title {
+            font-size: var(--text-xl);
+            font-weight: var(--font-weight-bold);
+            margin: 0 0 var(--spacing-sm);
+            color: var(--text-color);
+        }
+
+        .liquid-card-description {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .liquid-product-card {
+            width: 100%;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            background: var(--liquid-card-bg);
+            box-shadow: var(--liquid-card-shadow);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 150px;
+            background: var(--accent-pastel);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .product-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-weight-bold);
+            margin: 0 0 var(--spacing-xs);
+            color: var(--text-color);
+        }
+
+        .product-price {
+            font-size: var(--text-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary-pastel);
+            margin: 0 0 var(--spacing-md);
+        }
+
+        .product-btn {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: var(--liquid-action);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-bold);
+            cursor: pointer;
+            transition: var(--duration-normal) var(--ease-out);
+        }
+
+        .product-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px color-mix(in srgb, var(--liquid-action) 40%, transparent);
+        }
+
+        .liquid-dock {
+            display: flex;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-full);
+            background: var(--liquid-glass-base);
+            box-shadow: var(--liquid-card-shadow);
+        }
+
+        .liquid-dock-item {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border-radius: var(--radius-md);
+            background: var(--liquid-glass-tint);
+            transition: var(--liquid-transition-fast);
+            cursor: pointer;
+        }
+
+        .liquid-dock-item:hover {
+            transform: scale(1.2);
+            background: var(--liquid-action);
+        }
+
+        .liquid-switcher {
+            display: inline-flex;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-sm);
+            background: var(--liquid-switcher-bg);
+            backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+            border-radius: var(--radius-full);
+            border: 1px solid var(--liquid-glass-border);
+            box-shadow: var(--liquid-shadow-md);
+            position: relative;
+        }
+
+        .liquid-switcher-option {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-full);
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: var(--duration-fast) var(--ease-out);
+            position: relative;
+            z-index: 2;
+        }
+
+        .liquid-switcher-option:hover {
+            color: var(--liquid-action);
+            transform: scale(1.1);
+        }
+
+        .liquid-switcher-option.active {
+            color: var(--text-color);
+            background: var(--liquid-switcher-indicator);
+            box-shadow: var(--liquid-shadow-sm);
+        }
+
+        .lg-liquid-btn {
+            min-width: 200px;
+            min-height: 80px;
+            padding: var(--spacing-lg) var(--spacing-2xl);
+            border-radius: 40px;
+            background: var(--liquid-btn-bg);
+            backdrop-filter: blur(4px);
+            box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.3), inset -2px -2px 2px 1px rgba(255, 255, 255, 0.3), 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+            border: none;
+            color: var(--text-color);
+            font-size: var(--text-xl);
+            font-weight: var(--font-weight-bold);
+            cursor: pointer;
+            transition: var(--liquid-transition-fast);
+        }
+
+        .lg-liquid-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</body>
+
+</html>

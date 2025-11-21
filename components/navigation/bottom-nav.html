@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="components/navigation/bottom-nav.css">
+
+<div class="flex flex-col gap-md">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Bottom Navigation</h2>
+        <p class="text-body">Liquid glass navigation bar with floating effects.</p>
+    </div>
+
+    <section class="glass-panel p-md">
+        <div class="bottom-nav-container">
+            <nav class="bottom-nav">
+                <a class="nav-item active" onclick="setActive(this)">
+                    <div class="nav-icon-box">
+                        <span class="material-icons-round">home</span>
+                    </div>
+                    <span class="nav-label">Home</span>
+                </a>
+
+                <a class="nav-item" onclick="setActive(this)">
+                    <div class="nav-icon-box">
+                        <span class="material-icons-round">explore</span>
+                    </div>
+                    <span class="nav-label">Explore</span>
+                </a>
+
+                <a class="nav-item" onclick="setActive(this)">
+                    <div class="nav-icon-box">
+                        <span class="material-icons-round">favorite</span>
+                    </div>
+                    <span class="nav-label">Saved</span>
+                </a>
+
+                <a class="nav-item" onclick="setActive(this)">
+                    <div class="nav-icon-box">
+                        <span class="material-icons-round">person</span>
+                    </div>
+                    <span class="nav-label">Profile</span>
+                </a>
+            </nav>
+        </div>
+    </section>
+
+    <div class="text-center mt-md">
+        <p class="text-caption">Click items to see active state animation.</p>
+    </div>
+</div>
+
+<script>
+    function setActive(element) {
+        // Remove active class from all siblings
+        const siblings = element.parentElement.children;
+        for (let item of siblings) {
+            item.classList.remove('active');
+        }
+        // Add active class to clicked element
+        element.classList.add('active');
+    }
+</script>

@@ -1,0 +1,148 @@
+/* Pricing Container */
+.pricing-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xl);
+    justify-content: center;
+    padding: var(--spacing-xl);
+}
+
+/* Pricing Card */
+.pricing-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 350px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--glass-shadow);
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-pastel);
+}
+
+/* Popular Badge */
+.popular-badge {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background: var(--primary-pastel);
+    color: var(--primary-text);
+    padding: 4px 40px;
+    font-size: var(--text-xs);
+    font-weight: bold;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.pricing-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.plan-name {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.plan-price {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--text-color);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1;
+}
+
+.currency {
+    font-size: 24px;
+    margin-top: 8px;
+    margin-right: 4px;
+}
+
+.period {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: auto;
+    margin-bottom: 8px;
+    margin-left: 4px;
+}
+
+/* Features List */
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-2xl) 0;
+    flex: 1;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
+}
+
+.feature-icon {
+    color: var(--primary-pastel);
+    font-size: 20px;
+}
+
+.feature-icon.disabled {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.feature-text.disabled {
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* Action Button */
+.pricing-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-pastel);
+    color: var(--primary-pastel);
+}
+
+.btn-outline:hover {
+    background: var(--accent-pastel);
+}
+
+.btn-filled {
+    background: var(--primary-pastel);
+    border: 2px solid var(--primary-pastel);
+    color: var(--primary-text);
+}
+
+.btn-filled:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+}

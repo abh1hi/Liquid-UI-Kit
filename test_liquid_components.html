@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Components Test</title>
+    <link rel="stylesheet" href="liquid_sample.css">
+    <style>
+        /* Override body for this test page if needed, but liquid_sample.css sets it up nicely for a demo */
+        /* We might need to ensure the SVG takes up no space */
+        svg.filters {
+            position: absolute;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SVG Filters required by liquid_sample.css -->
+    <svg class="filters">
+        <defs>
+            <filter id="glass-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+            </filter>
+            <filter id="switcher">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+            </filter>
+            <filter id="filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.005" numOctaves="5" seed="2" />
+                <feDisplacementMap in="SourceGraphic" scale="20" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Theme Switcher -->
+    <div class="switcher" c-previous="1">
+        <div class="switcher__legend">Theme Switcher</div>
+
+        <label class="switcher__option">
+            <input class="switcher__input" type="radio" name="theme" value="light" c-option="1" checked>
+            <span class="switcher__icon">Light</span>
+        </label>
+
+        <label class="switcher__option">
+            <input class="switcher__input" type="radio" name="theme" value="dark" c-option="2">
+            <span class="switcher__icon">Dark</span>
+        </label>
+
+        <label class="switcher__option">
+            <input class="switcher__input" type="radio" name="theme" value="dim" c-option="3">
+            <span class="switcher__icon">Dim</span>
+        </label>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="wrapper">
+
+        <!-- Liquid Glass Button Variant 1 -->
+        <div class="liquidGlass-wrapper button">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">Liquid Button</div>
+        </div>
+
+        <!-- Large Glass Button Variant 2 -->
+        <button class="lg-btn">
+            Glass Action
+        </button>
+
+        <!-- Dock Example -->
+        <div class="dock liquidGlass-wrapper">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div style="z-index: 3; display: flex; gap: 10px; padding: 0 10px;">
+                <span>🏠</span>
+                <span>🔍</span>
+                <span>⚙️</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="info">Test Page for liquid_sample.css</div>
+
+    <script>
+        // Simple script to handle the 'c-previous' attribute for the switcher animation direction
+        const switcher = document.querySelector('.switcher');
+        const inputs = document.querySelectorAll('.switcher__input');
+
+        inputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const current = e.target.getAttribute('c-option');
+                // Wait a bit to set previous to allow animation to play
+                setTimeout(() => {
+                    switcher.setAttribute('c-previous', current);
+                }, 400);
+            });
+        });
+    </script>
+</body>
+
+</html>

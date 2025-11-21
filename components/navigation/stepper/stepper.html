@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="components/navigation/stepper/stepper.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Stepper</h2>
+        <p class="text-body">Progress through multi-step processes.</p>
+    </div>
+
+    <!-- Horizontal Stepper -->
+    <section class="glass-panel p-xl">
+        <h3 class="text-h4 mb-xl">Horizontal Stepper</h3>
+
+        <div class="stepper">
+            <div class="step completed">
+                <div class="step-circle">
+                    <span class="material-icons-round">check</span>
+                </div>
+                <div class="step-label">Account</div>
+            </div>
+            <div class="step active">
+                <div class="step-circle">2</div>
+                <div class="step-label">Personal</div>
+            </div>
+            <div class="step">
+                <div class="step-circle">3</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="step">
+                <div class="step-circle">4</div>
+                <div class="step-label">Confirm</div>
+            </div>
+        </div>
+
+        <div class="text-center mt-lg">
+            <button class="btn btn-primary">Next Step</button>
+        </div>
+    </section>
+
+    <!-- Vertical Stepper -->
+    <section class="glass-panel p-xl mt-md">
+        <h3 class="text-h4 mb-xl">Vertical Stepper</h3>
+
+        <div class="stepper stepper-vertical">
+            <div class="step completed">
+                <div class="step-circle">
+                    <span class="material-icons-round">check</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-label">Order Placed</div>
+                    <p class="text-sm text-secondary mt-xs">We have received your order.</p>
+                </div>
+            </div>
+            <div class="step active">
+                <div class="step-circle">2</div>
+                <div class="step-content">
+                    <div class="step-label">Processing</div>
+                    <p class="text-sm text-secondary mt-xs">Your items are being prepared.</p>
+                    <div class="mt-md">
+                        <button class="btn btn-sm btn-outline">View Details</button>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-circle">3</div>
+                <div class="step-content">
+                    <div class="step-label">Shipped</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-circle">4</div>
+                <div class="step-content">
+                    <div class="step-label">Delivered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

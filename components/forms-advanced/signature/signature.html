@@ -1,0 +1,109 @@
+<link rel="stylesheet" href="components/forms-advanced/signature/signature.css">
+<canvas id="sig-canvas" class="signature-canvas"></canvas>
+
+<div class="signature-toolbar">
+    <div class="pen-options">
+        <button class="color-btn active" style="background: #000;" data-color="#000000" title="Black"></button>
+        <button class="color-btn" style="background: #1976d2;" data-color="#1976d2" title="Blue"></button>
+        <button class="color-btn" style="background: #d32f2f;" data-color="#d32f2f" title="Red"></button>
+    </div>
+
+    <div style="display: flex; gap: 8px;">
+        <button class="btn btn-ghost btn-sm" id="clear-sig">Clear</button>
+        <button class="btn btn-primary btn-sm" id="save-sig">Save</button>
+    </div>
+</div>
+</div>
+
+<div id="sig-preview" class="mt-xl" style="display: none;">
+    <h4>Saved Signature:</h4>
+    <img id="sig-image" style="border: 1px dashed var(--glass-border); max-width: 300px; margin-top: 8px;">
+</div>
+</div>
+
+<script>
+    const canvas = document.getElementById('sig-canvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    // Resize canvas to match display size
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        // Set default styles
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+    }
+
+    // Initial resize
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Drawing functions
+    function startDrawing(e) {
+        isDrawing = true;
+        [lastX, lastY] = getCoords(e);
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        e.preventDefault();
+
+        const [x, y] = getCoords(e);
+
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        [lastX, lastY] = [x, y];
+    }
+
+    function stopDrawing() {
+        isDrawing = false;
+    }
+
+    function getCoords(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return [clientX - rect.left, clientY - rect.top];
+    }
+
+    // Event Listeners
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    canvas.addEventListener('touchstart', startDrawing);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDrawing);
+
+    // Controls
+    document.getElementById('clear-sig').addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    document.getElementById('save-sig').addEventListener('click', () => {
+        const dataUrl = canvas.toDataURL();
+        const img = document.getElementById('sig-image');
+        img.src = dataUrl;
+        document.getElementById('sig-preview').style.display = 'block';
+    });
+
+    // Color Picker
+    document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            ctx.strokeStyle = btn.dataset.color;
+        });
+    });
+</script>

@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="components/navigation/drawer/drawer.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Navigation Drawer</h2>
+        <p class="text-body">Side navigation menu.</p>
+    </div>
+
+    <section class="glass-panel p-0 overflow-hidden">
+        <div class="drawer-container">
+            <!-- Drawer -->
+            <div class="drawer" id="demo-drawer">
+                <div class="drawer-header">
+                    <div class="avatar avatar-lg mb-md">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User">
+                    </div>
+                    <div class="drawer-title">Alex Morgan</div>
+                    <div class="drawer-subtitle">alex@example.com</div>
+                </div>
+                <div class="drawer-content">
+                    <a class="drawer-item active">
+                        <span class="material-icons-round">dashboard</span>
+                        Dashboard
+                    </a>
+                    <a class="drawer-item">
+                        <span class="material-icons-round">person</span>
+                        Profile
+                    </a>
+                    <a class="drawer-item">
+                        <span class="material-icons-round">settings</span>
+                        Settings
+                    </a>
+                    <div style="height: 1px; background: var(--glass-border); margin: 8px 0;"></div>
+                    <a class="drawer-item">
+                        <span class="material-icons-round">help</span>
+                        Help & Feedback
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scrim -->
+            <div class="drawer-scrim" id="demo-scrim"></div>
+
+            <!-- Main Content -->
+            <div class="p-xl">
+                <button class="btn btn-primary" id="toggle-drawer">
+                    <span class="material-icons-round">menu</span>
+                    Toggle Drawer
+                </button>
+                <p class="mt-md text-secondary">Click the button to open the navigation drawer.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        const drawer = document.getElementById('demo-drawer');
+        const scrim = document.getElementById('demo-scrim');
+        const toggleBtn = document.getElementById('toggle-drawer');
+
+        function openDrawer() {
+            drawer.classList.add('open');
+        }
+
+        function closeDrawer() {
+            drawer.classList.remove('open');
+        }
+
+        if (toggleBtn) toggleBtn.addEventListener('click', openDrawer);
+        if (scrim) scrim.addEventListener('click', closeDrawer);
+
+        // Close on item click
+        const items = drawer.querySelectorAll('.drawer-item');
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                items.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                closeDrawer();
+            });
+        });
+    })();
+</script>

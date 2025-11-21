@@ -1,0 +1,107 @@
+<link rel="stylesheet" href="components/feedback/confirmation-dialog/confirmation-dialog.css">
+
+<!-- Demo Triggers -->
+<div class="demo-controls">
+    <button class="btn btn-primary" onclick="showDialog('confirm')">Confirm (Warning)</button>
+    <button class="btn btn-secondary" onclick="showDialog('delete')">Delete (Danger)</button>
+    <button class="btn btn-ghost" onclick="showDialog('info')">Info (Blue)</button>
+    <button class="btn btn-outline" onclick="showDialog('success')">Success (Green)</button>
+</div>
+
+<!-- Confirmation Dialog (Warning) -->
+<div class="dialog-overlay" id="dialog-confirm">
+    <div class="dialog-container">
+        <div class="dialog-header">
+            <div class="dialog-icon warning">
+                <span class="material-icons-round">warning</span>
+            </div>
+            <div class="dialog-title">Unsaved Changes</div>
+        </div>
+        <div class="dialog-content">
+            You have unsaved changes. Are you sure you want to leave this page? Your changes will be lost.
+        </div>
+        <div class="dialog-actions">
+            <button class="btn btn-ghost" onclick="closeDialog('confirm')">Cancel</button>
+            <button class="btn btn-primary" onclick="closeDialog('confirm')">Leave Page</button>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Dialog (Danger) -->
+<div class="dialog-overlay" id="dialog-delete">
+    <div class="dialog-container">
+        <div class="dialog-header">
+            <div class="dialog-icon danger">
+                <span class="material-icons-round">delete</span>
+            </div>
+            <div class="dialog-title">Delete Account</div>
+        </div>
+        <div class="dialog-content">
+            Are you sure you want to delete your account? This action cannot be undone and all your data will be
+            permanently removed.
+        </div>
+        <div class="dialog-actions">
+            <button class="btn btn-ghost" onclick="closeDialog('delete')">Cancel</button>
+            <button class="btn btn-primary"
+                style="background: var(--danger-color); border-color: var(--danger-color); color: white;"
+                onclick="closeDialog('delete')">Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- Info Dialog (Info) -->
+<div class="dialog-overlay" id="dialog-info">
+    <div class="dialog-container">
+        <div class="dialog-header">
+            <div class="dialog-icon info">
+                <span class="material-icons-round">info</span>
+            </div>
+            <div class="dialog-title">Update Available</div>
+        </div>
+        <div class="dialog-content">
+            A new version of the application is available. Update now to get the latest features and security
+            improvements.
+        </div>
+        <div class="dialog-actions">
+            <button class="btn btn-ghost" onclick="closeDialog('info')">Later</button>
+            <button class="btn btn-primary" onclick="closeDialog('info')">Update Now</button>
+        </div>
+    </div>
+</div>
+
+<!-- Success Dialog (Success) -->
+<div class="dialog-overlay" id="dialog-success">
+    <div class="dialog-container">
+        <div class="dialog-header">
+            <div class="dialog-icon success">
+                <span class="material-icons-round">check_circle</span>
+            </div>
+            <div class="dialog-title">Payment Successful</div>
+        </div>
+        <div class="dialog-content">
+            Your payment has been processed successfully. A receipt has been sent to your email address.
+        </div>
+        <div class="dialog-actions">
+            <button class="btn btn-primary" onclick="closeDialog('success')">Done</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showDialog(id) {
+        document.getElementById('dialog-' + id).classList.add('active');
+    }
+
+    function closeDialog(id) {
+        document.getElementById('dialog-' + id).classList.remove('active');
+    }
+
+    // Close on overlay click
+    document.querySelectorAll('.dialog-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+            }
+        });
+    });
+</script>

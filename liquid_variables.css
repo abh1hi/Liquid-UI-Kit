@@ -1,0 +1,203 @@
+/* ==========================================
+   LIQUID GLASS THEME VARIABLES
+   Integrated with main theme system
+   ========================================== */
+
+:root {
+    /* Liquid Glass Core Variables */
+    --liquid-glass-base: rgba(255, 255, 255, 0.3);
+    --liquid-glass-tint: rgba(255, 255, 255, 0.25);
+    --liquid-glass-border: rgba(255, 255, 255, 0.5);
+    --liquid-glass-shine-1: rgba(255, 255, 255, 0.5);
+    --liquid-glass-shine-2: rgba(255, 255, 255, 0.5);
+    
+    /* Liquid Glass Effects */
+    --liquid-blur: 8px;
+    --liquid-saturate: 150%;
+    --liquid-distortion-scale: 10;
+    
+    /* Liquid Glass Light/Dark Reflex */
+    --liquid-reflex-light: 1;
+    --liquid-reflex-dark: 1;
+    
+    /* Liquid Glass Content Colors */
+    --liquid-content: var(--text-color);
+    --liquid-action: var(--primary-pastel);
+    --liquid-bg-overlay: var(--bg-color);
+    
+    /* Liquid Glass Shadows */
+    --liquid-shadow-sm: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    --liquid-shadow-md: 0 6px 16px 0px rgba(0, 0, 0, 0.08);
+    --liquid-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --liquid-shadow-inset-1: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    --liquid-shadow-inset-2: inset 2px 3px 0px -2px rgba(255, 255, 255, 0.9);
+    --liquid-shadow-inset-3: inset -2px -2px 0px -2px rgba(255, 255, 255, 0.8);
+    --liquid-shadow-inset-4: inset -3px -8px 1px -6px rgba(255, 255, 255, 0.6);
+    
+    /* Liquid Button */
+    --liquid-btn-bg: rgba(255, 255, 255, 0.05);
+    --liquid-btn-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    
+    /* Liquid Card */
+    --liquid-card-bg: rgba(255, 255, 255, 0.3);
+    --liquid-card-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+    
+    /* Liquid Switcher */
+    --liquid-switcher-bg: rgba(187, 187, 188, 0.12);
+    --liquid-switcher-indicator: rgba(187, 187, 188, 0.36);
+    
+    /* Animation */
+    --liquid-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+    --liquid-transition-fast: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.5);
+    --liquid-ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Dark Mode Liquid Glass Variables */
+[data-theme="dark"],
+body:has(input[value="dark"]:checked),
+body.dark-mode {
+    --liquid-glass-base: rgba(255, 255, 255, 0.05);
+    --liquid-glass-tint: rgba(255, 255, 255, 0.08);
+    --liquid-glass-border: rgba(255, 255, 255, 0.1);
+    --liquid-glass-shine-1: rgba(255, 255, 255, 0.15);
+    --liquid-glass-shine-2: rgba(255, 255, 255, 0.15);
+    
+    --liquid-blur: 12px;
+    --liquid-saturate: 200%;
+    
+    --liquid-reflex-light: 0.3;
+    --liquid-reflex-dark: 2;
+    
+    --liquid-shadow-sm: 0 1px 5px 0px rgba(0, 0, 0, 0.3);
+    --liquid-shadow-md: 0 6px 16px 0px rgba(0, 0, 0, 0.4);
+    --liquid-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+    
+    --liquid-btn-bg: rgba(255, 255, 255, 0.05);
+    --liquid-card-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* Dim/Oceanic Theme */
+body:has(input[value="dim"]:checked),
+[data-theme="oceanic"] {
+    --liquid-glass-base: rgba(153, 222, 255, 0.12);
+    --liquid-glass-tint: rgba(255, 72, 169, 0.15);
+    --liquid-glass-border: rgba(255, 72, 169, 0.3);
+    --liquid-glass-shine-1: rgba(153, 222, 255, 0.4);
+    --liquid-glass-shine-2: rgba(255, 72, 169, 0.4);
+    
+    --liquid-blur: 10px;
+    --liquid-saturate: 200%;
+    
+    --liquid-reflex-light: 0.7;
+    --liquid-reflex-dark: 2;
+    
+    --liquid-action: #ff48a9;
+}
+
+/* Sunset Theme */
+[data-theme="sunset"] {
+    --liquid-glass-base: rgba(255, 171, 145, 0.2);
+    --liquid-glass-tint: rgba(255, 204, 188, 0.25);
+    --liquid-glass-border: rgba(255, 171, 145, 0.4);
+    --liquid-action: var(--tertiary-pastel);
+}
+
+/* Forest Theme */
+[data-theme="forest"] {
+    --liquid-glass-base: rgba(165, 214, 167, 0.2);
+    --liquid-glass-tint: rgba(200, 230, 201, 0.25);
+    --liquid-glass-border: rgba(165, 214, 167, 0.4);
+    --liquid-action: var(--primary-pastel);
+}
+
+/* ==========================================
+   LIQUID GLASS MIXINS & UTILITIES
+   ========================================== */
+
+/* Base Liquid Glass Effect */
+.liquid-glass-base {
+    background: var(--liquid-glass-base);
+    backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    border: 1px solid var(--liquid-glass-border);
+    box-shadow: var(--liquid-shadow-lg);
+}
+
+/* Liquid Glass with Advanced Reflections */
+.liquid-glass-advanced {
+    background-color: var(--liquid-glass-base);
+    backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(var(--liquid-saturate));
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, white calc(var(--liquid-reflex-light) * 10%), transparent),
+        inset 2px 3px 0px -2px color-mix(in srgb, white calc(var(--liquid-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, white calc(var(--liquid-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, white calc(var(--liquid-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, black calc(var(--liquid-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, black calc(var(--liquid-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, black calc(var(--liquid-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, black calc(var(--liquid-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, black calc(var(--liquid-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, black calc(var(--liquid-reflex-dark) * 8%), transparent);
+}
+
+/* Liquid Glass Animations */
+@keyframes liquidPulse {
+    0%, 100% {
+        filter: url(#glass-distortion) brightness(1);
+    }
+    50% {
+        filter: url(#glass-distortion) brightness(1.1);
+    }
+}
+
+@keyframes liquidScale {
+    0% {
+        scale: 1 1;
+    }
+    50% {
+        scale: 1.1 1;
+    }
+    100% {
+        scale: 1 1;
+    }
+}
+
+@keyframes liquidScaleX {
+    0% {
+        scale: 1 1;
+    }
+    50% {
+        scale: 1.2 1;
+    }
+    100% {
+        scale: 1 1;
+    }
+}
+
+@keyframes liquidGlow {
+    0%, 100% {
+        box-shadow: 
+            0 0 10px color-mix(in srgb, var(--liquid-action) 20%, transparent),
+            0 0 20px color-mix(in srgb, var(--liquid-action) 10%, transparent);
+    }
+    50% {
+        box-shadow: 
+            0 0 20px color-mix(in srgb, var(--liquid-action) 40%, transparent),
+            0 0 40px color-mix(in srgb, var(--liquid-action) 20%, transparent);
+    }
+}
+
+/* Liquid Hover Effect */
+.liquid-hover {
+    transition: var(--liquid-transition);
+}
+
+.liquid-hover:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.liquid-hover:active {
+    transform: scale(0.95);
+}

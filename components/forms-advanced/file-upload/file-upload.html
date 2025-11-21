@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="components/forms-advanced/file-upload/file-upload.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">File Upload</h2>
+        <p class="text-body">Drag and drop file selection.</p>
+    </div>
+
+    <section class="glass-panel p-md">
+        <div class="file-upload-area" id="drop-zone">
+            <input type="file" class="file-input" multiple id="file-input">
+            <span class="material-icons-round upload-icon">cloud_upload</span>
+            <h3 class="upload-text">Click or Drag files here</h3>
+            <p class="upload-hint">Supports JPG, PNG, PDF up to 10MB</p>
+        </div>
+
+        <div class="file-list" id="file-list">
+            <!-- Example File Item -->
+            <div class="file-item">
+                <span class="material-icons-round file-icon">description</span>
+                <div class="file-info">
+                    <span class="file-name">document-v1.pdf</span>
+                    <span class="file-size">2.4 MB</span>
+                </div>
+                <button class="file-remove">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+
+        // Drag effects
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+            });
+        });
+
+        // Handle Files
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.innerHTML = `
+                    <span class="material-icons-round file-icon">insert_drive_file</span>
+                    <div class="file-info">
+                        <span class="file-name">${file.name}</span>
+                        <span class="file-size">${(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                    </div>
+                    <button class="file-remove">
+                        <span class="material-icons-round">close</span>
+                    </button>
+                `;
+
+                item.querySelector('.file-remove').addEventListener('click', () => {
+                    item.remove();
+                });
+
+                fileList.appendChild(item);
+            });
+        }
+
+        dropZone.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+    })();
+</script>

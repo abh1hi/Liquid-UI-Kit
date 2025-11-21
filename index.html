@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Component Playground</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+    <div class="playground-container">
+        <!-- Mobile Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">Liquid UI</h1>
+            </div>
+            <nav class="sidebar-content" id="sidebar-nav">
+                <!-- Navigation items will be injected here by JS -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="flex items-center gap-md">
+                    <button id="mobile-menu-btn" class="icon-btn md:hidden">
+                        <span class="material-icons-round">menu</span>
+                    </button>
+                    <h2 id="current-component-title">Dashboard</h2>
+                </div>
+
+                <div class="theme-controls">
+                    <div class="control-group">
+                        <label class="text-caption">Theme</label>
+                        <select id="theme-select" class="select-input">
+                            <option value="default">Pastel (Default)</option>
+                            <option value="oceanic">Oceanic</option>
+                            <option value="sunset">Sunset</option>
+                            <option value="forest">Forest</option>
+                            <option value="dark">Dark Mode</option>
+                        </select>
+                    </div>
+                    <button id="toggle-mode" class="icon-btn" title="Toggle Dark Mode">
+                        <span class="material-icons-round">dark_mode</span>
+                    </button>
+                    <button id="customize-btn" class="icon-btn" title="Customize Theme">
+                        <span class="material-icons-round">palette</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Theme Customizer Panel -->
+            <div class="customizer-panel" id="customizer-panel">
+                <div class="customizer-header">
+                    <h3 class="text-lg font-bold">Theme Customizer</h3>
+                    <button id="close-customizer" class="icon-btn sm">
+                        <span class="material-icons-round">close</span>
+                    </button>
+                </div>
+                <div class="customizer-content">
+                    <div class="control-group-vertical">
+                        <label>Primary Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="custom-primary" value="#d3e3fd">
+                            <input type="text" id="custom-primary-text" value="#d3e3fd" class="text-input sm">
+                        </div>
+                    </div>
+                    <div class="control-group-vertical">
+                        <label>Secondary Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="custom-secondary" value="#c4eed0">
+                            <input type="text" id="custom-secondary-text" value="#c4eed0" class="text-input sm">
+                        </div>
+                    </div>
+                    <div class="control-group-vertical">
+                        <label>Background Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="custom-bg" value="#f8fdff">
+                            <input type="text" id="custom-bg-text" value="#f8fdff" class="text-input sm">
+                        </div>
+                    </div>
+                    <div class="control-group-vertical">
+                        <label>Text Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="custom-text" value="#1c1b1f">
+                            <input type="text" id="custom-text-text" value="#1c1b1f" class="text-input sm">
+                        </div>
+                    </div>
+
+                    <div class="customizer-actions">
+                        <button id="apply-theme" class="btn btn-primary full-width">Apply Changes</button>
+                        <button id="save-theme" class="btn btn-secondary full-width">Save as New Theme</button>
+                        <button id="export-theme" class="btn btn-outline full-width">Export CSS</button>
+                        <button id="reset-theme" class="btn btn-ghost full-width">Reset to Default</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-area">
+                <div id="component-stage" class="component-stage">
+                    <!-- Component will be rendered here -->
+                    <div class="text-center">
+                        <h3 class="text-h2 mb-md">Welcome to UI Kit</h3>
+                        <p class="text-body">Select a component from the sidebar to view it.</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Component Playground</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+    <div class="playground-container">
+        <!-- Mobile Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">Liquid UI</h1>
+            </div>
+            <nav class="sidebar-content" id="sidebar-nav">
+                <!-- Navigation items will be injected here by JS -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="flex items-center gap-md">
+                    <button id="mobile-menu-btn" class="icon-btn md:hidden">
+                        <span class="material-icons-round">menu</span>
+                    </button>
+                    <h2 id="current-component-title">Dashboard</h2>
+                </div>
+
+                <div class="theme-controls">
+                    <div class="control-group">
+                        <label class="text-caption">Theme</label>
+                        <select id="theme-select" class="select-input">
+                            <option value="default">Pastel (Default)</option>
+                            <option value="oceanic">Oceanic</option>
+                            <option value="sunset">Sunset</option>
+                            <option value="forest">Forest</option>
+                            <option value="dark">Dark Mode</option>
+                        </select>
+                    </div>
+                    <button id="toggle-mode" class="icon-btn" title="Toggle Dark Mode">
+                        <span class="material-icons-round">dark_mode</span>
+                    </button>
+                    <button id="customize-btn" class="icon-btn" title="Customize Theme">
+                        <span class="material-icons-round">palette</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Theme Customizer Panel -->
+            <div class="customizer-panel" id="customizer-panel">
+                <div class="customizer-header">
+                    <h3 class="text-lg font-bold">Theme Customizer</h3>
+                    <button id="close-customizer" class="icon-btn sm">
+                        <span class="material-icons-round">close</span>
+                    </button>
+                </div>
+                <div class="customizer-content">
+                    <div class="control-group-vertical">
+                        <label>Primary Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="custom-primary" value="#d3e3fd">
+                            <input type="text" id="custom-primary-text" value="#d3e3fd" class="text-input sm">
+                        </div>
+                    </div>
+                    <div class="control-group-vertical">
+                        <label>Secondary Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="custom-secondary" value="#c4eed0">
+                            <input type="text" id="custom-secondary-text" value="#c4eed0" class="text-input sm">
+                        </div>
+                    </div>
+                    <div class="control-group-vertical">
+                        <label>Background Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="custom-bg" value="#f8fdff">
+                            <input type="text" id="custom-bg-text" value="#f8fdff" class="text-input sm">
+                        </div>
+                    </div>
+                    <div class="control-group-vertical">
+                        <label>Text Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="custom-text" value="#1c1b1f">
+                            <input type="text" id="custom-text-text" value="#1c1b1f" class="text-input sm">
+                        </div>
+                    </div>
+
+                    <div class="customizer-actions">
+                        <button id="apply-theme" class="btn btn-primary full-width">Apply Changes</button>
+                        <button id="save-theme" class="btn btn-secondary full-width">Save as New Theme</button>
+                        <button id="export-theme" class="btn btn-outline full-width">Export CSS</button>
+                        <button id="reset-theme" class="btn btn-ghost full-width">Reset to Default</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-area">
+                <div id="component-stage" class="component-stage">
+                    <!-- Component will be rendered here -->
+                    <div class="text-center">
+                        <h3 class="text-h2 mb-md">Welcome to UI Kit</h3>
+                        <p class="text-body">Select a component from the sidebar to view it.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme-manager.js"></script>
+    <script src="js/app.js?v=2"></script>
+</body>
+
+</html>

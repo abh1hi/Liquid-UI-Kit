@@ -1,0 +1,82 @@
+/* Lists */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    transition: background 0.2s;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.list-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.list-item-content {
+    flex: 1;
+}
+
+.list-item-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 4px;
+}
+
+.list-item-subtitle {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+}
+
+.list-item-start,
+.list-item-end {
+    display: flex;
+    align-items: center;
+    color: var(--text-tertiary);
+}
+
+/* Expandable List Variant */
+.list-expandable .list-item {
+    cursor: pointer;
+}
+
+.list-expandable .list-item.expanded {
+    background: rgba(var(--primary-rgb), 0.05);
+}
+
+.list-expandable .list-item-body {
+    display: none;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.02);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    border-top: 1px solid var(--glass-border);
+}
+
+.list-expandable .list-item.expanded+.list-item-body {
+    display: block;
+    animation: slide-down 0.3s var(--ease-out);
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

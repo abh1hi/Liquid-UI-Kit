@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="components/data-display/countdown/countdown.css">
+<!-- Digital -->
+<div class="countdown-digital">
+    <div class="digit-group">
+        <div class="digit-value" id="d-days">00</div>
+        <div class="digit-label">Days</div>
+    </div>
+    <div class="separator">:</div>
+    <div class="digit-group">
+        <div class="digit-value" id="d-hours">00</div>
+        <div class="digit-label">Hours</div>
+    </div>
+    <div class="separator">:</div>
+    <div class="digit-group">
+        <div class="digit-value" id="d-mins">00</div>
+        <div class="digit-label">Minutes</div>
+    </div>
+    <div class="separator">:</div>
+    <div class="digit-group">
+        <div class="digit-value" id="d-secs">00</div>
+        <div class="digit-label">Seconds</div>
+    </div>
+</div>
+
+<!-- Circular -->
+<div class="countdown-circles">
+    <div class="circle-item">
+        <svg class="circle-svg">
+            <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="circle-progress" id="c-days-prog" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="circle-content">
+            <div class="circle-value" id="c-days">00</div>
+            <div class="circle-label">Days</div>
+        </div>
+    </div>
+    <div class="circle-item">
+        <svg class="circle-svg">
+            <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="circle-progress" id="c-hours-prog" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="circle-content">
+            <div class="circle-value" id="c-hours">00</div>
+            <div class="circle-label">Hours</div>
+        </div>
+    </div>
+    <div class="circle-item">
+        <svg class="circle-svg">
+            <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="circle-progress" id="c-mins-prog" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="circle-content">
+            <div class="circle-value" id="c-mins">00</div>
+            <div class="circle-label">Minutes</div>
+        </div>
+    </div>
+    <div class="circle-item">
+        <svg class="circle-svg">
+            <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="circle-progress" id="c-secs-prog" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="circle-content">
+            <div class="circle-value" id="c-secs">00</div>
+            <div class="circle-label">Seconds</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Set target date to 2 days from now
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 2);
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            // Expired
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Update Digital
+        document.getElementById('d-days').textContent = String(days).padStart(2, '0');
+        document.getElementById('d-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('d-mins').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('d-secs').textContent = String(seconds).padStart(2, '0');
+
+        // Update Circular
+        updateCircle('c-days', days, 30); // Max 30 days
+        updateCircle('c-hours', hours, 24);
+        updateCircle('c-mins', minutes, 60);
+        updateCircle('c-secs', seconds, 60);
+    }
+
+    function updateCircle(id, value, max) {
+        document.getElementById(id).textContent = String(value).padStart(2, '0');
+
+        const circle = document.getElementById(id + '-prog');
+        const circumference = 283;
+        const offset = circumference - (value / max) * circumference;
+        circle.style.strokeDashoffset = offset;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>

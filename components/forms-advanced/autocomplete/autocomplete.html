@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="components/forms-advanced/autocomplete/autocomplete.css">
+
+<div class="autocomplete-wrapper">
+    <div class="input-group">
+        <span class="material-icons-round search-icon">search</span>
+        <input type="text" class="autocomplete-input" placeholder="Search countries..." id="country-input">
+        <div class="input-actions">
+            <div class="input-spinner" id="spinner"></div>
+            <button class="clear-btn" id="clear-btn" title="Clear">
+                <span class="material-icons-round">close</span>
+            </button>
+        </div>
+    </div>
+    <div class="suggestions-list" id="suggestions"></div>
+</div>
+
+<div class="mt-lg">
+    <p>Selected: <span id="selection-result" class="text-primary font-bold">-</span></p>
+</div>
+
+<script>
+    const countries = [
+        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+        "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia",
+        "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
+        "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia",
+        "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
+        "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+        "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia",
+        "Fiji", "Finland", "France",
+        "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guyana",
+        "Haiti", "Honduras", "Hungary",
+        "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast",
+        "Jamaica", "Japan", "Jordan",
+        "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan",
+        "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+        "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar",
+        "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway",
+        "Oman",
+        "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
+        "Qatar",
+        "Romania", "Russia", "Rwanda",
+        "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria",
+        "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+        "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan",
+        "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
+        "Yemen",
+        "Zambia", "Zimbabwe"
+    ];
+
+    const input = document.getElementById('country-input');
+    const list = document.getElementById('suggestions');
+    const spinner = document.getElementById('spinner');
+    const result = document.getElementById('selection-result');
+    const clearBtn = document.getElementById('clear-btn');
+
+    let timeoutId;
+
+    input.addEventListener('input', (e) => {
+        const value = e.target.value;
+
+        // Toggle clear button
+        if (value) {
+            clearBtn.classList.add('visible');
+        } else {
+            clearBtn.classList.remove('visible');
+        }
+
+        // Clear previous timeout
+        clearTimeout(timeoutId);
+
+        if (!value) {
+            list.classList.remove('active');
+            return;
+        }
+
+        // Simulate network delay
+        spinner.classList.add('active');
+        clearBtn.style.display = 'none'; // Hide clear btn while loading
+
+        timeoutId = setTimeout(() => {
+            const matches = countries.filter(country =>
+                country.toLowerCase().includes(value.toLowerCase())
+            );
+
+            renderSuggestions(matches, value);
+            spinner.classList.remove('active');
+            clearBtn.style.display = ''; // Show clear btn again
+        }, 300);
+    });
+
+    // Clear button logic
+    clearBtn.addEventListener('click', () => {
+        input.value = '';
+        list.classList.remove('active');
+        clearBtn.classList.remove('visible');
+        input.focus();
+    });
+
+    function renderSuggestions(matches, query) {
+        if (matches.length === 0) {
+            list.innerHTML = '<div class="no-results">No results found</div>';
+        } else {
+            list.innerHTML = matches.map(country => {
+                // Highlight match
+                const regex = new RegExp(`(${query})`, 'gi');
+                const highlighted = country.replace(regex, '<span class="highlight">$1</span>');
+
+                return `
+                <div class="suggestion-item" onclick="selectCountry('${country}')">
+                    <span class="material-icons-round suggestion-icon">public</span>
+                    <span>${highlighted}</span>
+                </div>
+            `;
+            }).join('');
+        }
+
+        list.classList.add('active');
+    }
+
+    function selectCountry(country) {
+        input.value = country;
+        list.classList.remove('active');
+        result.textContent = country;
+        clearBtn.classList.add('visible');
+    }
+
+    // Close list when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.autocomplete-wrapper')) {
+            list.classList.remove('active');
+        }
+    });
+</script>

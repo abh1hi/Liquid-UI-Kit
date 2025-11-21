@@ -1,0 +1,108 @@
+/* Dialog Overlay */
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease-out);
+}
+
+.dialog-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Dialog Container */
+.dialog-container {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95) translateY(10px);
+    transition: all 0.3s var(--ease-out);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.dialog-overlay.active .dialog-container {
+    transform: scale(1) translateY(0);
+}
+
+/* Dialog Header */
+.dialog-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.dialog-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.dialog-icon.warning {
+    background: rgba(249, 171, 0, 0.1);
+    color: var(--warning-color);
+}
+
+.dialog-icon.danger {
+    background: rgba(179, 38, 30, 0.1);
+    color: var(--danger-color);
+}
+
+.dialog-icon.info {
+    background: rgba(0, 99, 155, 0.1);
+    color: var(--info-color);
+}
+
+.dialog-icon.success {
+    background: rgba(20, 108, 46, 0.1);
+    color: var(--success-color);
+}
+
+.dialog-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color);
+}
+
+/* Dialog Content */
+.dialog-content {
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Dialog Actions */
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+}
+
+/* Demo Controls */
+.demo-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl);
+    background: var(--glass-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    flex-wrap: wrap;
+}

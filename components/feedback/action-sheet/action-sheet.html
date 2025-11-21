@@ -1,0 +1,114 @@
+<link rel="stylesheet" href="components/feedback/action-sheet/action-sheet.css">
+
+<!-- Demo Trigger -->
+<div class="demo-controls">
+    <button class="btn btn-primary" onclick="showSheet('share')">Share (Grid)</button>
+    <button class="btn btn-secondary" onclick="showSheet('profile')">Profile (List)</button>
+    <button class="btn btn-ghost" onclick="showSheet('more')">More Actions</button>
+</div>
+
+<!-- Share Sheet (Grid Variation) -->
+<div class="sheet-overlay" id="sheet-share">
+    <div class="action-sheet">
+        <div class="sheet-header">
+            <div class="sheet-title">Share Content</div>
+            <div class="sheet-subtitle">Select how you want to share</div>
+        </div>
+        <div class="action-grid">
+            <button class="action-grid-item" onclick="closeSheet('share')">
+                <div class="action-grid-icon">
+                    <span class="material-icons-round">content_copy</span>
+                </div>
+                <span class="action-grid-label">Copy</span>
+            </button>
+            <button class="action-grid-item" onclick="closeSheet('share')">
+                <div class="action-grid-icon">
+                    <span class="material-icons-round">email</span>
+                </div>
+                <span class="action-grid-label">Email</span>
+            </button>
+            <button class="action-grid-item" onclick="closeSheet('share')">
+                <div class="action-grid-icon">
+                    <span class="material-icons-round">message</span>
+                </div>
+                <span class="action-grid-label">Message</span>
+            </button>
+            <button class="action-grid-item" onclick="closeSheet('share')">
+                <div class="action-grid-icon">
+                    <span class="material-icons-round">share</span>
+                </div>
+                <span class="action-grid-label">More</span>
+            </button>
+        </div>
+        <button class="sheet-cancel" onclick="closeSheet('share')">Cancel</button>
+    </div>
+</div>
+
+<!-- Profile Sheet (List Variation) -->
+<div class="sheet-overlay" id="sheet-profile">
+    <div class="action-sheet">
+        <div class="action-list">
+            <button class="action-item primary" onclick="closeSheet('profile')">
+                <span class="material-icons-round">edit</span>
+                Edit Profile
+            </button>
+            <button class="action-item" onclick="closeSheet('profile')">
+                <span class="material-icons-round">settings</span>
+                Settings
+            </button>
+            <button class="action-item" onclick="closeSheet('profile')">
+                <span class="material-icons-round">help</span>
+                Help & Support
+            </button>
+            <div style="height: 1px; background: var(--glass-border); margin: 8px 0;"></div>
+            <button class="action-item danger" onclick="closeSheet('profile')">
+                <span class="material-icons-round">logout</span>
+                Log Out
+            </button>
+        </div>
+        <button class="sheet-cancel" onclick="closeSheet('profile')">Cancel</button>
+    </div>
+</div>
+
+<!-- More Actions Sheet -->
+<div class="sheet-overlay" id="sheet-more">
+    <div class="action-sheet">
+        <div class="sheet-header">
+            <div class="sheet-title">More Actions</div>
+        </div>
+        <div class="action-list">
+            <button class="action-item" onclick="closeSheet('more')">
+                <span class="material-icons-round">visibility_off</span>
+                Hide this post
+            </button>
+            <button class="action-item" onclick="closeSheet('more')">
+                <span class="material-icons-round">flag</span>
+                Report
+            </button>
+            <button class="action-item" onclick="closeSheet('more')">
+                <span class="material-icons-round">block</span>
+                Block User
+            </button>
+        </div>
+        <button class="sheet-cancel" onclick="closeSheet('more')">Cancel</button>
+    </div>
+</div>
+
+<script>
+    function showSheet(id) {
+        document.getElementById('sheet-' + id).classList.add('active');
+    }
+
+    function closeSheet(id) {
+        document.getElementById('sheet-' + id).classList.remove('active');
+    }
+
+    // Close on overlay click
+    document.querySelectorAll('.sheet-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+            }
+        });
+    });
+</script>

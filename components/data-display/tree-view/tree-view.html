@@ -1,0 +1,272 @@
+<style>
+    /* Tree View Container */
+    .tree-view-demo {
+        padding: var(--spacing-xl);
+        background: var(--glass-bg);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--glass-border);
+        max-width: 400px;
+    }
+
+    .tree-view {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tree-item {
+        margin: 2px 0;
+    }
+
+    /* Tree Content Row */
+    .tree-content {
+        display: flex;
+        align-items: center;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: all 0.2s var(--ease-out);
+        color: var(--text-color);
+        user-select: none;
+    }
+
+    .tree-content:hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    .tree-content.selected {
+        background: var(--primary-pastel);
+        color: var(--primary-text);
+    }
+
+    /* Toggle Icon */
+    .tree-toggle {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 4px;
+        color: var(--text-secondary);
+        transition: transform 0.2s var(--ease-out);
+    }
+
+    .tree-item.expanded>.tree-content>.tree-toggle {
+        transform: rotate(90deg);
+    }
+
+    .tree-toggle.hidden {
+        visibility: hidden;
+    }
+
+    /* Item Icon */
+    .tree-icon {
+        margin-right: var(--spacing-sm);
+        font-size: 20px;
+        color: var(--text-secondary);
+    }
+
+    .tree-content.selected .tree-icon {
+        color: var(--primary-text);
+    }
+
+    .folder-icon {
+        color: #fbc02d;
+    }
+
+    .file-icon {
+        color: #90caf9;
+    }
+
+    /* Label */
+    .tree-label {
+        font-size: var(--text-sm);
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Nested List */
+    .tree-children {
+        list-style: none;
+        padding-left: 28px;
+        margin: 0;
+        display: none;
+        overflow: hidden;
+    }
+
+    .tree-item.expanded>.tree-children {
+        display: block;
+        animation: slideDown 0.2s ease-out;
+    }
+
+    /* Checkbox Variant */
+    .tree-checkbox {
+        margin-right: var(--spacing-sm);
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--text-secondary);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+
+    .tree-checkbox.checked {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .tree-checkbox.checked::after {
+        content: 'check';
+        font-family: 'Material Icons Round';
+        font-size: 12px;
+        color: white;
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="tree-view-demo">
+    <ul class="tree-view">
+        <!-- Project Root -->
+        <li class="tree-item expanded">
+            <div class="tree-content">
+                <span class="tree-toggle material-icons-round">chevron_right</span>
+                <span class="tree-icon material-icons-round folder-icon">folder</span>
+                <span class="tree-label">My Project</span>
+            </div>
+            <ul class="tree-children">
+                <!-- src folder -->
+                <li class="tree-item">
+                    <div class="tree-content">
+                        <span class="tree-toggle material-icons-round">chevron_right</span>
+                        <span class="tree-icon material-icons-round folder-icon">folder</span>
+                        <span class="tree-label">src</span>
+                    </div>
+                    <ul class="tree-children">
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <span class="tree-toggle hidden"></span>
+                                <span class="tree-icon material-icons-round file-icon">description</span>
+                                <span class="tree-label">app.js</span>
+                            </div>
+                        </li>
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <span class="tree-toggle hidden"></span>
+                                <span class="tree-icon material-icons-round file-icon">description</span>
+                                <span class="tree-label">index.html</span>
+                            </div>
+                        </li>
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <span class="tree-toggle hidden"></span>
+                                <span class="tree-icon material-icons-round file-icon">palette</span>
+                                <span class="tree-label">styles.css</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- components folder -->
+                <li class="tree-item expanded">
+                    <div class="tree-content">
+                        <span class="tree-toggle material-icons-round">chevron_right</span>
+                        <span class="tree-icon material-icons-round folder-icon">folder</span>
+                        <span class="tree-label">components</span>
+                    </div>
+                    <ul class="tree-children">
+                        <li class="tree-item">
+                            <div class="tree-content selected">
+                                <span class="tree-toggle hidden"></span>
+                                <span class="tree-icon material-icons-round file-icon">widgets</span>
+                                <span class="tree-label">Button.js</span>
+                            </div>
+                        </li>
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <span class="tree-toggle hidden"></span>
+                                <span class="tree-icon material-icons-round file-icon">widgets</span>
+                                <span class="tree-label">Card.js</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- assets folder -->
+                <li class="tree-item">
+                    <div class="tree-content">
+                        <span class="tree-toggle material-icons-round">chevron_right</span>
+                        <span class="tree-icon material-icons-round folder-icon">folder</span>
+                        <span class="tree-label">assets</span>
+                    </div>
+                    <ul class="tree-children">
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <span class="tree-toggle hidden"></span>
+                                <span class="tree-icon material-icons-round file-icon">image</span>
+                                <span class="tree-label">logo.png</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- root files -->
+                <li class="tree-item">
+                    <div class="tree-content">
+                        <span class="tree-toggle hidden"></span>
+                        <span class="tree-icon material-icons-round file-icon">settings</span>
+                        <span class="tree-label">package.json</span>
+                    </div>
+                </li>
+                <li class="tree-item">
+                    <div class="tree-content">
+                        <span class="tree-toggle hidden"></span>
+                        <span class="tree-icon material-icons-round file-icon">info</span>
+                        <span class="tree-label">README.md</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script>
+    document.querySelectorAll('.tree-content').forEach(content => {
+        content.addEventListener('click', (e) => {
+            const item = content.parentElement;
+            const toggle = content.querySelector('.tree-toggle');
+
+            // Toggle expansion if it has children (toggle icon is not hidden)
+            if (!toggle.classList.contains('hidden')) {
+                item.classList.toggle('expanded');
+
+                // Update folder icon
+                const icon = content.querySelector('.folder-icon');
+                if (icon) {
+                    icon.textContent = item.classList.contains('expanded') ? 'folder_open' : 'folder';
+                }
+            }
+
+            // Selection logic
+            document.querySelectorAll('.tree-content').forEach(c => c.classList.remove('selected'));
+            content.classList.add('selected');
+
+            e.stopPropagation();
+        });
+    });
+</script>

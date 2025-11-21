@@ -1,0 +1,98 @@
+/* Tabs */
+.tabs-container {
+    width: 100%;
+}
+
+.tabs-header {
+    display: flex;
+    gap: var(--spacing-md);
+    border-bottom: 1px solid var(--glass-border);
+    position: relative;
+}
+
+.tab-item {
+    padding: 12px 16px;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.tab-item:hover {
+    color: var(--text-color);
+}
+
+.tab-item.active {
+    color: var(--primary-text);
+}
+
+/* Animated Underline */
+.tab-indicator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: var(--primary-pastel);
+    transition: all 0.3s var(--ease-elastic);
+    border-radius: 2px 2px 0 0;
+}
+
+/* Tab Content */
+.tab-content {
+    padding: var(--spacing-md) 0;
+    display: none;
+    animation: fade-in 0.3s var(--ease-out);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Pill Tabs Variant */
+.tabs-pills {
+    display: inline-flex;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px;
+    border-radius: var(--radius-full);
+    position: relative;
+}
+
+.tab-pill {
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s;
+}
+
+.tab-pill.active {
+    color: var(--primary-text);
+}
+
+.pill-indicator {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 0;
+    background: #fff;
+    border-radius: var(--radius-full);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s var(--ease-elastic);
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="components/ecommerce/cart/cart.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Shopping Cart</h2>
+        <p class="text-body">Responsive cart layout with quantity controls.</p>
+    </div>
+
+    <div class="cart-container">
+        <div class="cart-header">
+            <h3 class="text-h3">Your Cart (3 items)</h3>
+            <button class="btn btn-ghost text-sm text-danger">Clear Cart</button>
+        </div>
+
+        <div class="cart-items">
+            <!-- Item 1 -->
+            <div class="cart-item">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80"
+                    alt="Product" class="cart-item-image">
+                <div class="cart-item-details">
+                    <div class="cart-item-title">Nike Air Max 270</div>
+                    <div class="cart-item-meta">Size: 10 | Color: Red</div>
+                    <div class="text-primary font-bold mt-1">$129.99</div>
+                </div>
+                <div class="cart-item-actions">
+                    <div class="quantity-control">
+                        <div class="qty-btn">-</div>
+                        <input type="text" value="1" class="qty-input" readonly>
+                        <div class="qty-btn">+</div>
+                    </div>
+                    <button class="icon-btn text-danger">
+                        <span class="material-icons-round">delete_outline</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="cart-item">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80"
+                    alt="Product" class="cart-item-image">
+                <div class="cart-item-details">
+                    <div class="cart-item-title">Minimalist Watch</div>
+                    <div class="cart-item-meta">Color: Black</div>
+                    <div class="text-primary font-bold mt-1">$89.00</div>
+                </div>
+                <div class="cart-item-actions">
+                    <div class="quantity-control">
+                        <div class="qty-btn">-</div>
+                        <input type="text" value="1" class="qty-input" readonly>
+                        <div class="qty-btn">+</div>
+                    </div>
+                    <button class="icon-btn text-danger">
+                        <span class="material-icons-round">delete_outline</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-summary-row">
+                <span>Subtotal</span>
+                <span>$218.99</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Shipping</span>
+                <span>$15.00</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Tax</span>
+                <span>$18.50</span>
+            </div>
+            <div class="cart-total">
+                <span>Total</span>
+                <span>$252.49</span>
+            </div>
+            <button class="btn btn-primary w-full mt-lg">Proceed to Checkout</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,167 @@
+<link rel="stylesheet" href="components/feedback/bottom-sheet/bottom-sheet.css">
+
+<!-- Demo Controls -->
+<div class="demo-controls">
+    <button class="btn btn-primary" onclick="openSheet('sheet-basic')">Basic Sheet</button>
+    <button class="btn btn-secondary" onclick="openSheet('sheet-list')">List Menu</button>
+    <button class="btn btn-ghost" onclick="openSheet('sheet-grid')">Grid Actions</button>
+    <button class="btn btn-outline" onclick="openSheet('sheet-modal')">Modal Style</button>
+</div>
+
+<!-- Basic Bottom Sheet -->
+<div class="bottom-sheet-overlay" id="sheet-basic">
+    <div class="bottom-sheet">
+        <div class="sheet-handle-bar">
+            <div class="sheet-handle"></div>
+        </div>
+        <div class="sheet-content-header">
+            <div class="sheet-content-title">Information</div>
+            <button class="btn-close-sheet" onclick="closeSheet('sheet-basic')">
+                <span class="material-icons-round">close</span>
+            </button>
+        </div>
+        <div class="sheet-body">
+            <p style="margin-bottom: var(--spacing-lg); color: var(--text-secondary); line-height: 1.6;">
+                This is a standard bottom sheet. It slides up from the bottom and covers a portion of the screen.
+                It's great for showing details, long descriptions, or supplementary content that doesn't require a full
+                page transition.
+            </p>
+            <div class="p-md" style="background: rgba(0,0,0,0.02); border-radius: var(--radius-md);">
+                <h4 style="margin-bottom: 8px;">Did you know?</h4>
+                <p style="font-size: var(--text-sm); color: var(--text-secondary);">
+                    Bottom sheets are ergonomically superior on mobile devices because they appear within easy reach of
+                    the thumb.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- List Menu Bottom Sheet -->
+<div class="bottom-sheet-overlay" id="sheet-list">
+    <div class="bottom-sheet">
+        <div class="sheet-handle-bar">
+            <div class="sheet-handle"></div>
+        </div>
+        <div class="sheet-content-header">
+            <div class="sheet-content-title">Actions</div>
+            <button class="btn-close-sheet" onclick="closeSheet('sheet-list')">
+                <span class="material-icons-round">close</span>
+            </button>
+        </div>
+        <div class="sheet-body">
+            <div class="sheet-list">
+                <div class="sheet-list-item">
+                    <span class="material-icons-round sheet-list-icon">share</span>
+                    <span>Share</span>
+                </div>
+                <div class="sheet-list-item">
+                    <span class="material-icons-round sheet-list-icon">link</span>
+                    <span>Copy Link</span>
+                </div>
+                <div class="sheet-list-item">
+                    <span class="material-icons-round sheet-list-icon">edit</span>
+                    <span>Edit</span>
+                </div>
+                <div class="sheet-list-item" style="color: var(--danger-color);">
+                    <span class="material-icons-round sheet-list-icon" style="color: var(--danger-color);">delete</span>
+                    <span>Delete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Grid Actions Bottom Sheet -->
+<div class="bottom-sheet-overlay" id="sheet-grid">
+    <div class="bottom-sheet">
+        <div class="sheet-handle-bar">
+            <div class="sheet-handle"></div>
+        </div>
+        <div class="sheet-content-header">
+            <div class="sheet-content-title">Share to</div>
+            <button class="btn-close-sheet" onclick="closeSheet('sheet-grid')">
+                <span class="material-icons-round">close</span>
+            </button>
+        </div>
+        <div class="sheet-body">
+            <div class="sheet-grid">
+                <div class="sheet-grid-item">
+                    <div class="grid-icon-box">
+                        <span class="material-icons-round">mail</span>
+                    </div>
+                    <span class="grid-label">Email</span>
+                </div>
+                <div class="sheet-grid-item">
+                    <div class="grid-icon-box">
+                        <span class="material-icons-round">chat</span>
+                    </div>
+                    <span class="grid-label">Message</span>
+                </div>
+                <div class="sheet-grid-item">
+                    <div class="grid-icon-box">
+                        <span class="material-icons-round">content_copy</span>
+                    </div>
+                    <span class="grid-label">Copy</span>
+                </div>
+                <div class="sheet-grid-item">
+                    <div class="grid-icon-box">
+                        <span class="material-icons-round">bluetooth</span>
+                    </div>
+                    <span class="grid-label">Bluetooth</span>
+                </div>
+                <div class="sheet-grid-item">
+                    <div class="grid-icon-box">
+                        <span class="material-icons-round">wifi_tethering</span>
+                    </div>
+                    <span class="grid-label">Nearby</span>
+                </div>
+                <div class="sheet-grid-item">
+                    <div class="grid-icon-box">
+                        <span class="material-icons-round">more_horiz</span>
+                    </div>
+                    <span class="grid-label">More</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Style Bottom Sheet -->
+<div class="bottom-sheet-overlay" id="sheet-modal">
+    <div class="bottom-sheet sheet-modal">
+        <div class="sheet-handle-bar">
+            <div class="sheet-handle"></div>
+        </div>
+        <div class="sheet-body" style="text-align: center; padding-top: 0;">
+            <div
+                style="width: 64px; height: 64px; background: var(--secondary-pastel); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--spacing-md); color: var(--secondary-text);">
+                <span class="material-icons-round" style="font-size: 32px;">check_circle</span>
+            </div>
+            <h3 style="margin-bottom: var(--spacing-sm);">Success!</h3>
+            <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);">
+                Your changes have been saved successfully. You can now close this sheet.
+            </p>
+            <button class="btn btn-primary w-full" onclick="closeSheet('sheet-modal')">Got it</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openSheet(id) {
+        document.getElementById(id).classList.add('active');
+    }
+
+    function closeSheet(id) {
+        document.getElementById(id).classList.remove('active');
+    }
+
+    // Close on overlay click
+    document.querySelectorAll('.bottom-sheet-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,151 @@
+/* Inputs */
+.input-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.input-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    margin-left: 4px;
+    transition: color 0.2s;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: var(--font-family);
+    font-size: var(--text-base);
+    color: var(--text-color);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: all 0.2s var(--ease-out);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.input-field::placeholder {
+    color: var(--text-tertiary);
+}
+
+.input-field:hover {
+    border-color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.input-field:focus {
+    border-color: var(--primary-pastel);
+    box-shadow: 0 0 0 4px rgba(var(--primary-pastel), 0.2);
+    /* Need RGB var or fallback */
+    box-shadow: 0 0 0 4px var(--primary-hover);
+    /* Using hover color as proxy for light ring */
+    background: rgba(255, 255, 255, 0.6);
+    transform: translateY(-1px);
+}
+
+.input-group:focus-within .input-label {
+    color: var(--primary-text);
+}
+
+/* With Icon */
+.input-icon {
+    position: absolute;
+    color: var(--text-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.input-icon-start {
+    left: 12px;
+}
+
+.input-icon-end {
+    right: 12px;
+}
+
+.input-field.has-start-icon {
+    padding-left: 44px;
+}
+
+.input-field.has-end-icon {
+    padding-right: 44px;
+}
+
+.input-group:focus-within .input-icon {
+    color: var(--primary-text);
+}
+
+/* Helper Text */
+.input-helper {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    margin-left: 4px;
+}
+
+/* Error State */
+.input-group.error .input-field {
+    border-color: var(--danger-color);
+    background: rgba(179, 38, 30, 0.05);
+}
+
+.input-group.error .input-label,
+.input-group.error .input-helper,
+.input-group.error .input-icon {
+    color: var(--danger-color);
+}
+
+.input-group.error .input-field:focus {
+    box-shadow: 0 0 0 4px rgba(179, 38, 30, 0.1);
+}
+
+/* Disabled */
+.input-field:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Password Toggle */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-secondary);
+}
+
+/* Search Input Variant */
+.input-search {
+    border-radius: var(--radius-full);
+    padding-left: 48px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.input-search:focus {
+    background: #fff;
+}

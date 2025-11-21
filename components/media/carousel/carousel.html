@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="components/media/carousel/carousel.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Carousel</h2>
+        <p class="text-body">Image slider with navigation.</p>
+    </div>
+
+    <section class="glass-panel p-0 overflow-hidden">
+        <div class="carousel" id="demo-carousel">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80"
+                        alt="Landscape 1">
+                    <div class="carousel-caption">
+                        <h3>Mountain View</h3>
+                        <p>Breathtaking peaks and valleys.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80"
+                        alt="Landscape 2">
+                    <div class="carousel-caption">
+                        <h3>Forest Mist</h3>
+                        <p>Serene morning in the woods.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+                        alt="Landscape 3">
+                    <div class="carousel-caption">
+                        <h3>Sunlight</h3>
+                        <p>Golden hour through the trees.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-nav carousel-prev">
+                <span class="material-icons-round">chevron_left</span>
+            </button>
+            <button class="carousel-nav carousel-next">
+                <span class="material-icons-round">chevron_right</span>
+            </button>
+
+            <div class="carousel-indicators">
+                <div class="carousel-dot active" data-index="0"></div>
+                <div class="carousel-dot" data-index="1"></div>
+                <div class="carousel-dot" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        const carousel = document.getElementById('demo-carousel');
+        if (!carousel) return;
+
+        const track = carousel.querySelector('.carousel-track');
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const nextBtn = carousel.querySelector('.carousel-next');
+        const prevBtn = carousel.querySelector('.carousel-prev');
+        const dots = carousel.querySelectorAll('.carousel-dot');
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentIndex = parseInt(dot.dataset.index);
+                updateCarousel();
+            });
+        });
+    })();
+</script>

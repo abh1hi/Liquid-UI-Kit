@@ -1,0 +1,196 @@
+{
+  "application_types": [
+    {
+      "category": "Commerce & Transaction Apps",
+      "types": [
+        "Ecommerce",
+        "Marketplace",
+        "Grocery Delivery",
+        "Food Delivery",
+        "Ticket Booking",
+        "Subscription/Box Services",
+        "Classifieds & Listings"
+      ]
+    },
+    {
+      "category": "Content Consumption Apps",
+      "types": [
+        "Video Streaming",
+        "Short Video",
+        "Music Streaming",
+        "News & Articles",
+        "Podcast Apps",
+        "OTT Platforms"
+      ]
+    },
+    {
+      "category": "Social & Communication Apps",
+      "types": [
+        "Social Media",
+        "Messaging",
+        "Dating Apps",
+        "Community Forums",
+        "Event/Meetup Apps"
+      ]
+    },
+    {
+      "category": "Business & Productivity Apps",
+      "types": [
+        "Task/To-Do Managers",
+        "Notes Apps",
+        "Office Suite",
+        "CRM Tools",
+        "HR/Payroll Apps",
+        "Time Tracking"
+      ]
+    },
+    {
+      "category": "Financial Apps",
+      "types": [
+        "Banking Apps",
+        "UPI/Wallet",
+        "Investment/Trading",
+        "Crypto Apps",
+        "Expense Managers",
+        "Loan Apps"
+      ]
+    },
+    {
+      "category": "Learning & Education Apps",
+      "types": [
+        "Online Courses",
+        "Test Prep Apps",
+        "Kids Learning Apps",
+        "Language Learning",
+        "Skill Development",
+        "Educational Games"
+      ]
+    },
+    {
+      "category": "Health & Fitness Apps",
+      "types": [
+        "Workout Apps",
+        "Diet/Nutrition Tracking",
+        "Yoga/Meditation Apps",
+        "Clinic/Hospital Booking",
+        "Pharmacy Delivery",
+        "Mental Wellness Apps"
+      ]
+    },
+    {
+      "category": "Utility & Tool Apps",
+      "types": [
+        "Scanner Apps",
+        "File Managers",
+        "Cloud Storage",
+        "Calculator",
+        "Weather Apps",
+        "QR Code Tools",
+        "VPN Apps"
+      ]
+    },
+    {
+      "category": "Creative & Media Apps",
+      "types": [
+        "Photo Editing",
+        "Video Editing",
+        "Graphic Design",
+        "Music/Beat Maker",
+        "Animation Tools",
+        "AR/VR Tools"
+      ]
+    },
+    {
+      "category": "Travel & Navigation Apps",
+      "types": [
+        "Maps & Navigation",
+        "Flight/Hotel Booking",
+        "Cab/Bike Rental",
+        "Travel Guides",
+        "Local Transport Tracking"
+      ]
+    },
+    {
+      "category": "Real Estate & Property Apps",
+      "types": [
+        "Renting",
+        "Buying/Selling",
+        "PG & Hostels",
+        "Commercial Real Estate",
+        "Property Management"
+      ]
+    },
+    {
+      "category": "On-Demand Service Apps",
+      "types": [
+        "Home Services",
+        "Laundry",
+        "Repair/Technician Services",
+        "Electrician/Plumber",
+        "Pet Care",
+        "Beauty/Salon Booking"
+      ]
+    },
+    {
+      "category": "Gaming",
+      "types": [
+        "Casual Games",
+        "Board/Chess Games",
+        "Strategy Games",
+        "Multiplayer Games",
+        "Fantasy Sports"
+      ]
+    },
+    {
+      "category": "Government & Public Services",
+      "types": [
+        "ID/Document Apps",
+        "Bill Payment Apps",
+        "Transport Pass Apps",
+        "Public Welfare Services"
+      ]
+    },
+    {
+      "category": "B2B / Enterprise Apps",
+      "types": [
+        "Inventory Management",
+        "POS Systems",
+        "Warehouse Apps",
+        "Sales Tracking",
+        "Team Collaboration",
+        "ERP Systems"
+      ]
+    },
+    {
+      "category": "AI & Smart Apps",
+      "types": [
+        "Chatbots",
+        "AI Assistants",
+        "AI Image/Video Tools",
+        "OCR/Document Extraction",
+        "AI Personalization Systems"
+      ]
+    },
+    {
+      "category": "Lifestyle & Daily Life Apps",
+      "types": [
+        "Food Recipes",
+        "Journaling",
+        "Fashion & Wardrobe Apps",
+        "Astrology",
+        "Home Décor",
+        "Relationship Guidance"
+      ]
+    },
+    {
+      "category": "Niche/Community Apps",
+      "types": [
+        "Sports Fan Communities",
+        "Book Clubs",
+        "Hobby Communities",
+        "Religious Apps",
+        "Local Neighborhood Groups"
+      ]
+    }
+  ]
+}

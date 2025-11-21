@@ -1,0 +1,498 @@
+{
+    "iOS_Modern_UI_Animations": {
+        "System_Navigation": [
+            {
+                "name": "Navigation push/pop slide transition",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Context-aware parallax during transitions",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Modal sheet slide-up with spring damping",
+                "targets": [
+                    "Modals",
+                    "Action-sheet",
+                    "Bottom-sheet"
+                ]
+            },
+            {
+                "name": "Medium/large sheet resize animation",
+                "targets": [
+                    "Modals",
+                    "Bottom-sheet"
+                ]
+            },
+            {
+                "name": "Background dimming fade",
+                "targets": [
+                    "Modals",
+                    "Action-sheet",
+                    "Drawer"
+                ]
+            },
+            {
+                "name": "Drawer/Sidebar reveal slide",
+                "targets": [
+                    "Drawer",
+                    "Rail"
+                ]
+            },
+            {
+                "name": "Tab bar crossfade transition",
+                "targets": [
+                    "Tabs"
+                ]
+            },
+            {
+                "name": "Tab icon micro-bounce",
+                "targets": [
+                    "Tabs"
+                ]
+            }
+        ],
+        "Material_and_Depth": [
+            {
+                "name": "Dynamic liquid blur movement",
+                "targets": [
+                    "Cards",
+                    "Modals",
+                    "Buttons"
+                ]
+            },
+            {
+                "name": "Frosted-glass morph transitions",
+                "targets": [
+                    "Cards",
+                    "Modals"
+                ]
+            },
+            {
+                "name": "Depth-based parallax layers",
+                "targets": [
+                    "Cards",
+                    "Gallery"
+                ]
+            },
+            {
+                "name": "Elevation shift with shadow softening",
+                "targets": [
+                    "Cards",
+                    "Buttons"
+                ]
+            },
+            {
+                "name": "Vibrancy fade transitions",
+                "targets": [
+                    "all"
+                ]
+            }
+        ],
+        "Micro_Interactions": [
+            {
+                "name": "Button press squish (scale 0.97)",
+                "targets": [
+                    "Buttons",
+                    "Icon-button",
+                    "Segmented-buttons"
+                ]
+            },
+            {
+                "name": "Button spring release bounce",
+                "targets": [
+                    "Buttons",
+                    "Icon-button"
+                ]
+            },
+            {
+                "name": "Button color state fade",
+                "targets": [
+                    "Buttons",
+                    "Icon-button"
+                ]
+            },
+            {
+                "name": "Switch toggle sliding with spring physics",
+                "targets": [
+                    "Toggles"
+                ]
+            },
+            {
+                "name": "Switch track color transition",
+                "targets": [
+                    "Toggles"
+                ]
+            },
+            {
+                "name": "Checkbox tick drawing animation",
+                "targets": [
+                    "Toggles",
+                    "Inputs"
+                ]
+            },
+            {
+                "name": "Checkbox fill fade",
+                "targets": [
+                    "Toggles",
+                    "Inputs"
+                ]
+            },
+            {
+                "name": "Text field floating label animation",
+                "targets": [
+                    "Inputs",
+                    "Autocomplete"
+                ]
+            },
+            {
+                "name": "Text field cursor smooth movement",
+                "targets": [
+                    "Inputs"
+                ]
+            },
+            {
+                "name": "Context menu morph/pop-in",
+                "targets": [
+                    "Dropdowns",
+                    "Icon-button"
+                ]
+            },
+            {
+                "name": "Segmented control capsule slide",
+                "targets": [
+                    "Segmented-buttons"
+                ]
+            },
+            {
+                "name": "Segmented label crossfade",
+                "targets": [
+                    "Segmented-buttons"
+                ]
+            }
+        ],
+        "Gestural": [
+            {
+                "name": "Swipe-to-delete with rubber-band physics",
+                "targets": [
+                    "Lists"
+                ]
+            },
+            {
+                "name": "Swipe back gesture navigation",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Home indicator swipe-up pull animation",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Pull-to-refresh tension stretch",
+                "targets": [
+                    "Lists",
+                    "Cards"
+                ]
+            },
+            {
+                "name": "Pull-to-refresh snap-back motion",
+                "targets": [
+                    "Lists",
+                    "Cards"
+                ]
+            },
+            {
+                "name": "Drag-and-drop 3D lift",
+                "targets": [
+                    "Drag-drop",
+                    "Cards",
+                    "Lists"
+                ]
+            },
+            {
+                "name": "Drag preview shadow elevation increase",
+                "targets": [
+                    "Drag-drop",
+                    "Cards"
+                ]
+            },
+            {
+                "name": "Magnetic snapping during drag",
+                "targets": [
+                    "Drag-drop"
+                ]
+            }
+        ],
+        "Overlays_and_Modals": [
+            {
+                "name": "Alert pop-in with spring scale",
+                "targets": [
+                    "Confirmation-dialog",
+                    "Modals"
+                ]
+            },
+            {
+                "name": "Alert background dim fade-in",
+                "targets": [
+                    "Confirmation-dialog",
+                    "Modals"
+                ]
+            },
+            {
+                "name": "Action sheet slide-up animation",
+                "targets": [
+                    "Action-sheet"
+                ]
+            },
+            {
+                "name": "Action sheet corner radius morph",
+                "targets": [
+                    "Action-sheet"
+                ]
+            },
+            {
+                "name": "Keyboard slide up from bottom",
+                "targets": [
+                    "Inputs"
+                ]
+            },
+            {
+                "name": "Keyboard contextual resizing animations",
+                "targets": [
+                    "Inputs"
+                ]
+            }
+        ],
+        "SF_Symbol_Animations": [
+            {
+                "name": "Variable symbol animations (progress-driven)",
+                "targets": [
+                    "Icon-button",
+                    "Badges"
+                ]
+            },
+            {
+                "name": "Bounce effect",
+                "targets": [
+                    "Icon-button",
+                    "Badges"
+                ]
+            },
+            {
+                "name": "Pulse effect",
+                "targets": [
+                    "Icon-button",
+                    "Badges"
+                ]
+            },
+            {
+                "name": "Scale effect",
+                "targets": [
+                    "Icon-button",
+                    "Badges"
+                ]
+            },
+            {
+                "name": "Replace/morph effect",
+                "targets": [
+                    "Icon-button",
+                    "Badges"
+                ]
+            },
+            {
+                "name": "Symmetric appear/disappear",
+                "targets": [
+                    "Icon-button",
+                    "Badges"
+                ]
+            },
+            {
+                "name": "Progressive drawing animations",
+                "targets": [
+                    "Icon-button",
+                    "Badges"
+                ]
+            }
+        ],
+        "Home_Screen": [
+            {
+                "name": "App icon lift with shadow",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Icon jiggle/wiggle physics",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Spotlight search bar expansion",
+                "targets": [
+                    "Inputs"
+                ]
+            },
+            {
+                "name": "App open zoom animation",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Haptic-paired icon tap feedback",
+                "targets": [
+                    "all"
+                ]
+            }
+        ],
+        "Lock_Screen": [
+            {
+                "name": "Depth effect subject pop-out",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Layered parallax wallpaper movement",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Live Activities expanding animation",
+                "targets": [
+                    "Notifications",
+                    "Cards"
+                ]
+            },
+            {
+                "name": "Lock screen widget fade-in",
+                "targets": [
+                    "Cards"
+                ]
+            },
+            {
+                "name": "Micro-motion loops for live widgets",
+                "targets": [
+                    "Cards"
+                ]
+            }
+        ],
+        "Dynamic_Island": [
+            {
+                "name": "Expansion morph animation",
+                "targets": [
+                    "Notifications",
+                    "Badges"
+                ]
+            },
+            {
+                "name": "Collapse shrink animation",
+                "targets": [
+                    "Notifications",
+                    "Badges"
+                ]
+            },
+            {
+                "name": "Rounded corner morph transitions",
+                "targets": [
+                    "Notifications"
+                ]
+            },
+            {
+                "name": "Waveform live animation",
+                "targets": [
+                    "Audio-player"
+                ]
+            },
+            {
+                "name": "Micro-icon bounce feedback",
+                "targets": [
+                    "Icon-button"
+                ]
+            },
+            {
+                "name": "Dynamic state switching fluid transitions",
+                "targets": [
+                    "Notifications"
+                ]
+            }
+        ],
+        "SwiftUI_Motion_APIs": [
+            {
+                "name": "matchedGeometryEffect shared element morphing",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "symbolEffect bounce",
+                "targets": [
+                    "Icon-button"
+                ]
+            },
+            {
+                "name": "symbolEffect replace",
+                "targets": [
+                    "Icon-button"
+                ]
+            },
+            {
+                "name": "symbolEffect pulse",
+                "targets": [
+                    "Icon-button"
+                ]
+            },
+            {
+                "name": "symbolEffect scale",
+                "targets": [
+                    "Icon-button"
+                ]
+            },
+            {
+                "name": "Default spring animation (tension+damping optimized)",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Transition.move",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Transition.opacity",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Transition.scale",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Transition.blur",
+                "targets": [
+                    "all"
+                ]
+            },
+            {
+                "name": "Combined view transitions",
+                "targets": [
+                    "all"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Liquid Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="liquid_sample.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: block !important;
+            height: auto !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: var(--bg-color) !important;
+            animation: none !important;
+            color: var(--text-color) !important;
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .switcher {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .checkout-container {
+            padding-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+            background: color-mix(in srgb, var(--bg-color) 80%, transparent);
+            color: var(--text-color);
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-pastel);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-pastel) 20%, transparent);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid color-mix(in srgb, var(--text-color) 10%, transparent);
+            position: relative;
+            z-index: 5;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .order-item-info {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .order-item-icon {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-pastel);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .order-item-details h5 {
+            margin: 0 0 4px 0;
+            font-size: 14px;
+        }
+
+        .order-item-details .quantity {
+            font-size: 12px;
+            color: color-mix(in srgb, var(--text-color) 70%, transparent);
+        }
+
+        .order-item-price {
+            font-weight: 600;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .summary-row.total {
+            font-weight: 600;
+            font-size: 18px;
+            padding-top: 12px;
+            margin-top: 12px;
+            border-top: 2px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+        }
+
+        .place-order-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: linear-gradient(135deg, var(--primary-pastel), var(--secondary-pastel));
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 5;
+        }
+
+        .place-order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .payment-method {
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            border: 2px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+            background: color-mix(in srgb, var(--bg-color) 50%, transparent);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 24px;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-pastel);
+        }
+
+        .payment-method.active {
+            border-color: var(--primary-pastel);
+            background: color-mix(in srgb, var(--primary-pastel) 20%, transparent);
+        }
+
+        .success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-content {
+            text-align: center;
+            padding: 40px;
+            max-width: 90%;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SVG Filters -->
+    <svg class="filters" style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <defs>
+            <filter id="glass-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+            </filter>
+            <filter id="switcher">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header flex justify-between items-center">
+            <div class="flex items-center gap-sm">
+                <a href="cart.html"
+                    style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar" style="width: 32px; height: 32px;">←</div>
+                    <h3>Checkout</h3>
+                </a>
+            </div>
+        </header>
+
+        <!-- Theme Switcher -->
+        <div class="switcher" c-previous="1" style="position: relative; top: 0; margin-bottom: 20px;">
+            <div class="switcher__legend">Theme</div>
+            <label class="switcher__option">
+                <input class="switcher__input" type="radio" name="theme" value="light" c-option="1" checked>
+                <span class="switcher__icon">Light</span>
+            </label>
+            <label class="switcher__option">
+                <input class="switcher__input" type="radio" name="theme" value="dark" c-option="2">
+                <span class="switcher__icon">Dark</span>
+            </label>
+            <label class="switcher__option">
+                <input class="switcher__input" type="radio" name="theme" value="dim" c-option="3">
+                <span class="switcher__icon">Dim</span>
+            </label>
+        </div>
+
+        <!-- Checkout Container -->
+        <div class="checkout-container p-md">
+            <!-- Shipping Information -->
+            <h3 class="section-title">Shipping Information</h3>
+            <div class="liquidGlass-wrapper"
+                style="border-radius: var(--radius-lg); padding: var(--spacing-md); margin-bottom: 24px;">
+                <div class="liquidGlass-effect"></div>
+                <div class="liquidGlass-tint"></div>
+                <div class="liquidGlass-shine"></div>
+
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <input type="text" class="form-input" placeholder="123 Main St" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-input" placeholder="New York" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Zip Code</label>
+                        <input type="text" class="form-input" placeholder="10001" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Method -->
+            <h3 class="section-title">Payment Method</h3>
+            <div class="glass-panel" style="padding: var(--spacing-md); margin-bottom: 24px;">
+                <div class="payment-methods">
+                    <div class="payment-method active" onclick="selectPayment(this)">💳</div>
+                    <div class="payment-method" onclick="selectPayment(this)">📱</div>
+                    <div class="payment-method" onclick="selectPayment(this)">🏦</div>
+                </div>
+
+                <div class="form-group" style="margin-top: 16px;">
+                    <label class="form-label">Card Number</label>
+                    <input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Expiry Date</label>
+                        <input type="text" class="form-input" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">CVV</label>
+                        <input type="text" class="form-input" placeholder="123" maxlength="3" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <h3 class="section-title">Order Summary</h3>
+            <div class="liquidGlass-wrapper"
+                style="border-radius: var(--radius-lg); padding: var(--spacing-md); margin-bottom: 24px;">
+                <div class="liquidGlass-effect"></div>
+                <div class="liquidGlass-tint"></div>
+                <div class="liquidGlass-shine"></div>
+
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <div class="order-item-icon">🎒</div>
+                        <div class="order-item-details">
+                            <h5>Liquid Backpack</h5>
+                            <span class="quantity">Qty: 1</span>
+                        </div>
+                    </div>
+                    <span class="order-item-price">$85.00</span>
+                </div>
+
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <div class="order-item-icon">🕶️</div>
+                        <div class="order-item-details">
+                            <h5>Cool Sunglasses</h5>
+                            <span class="quantity">Qty: 2</span>
+                        </div>
+                    </div>
+                    <span class="order-item-price">$90.00</span>
+                </div>
+
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <div class="order-item-icon">👟</div>
+                        <div class="order-item-details">
+                            <h5>Running Shoes</h5>
+                            <span class="quantity">Qty: 1</span>
+                        </div>
+                    </div>
+                    <span class="order-item-price">$120.00</span>
+                </div>
+
+                <div style="margin-top: 16px;">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>$295.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>$10.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax</span>
+                        <span>$15.25</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>$320.25</span>
+                    </div>
+                </div>
+
+                <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="liquid-layers">
+                <div class="liquid-effect"></div>
+                <div class="liquid-shine"></div>
+            </div>
+
+            <div class="dock-items">
+                <div class="dock-item" data-tooltip="Home" onclick="location.href='test_liquid_ecommerce.html'">🏠</div>
+                <div class="dock-item" data-tooltip="Favourites" onclick="location.href='favourites.html'">❤️</div>
+                <div class="dock-item" data-tooltip="Cart" onclick="location.href='cart.html'">🛒</div>
+                <div class="dock-item" data-tooltip="Orders" onclick="location.href='test_liquid_ecommerce.html'">📦
+                </div>
+                <div class="dock-item" data-tooltip="Profile" onclick="location.href='test_liquid_ecommerce.html'">👤
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="liquidGlass-wrapper success-content" style="animation: scaleIn 0.3s ease;">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+
+            <div class="success-icon">✅</div>
+            <h2 style="position: relative; z-index: 5; margin-bottom: 8px;">Order Placed!</h2>
+            <p style="position: relative; z-index: 5; margin-bottom: 24px;">Thank you for your purchase.</p>
+            <button class="glass-button" style="position: relative; z-index: 5;"
+                onclick="location.href='test_liquid_ecommerce.html'">Continue Shopping</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="Glass-liquid-components\LiquidDock\LiquidDock.js"></script>
+    <script>
+        // Switcher logic
+        const switcher = document.querySelector('.switcher');
+        const inputs = document.querySelectorAll('.switcher__input');
+        inputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const current = e.target.getAttribute('c-option');
+                setTimeout(() => {
+                    switcher.setAttribute('c-previous', current);
+                }, 400);
+
+                if (e.target.value === 'dark' || e.target.value === 'dim') {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+            });
+        });
+
+        // Payment method selection
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Place order
+        function placeOrder() {
+            const modal = document.getElementById('successModal');
+            modal.style.display = 'flex';
+
+            setTimeout(() => {
+                location.href = 'test_liquid_ecommerce.html';
+            }, 3000);
+        }
+
+        // Format card number input
+        document.querySelector('input[placeholder="1234 5678 9012 3456"]').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date
+        document.querySelector('input[placeholder="MM/YY"]').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\//g, '');
+            if (value.length >= 2) {
+                e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            } else {
+                e.target.value = value;
+            }
+        });
+    </script>
+</body>
+
+</html>
+<style>
+    /* Import main theme variables */
+    @import url('liquid_variables.css');
+    @import url('/Glass-liquid-components/LiquidDock/LiquidDock.css');
+
+    /* Base Reset */
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 40px;
+        min-height: 100vh;
+        background: var(--bg-color);
+        font-family: 'Inter', sans-serif;
+        box-sizing: border-box;
+        color: var(--text-color);
+        transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .filters {
+        position: absolute;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+    }
+
+    .liquid-dock {
+        position: relative;
+        padding: 12px 24px;
+        border-radius: 24px;
+        transition: all 0.3s ease;
+    }
+
+    .liquid-layers {
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: var(--glass-shadow);
+        z-index: 0;
+    }
+
+    .liquid-effect {
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(8px);
+        filter: url(#glass-distortion);
+        background: var(--glass-bg);
+    }
+
+    .liquid-tint {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg,
+                color-mix(in srgb, var(--primary-pastel) 40%, transparent) 0%,
+                color-mix(in srgb, var(--secondary-pastel) 20%, transparent) 100%);
+        opacity: 0.7;
+    }
+
+    .liquid-shine {
+        position: absolute;
+        inset: 0;
+        box-shadow:
+            inset 1px 1px 0 0 rgba(255, 255, 255, 0.8),
+            inset -1px -1px 0 0 rgba(255, 255, 255, 0.4);
+        border-radius: 24px;
+    }
+
+    .dock-items {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        gap: 12px;
+        align-items: flex-end;
+        height: 48px;
+    }
+
+    .dock-item {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        background: color-mix(in srgb, var(--accent-pastel) 30%, transparent);
+        position: relative;
+        transform-origin: bottom center;
+    }
+
+    .dock-item:hover,
+    .dock-item.active {
+        background: var(--accent-pastel);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dock-item::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        background: var(--text-color);
+        color: var(--bg-color);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        opacity: 0;
+        transition: all 0.2s ease;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .dock-item:hover::after {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+</style>

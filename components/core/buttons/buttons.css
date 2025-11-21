@@ -1,0 +1,158 @@
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: 10px 24px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-family);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-out);
+    border: 1px solid transparent;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    letter-spacing: 0.1px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Primary */
+.btn-primary {
+    background-color: var(--primary-pastel);
+    color: var(--primary-text);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    background-color: var(--primary-active);
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Secondary */
+.btn-secondary {
+    background-color: var(--secondary-pastel);
+    color: var(--secondary-text);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* Tertiary / Ghost */
+.btn-tertiary {
+    background-color: transparent;
+    color: var(--primary-text);
+}
+
+.btn-tertiary:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn-tertiary:active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Outline */
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--glass-bg);
+    border-color: var(--text-secondary);
+}
+
+/* Icon Button */
+.btn-icon {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Sizes */
+.btn-sm {
+    padding: 6px 16px;
+    font-size: var(--text-xs);
+}
+
+.btn-lg {
+    padding: 14px 32px;
+    font-size: var(--text-base);
+}
+
+/* FAB */
+.fab {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--tertiary-pastel);
+    color: var(--tertiary-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--glass-shadow);
+    cursor: pointer;
+    z-index: var(--z-sticky);
+    transition: all 0.3s var(--ease-elastic);
+    border: none;
+}
+
+.fab:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.fab:active {
+    transform: scale(0.95);
+}
+
+.fab-extended {
+    width: auto;
+    padding: 0 24px;
+    border-radius: 16px;
+}
+
+/* Glass Button (Special) */
+.btn-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    color: var(--text-color);
+    box-shadow: var(--glass-shadow);
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}

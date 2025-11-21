@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="components/data-display/accordions/accordions.css">
+
+<div class="flex flex-col gap-xl">
+    <div class="text-center mb-md">
+        <h2 class="text-h2">Accordions</h2>
+        <p class="text-body">Collapsible content sections.</p>
+    </div>
+
+    <section class="glass-panel p-md">
+        <div class="accordion" id="demo-accordion">
+            <!-- Item 1 -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>What is Liquid UI?</span>
+                    <span class="material-icons-round accordion-icon">expand_more</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Liquid UI is a modern design system that utilizes glassmorphism, fluid animations, and pastel
+                        colors to create a premium user experience.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>How do I use themes?</span>
+                    <span class="material-icons-round accordion-icon">expand_more</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        You can switch themes using the dropdown in the top right corner. The system uses CSS variables,
+                        so changes are instant and require no page reload.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>Is it responsive?</span>
+                    <span class="material-icons-round accordion-icon">expand_more</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Yes, all components are built with responsiveness in mind, ensuring they look great on mobile,
+                        tablet, and desktop devices.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        const accordion = document.getElementById('demo-accordion');
+        if (accordion) {
+            const items = accordion.querySelectorAll('.accordion-item');
+
+            items.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                const body = item.querySelector('.accordion-body');
+
+                header.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('open');
+
+                    // Close others (Accordion behavior)
+                    items.forEach(i => {
+                        i.classList.remove('open');
+                        i.querySelector('.accordion-content').style.height = '0';
+                    });
+
+                    // Toggle current
+                    if (!isOpen) {
+                        item.classList.add('open');
+                        content.style.height = body.offsetHeight + 'px';
+                    }
+                });
+            });
+        }
+    })();
+</script>

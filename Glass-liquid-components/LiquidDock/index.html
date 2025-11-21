@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Dock Component</title>
+    <link rel="stylesheet" href="LiquidDock.css">
+</head>
+
+<body>
+    <!-- Required SVG Filters -->
+    <svg class="filters" aria-hidden="true">
+        <defs>
+            <filter id="glass-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="container">
+        <!-- Liquid Dock -->
+        <div class="liquid-dock">
+            <div class="liquid-layers">
+                <div class="liquid-effect"></div>
+                <div class="liquid-tint"></div>
+                <div class="liquid-shine"></div>
+            </div>
+
+            <div class="dock-items">
+                <div class="dock-item" data-tooltip="Home">🏠</div>
+                <div class="dock-item" data-tooltip="Search">🔍</div>
+                <div class="dock-item" data-tooltip="Notifications">🔔</div>
+                <div class="dock-item" data-tooltip="Profile">👤</div>
+                <div class="dock-item" data-tooltip="Settings">⚙️</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="LiquidDock.js"></script>
+</body>
+
+</html>
